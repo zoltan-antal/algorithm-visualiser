@@ -4,6 +4,8 @@ function App() {
   console.log(startArray);
   console.log('Selection sort');
   console.log(selectionSort(startArray));
+  console.log('Bubble sort');
+  console.log(bubbleSort(startArray));
   return <h1>Algorithm Visualiser</h1>;
 }
 
@@ -34,6 +36,26 @@ const selectionSort = (unsorted: number[]) => {
     const temp = sorted[i];
     sorted[i] = sorted[min_index];
     sorted[min_index] = temp;
+  }
+
+  return sorted;
+};
+
+const bubbleSort = (unsorted: number[]) => {
+  const sorted = [...unsorted];
+  const n = sorted.length;
+
+  let swap = true;
+  while (swap) {
+    swap = false;
+    for (let j = 0; j < n - 1; j++) {
+      if (sorted[j] > sorted[j + 1]) {
+        swap = true;
+        const temp = sorted[j];
+        sorted[j] = sorted[j + 1];
+        sorted[j + 1] = temp;
+      }
+    }
   }
 
   return sorted;
