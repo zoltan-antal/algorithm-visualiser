@@ -33,9 +33,7 @@ const selectionSort = (unsorted: number[]) => {
     }
 
     // Swap the found element with the element at the current index
-    const temp = sorted[i];
-    sorted[i] = sorted[min_index];
-    sorted[min_index] = temp;
+    [sorted[i], sorted[min_index]] = [sorted[min_index], sorted[i]];
   }
 
   return sorted;
@@ -51,9 +49,7 @@ const bubbleSort = (unsorted: number[]) => {
     for (let j = 0; j < n - 1; j++) {
       if (sorted[j] > sorted[j + 1]) {
         swap = true;
-        const temp = sorted[j];
-        sorted[j] = sorted[j + 1];
-        sorted[j + 1] = temp;
+        [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
       }
     }
   }
