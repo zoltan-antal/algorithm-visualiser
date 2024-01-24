@@ -18,7 +18,7 @@ type Arrays = {
 };
 
 function App() {
-  const randomArray = generateArray(5, 50);
+  const randomArray = generateArray(5, 1, 50);
   const [arrays, setArrays] = useState<Arrays>({
     selectionSort: [...randomArray],
   });
@@ -66,10 +66,10 @@ function App() {
   );
 }
 
-const generateArray = (length: number, range: number) => {
+const generateArray = (length: number, min: number, max: number) => {
   const arr = [];
   for (let i = 0; i < length; i++) {
-    arr[i] = Math.floor(Math.random() * (range + 1));
+    arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
   }
   return arr;
 };
