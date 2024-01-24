@@ -44,7 +44,7 @@ const runAlgorithms = async (
     await new Promise((resolve) => setTimeout(resolve, timeout));
 
     setArrays((prevArrays) => {
-      const updatedArrays: Arrays = { ...prevArrays };
+      const updatedArrays: Arrays = structuredClone(prevArrays);
       Object.entries(algorithmStates).forEach(([key, value]) => {
         updatedArrays[key as keyof Arrays] = value.arr;
       });
