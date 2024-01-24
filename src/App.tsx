@@ -7,7 +7,8 @@ import runAlgorithms from './utils/runAlgorithms.ts';
 import Arrays from './types/Arrays.ts';
 
 function App() {
-  const randomArray = generateArray(10, 1, 50);
+  const randomArray = generateArray(30, 1, 50);
+  const TIMEOUT = 10;
   const [arrays, setArrays] = useState<Arrays>({
     selectionSort: [...randomArray],
     bubbleSort: [...randomArray],
@@ -19,7 +20,9 @@ function App() {
   return (
     <>
       <h1>Algorithm Visualiser</h1>
-      <button onClick={() => runAlgorithms(randomArray, setArrays)}>Run</button>
+      <button onClick={() => runAlgorithms(randomArray, setArrays, TIMEOUT)}>
+        Run
+      </button>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div>
           <h2>Selection sort</h2>

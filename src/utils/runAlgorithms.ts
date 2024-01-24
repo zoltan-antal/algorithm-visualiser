@@ -6,7 +6,8 @@ import Arrays from '../types/Arrays.ts';
 
 const runAlgorithms = async (
   randomArray: number[],
-  setArrays: React.Dispatch<React.SetStateAction<Arrays>>
+  setArrays: React.Dispatch<React.SetStateAction<Arrays>>,
+  timeout: number
 ) => {
   const arrayLength = randomArray.length;
   const algorithms = [selectionSort, bubbleSort];
@@ -40,7 +41,7 @@ const runAlgorithms = async (
       }
       algorithmStates[algorithmName] = newState as any;
     }
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, timeout));
 
     setArrays((prevArrays) => {
       const updatedArrays: Arrays = { ...prevArrays };
