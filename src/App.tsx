@@ -13,7 +13,7 @@ function App() {
 
   const [arrays, setArrays] = useState<Arrays>(
     Object.fromEntries(
-      algorithmNames.map((algorithmName) => [algorithmName, [] as unknown])
+      algorithmNames.map((algorithmName) => [algorithmName, [] as number[]])
     ) as Arrays
   );
 
