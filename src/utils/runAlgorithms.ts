@@ -4,13 +4,15 @@ import bubbleSort from '../algorithms/bubbleSort.ts';
 import AlgorithmStates from '../types/AlgorithmStates.ts';
 import Arrays from '../types/Arrays.ts';
 
+const algorithms = [selectionSort, bubbleSort];
+const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
+
 const runAlgorithms = async (
   randomArray: number[],
   setArrays: React.Dispatch<React.SetStateAction<Arrays>>,
   timeout: number
 ) => {
   const arrayLength = randomArray.length;
-  const algorithms = [selectionSort, bubbleSort];
 
   const algorithmStates: AlgorithmStates = {
     selectionSort: {
@@ -55,3 +57,4 @@ const runAlgorithms = async (
 };
 
 export default runAlgorithms;
+export { algorithmNames };
