@@ -1,27 +1,27 @@
 import { useState } from 'react';
 
-interface SelectionSortState {
+type SelectionSortState = {
   processing: boolean;
   arr: number[];
   n: number;
   i: number;
   j: number;
   min_index: number;
-}
+};
 
-interface BubbleSortState {
+type BubbleSortState = {
   processing: boolean;
   arr: number[];
   n: number;
   i: number;
   j: number;
   swap: boolean;
-}
+};
 
-interface AlgorithmStates {
+type AlgorithmStates = {
   selectionSort: SelectionSortState;
   bubbleSort: BubbleSortState;
-}
+};
 
 type Arrays = {
   [K in keyof AlgorithmStates]: number[];
