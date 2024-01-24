@@ -28,6 +28,8 @@ const bubbleSort = (inputState: any) => {
   return state;
 };
 
+bubbleSort.algorithmName = 'bubbleSort';
+
 // const bubbleSort = (unsorted: number[]) => {
 //   const sorted = [...unsorted];
 //   const n = sorted.length;

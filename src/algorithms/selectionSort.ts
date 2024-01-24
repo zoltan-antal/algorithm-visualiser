@@ -28,6 +28,8 @@ const selectionSort = (inputState: any) => {
   return state;
 };
 
+selectionSort.algorithmName = 'selectionSort';
+
 // const selectionSort = (unsorted: number[]) => {
 //   const sorted = [...unsorted];
 //   const n = sorted.length;

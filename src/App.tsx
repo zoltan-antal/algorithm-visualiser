@@ -40,7 +40,8 @@ function App() {
 
     while (Object.values(algorithmStates).some((state) => state.processing)) {
       for (const algorithm of algorithms) {
-        const algorithmName = algorithm.name as keyof typeof algorithmStates;
+        const algorithmName =
+          algorithm.algorithmName as keyof typeof algorithmStates;
         const newState = algorithm(algorithmStates[algorithmName]);
         if (!newState.processing) {
           console.log(algorithmName + ' DONE');
