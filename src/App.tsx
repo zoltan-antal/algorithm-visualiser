@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BarChart from './components/BarChart.tsx';
 
 import generateArray from './utils/generateArray.ts';
@@ -8,13 +8,26 @@ import { algorithmNames } from './utils/runAlgorithms.ts';
 import Arrays from './types/Arrays.ts';
 
 function App() {
-  const randomArray = generateArray(30, 1, 50);
   const TIMEOUT = 10;
   const [arrays, setArrays] = useState<Arrays>(
     Object.fromEntries(
-      algorithmNames.map((algorithmName) => [algorithmName, [...randomArray]])
+      algorithmNames.map((algorithmName) => [algorithmName, [] as unknown])
     ) as Arrays
   );
+
+  const generateArrays = () => {
+    const randomArray: number[] = generateArray(30, 1, 50);
+    setArrays((prevArrays) => {
+      const updatedArrays: Arrays = structuredClone(prevArrays);
+      Object.keys(updatedArrays).forEach(
+        (key) => (updatedArrays[key as keyof Arrays] = randomArray)
+      );
+      return updatedArrays;
+    });
+  };
+  useEffect(() => {
+    generateArrays();
+  }, []);
 
   console.log('Selection sort: ' + arrays.selectionSort);
   console.log('Bubble sort: ' + arrays.bubbleSort);
@@ -22,9 +35,10 @@ function App() {
   return (
     <>
       <h1>Algorithm Visualiser</h1>
-      <button onClick={() => runAlgorithms(randomArray, setArrays, TIMEOUT)}>
+      <button onClick={() => runAlgorithms(arrays, setArrays, TIMEOUT)}>
         Run
       </button>
+      <button onClick={() => generateArrays()}>Regenerate arrays</button>
       <div style={{ display: 'flex', flexDirection: 'row' }}>
         <div>
           <h2>Selection sort</h2>

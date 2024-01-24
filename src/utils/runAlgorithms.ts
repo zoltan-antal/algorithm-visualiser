@@ -8,25 +8,23 @@ const algorithms = [selectionSort, bubbleSort];
 const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
 
 const runAlgorithms = async (
-  randomArray: number[],
+  arrays: Arrays,
   setArrays: React.Dispatch<React.SetStateAction<Arrays>>,
   timeout: number
 ) => {
-  const arrayLength = randomArray.length;
-
   const algorithmStates: AlgorithmStates = {
     selectionSort: {
       processing: true,
-      arr: [...randomArray],
-      n: arrayLength,
+      arr: [...arrays.selectionSort],
+      n: arrays.selectionSort.length,
       i: 0,
       j: 1,
       min_index: 0,
     },
     bubbleSort: {
       processing: true,
-      arr: [...randomArray],
-      n: arrayLength,
+      arr: [...arrays.bubbleSort],
+      n: arrays.bubbleSort.length,
       i: 0,
       j: 0,
       swap: true,
