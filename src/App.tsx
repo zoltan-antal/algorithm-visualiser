@@ -9,6 +9,8 @@ import Arrays from './types/Arrays.ts';
 
 function App() {
   const TIMEOUT = 10;
+  const MAX_VALUE = 100;
+
   const [arrays, setArrays] = useState<Arrays>(
     Object.fromEntries(
       algorithmNames.map((algorithmName) => [algorithmName, [] as unknown])
@@ -16,7 +18,7 @@ function App() {
   );
 
   const generateArrays = () => {
-    const randomArray: number[] = generateArray(30, 1, 50);
+    const randomArray: number[] = generateArray(30, 1, MAX_VALUE);
     setArrays((prevArrays) => {
       const updatedArrays: Arrays = structuredClone(prevArrays);
       Object.keys(updatedArrays).forEach(
