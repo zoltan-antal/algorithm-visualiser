@@ -32,13 +32,13 @@ const mergeSort = (inputState: any) => {
     }
   }
 
-  // BASE CASE
+  // Base case
   if (node.start === node.end) {
     _.set(state, [...state.path, 'sorted'], true);
     return state;
   }
 
-  // MERGE STEP: Merge the two sorted halves
+  // Merge the two sorted halves
   if (node.left && node.left.sorted && node.right && node.right.sorted) {
     let i = 0;
     let j = 0;
@@ -73,7 +73,7 @@ const mergeSort = (inputState: any) => {
     return state;
   }
 
-  // "RECURSIVE" STEP: Build tree
+  // Build tree
   const mid = node.start! + Math.ceil((node.end! - node.start!) / 2);
   const left = { start: node.start, end: mid - 1, sorted: false };
   const right = { start: mid, end: node.end, sorted: false };
