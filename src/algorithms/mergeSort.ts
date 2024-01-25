@@ -2,6 +2,8 @@ import _ from 'lodash';
 
 import MergeSortState from '../types/MergeSortState';
 
+// "STEPPING" ALGORITHM USING STATE
+
 const mergeSort = (inputState: any) => {
   if (!inputState.processing) {
     return inputState;
@@ -82,6 +84,8 @@ const mergeSort = (inputState: any) => {
 };
 
 mergeSort.algorithmName = 'mergeSort';
+
+// STANDARD ALGORITHM
 
 // const mergeSort = (unsorted: number[]) => {
 //   const n = unsorted.length;

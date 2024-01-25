@@ -1,5 +1,7 @@
 import BubbleSortState from '../types/BubbleSortState';
 
+// "STEPPING" ALGORITHM USING STATE
+
 const bubbleSort = (inputState: any) => {
   if (!inputState.processing) {
     return inputState;
@@ -29,6 +31,8 @@ const bubbleSort = (inputState: any) => {
 };
 
 bubbleSort.algorithmName = 'bubbleSort';
+
+// STANDARD ALGORITHM
 
 // const bubbleSort = (unsorted: number[]) => {
 //   const sorted = [...unsorted];

@@ -1,5 +1,7 @@
 import SelectionSortState from '../types/SelectionSortState';
 
+// "STEPPING" ALGORITHM USING STATE
+
 const selectionSort = (inputState: any) => {
   if (!inputState.processing) {
     return inputState;
@@ -29,6 +31,8 @@ const selectionSort = (inputState: any) => {
 };
 
 selectionSort.algorithmName = 'selectionSort';
+
+// STANDARD ALGORITHM
 
 // const selectionSort = (unsorted: number[]) => {
 //   const sorted = [...unsorted];
