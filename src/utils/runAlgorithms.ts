@@ -33,12 +33,12 @@ const runAlgorithms = async (
     mergeSort: {
       processing: true,
       arr: [...arrays.mergeSort],
-      tree: {
+      root: {
         start: 0,
         end: arrays.mergeSort.length - 1,
         sorted: false,
       },
-      path: ['tree'],
+      path: ['root'],
     },
   };
 

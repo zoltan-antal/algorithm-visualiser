@@ -9,7 +9,7 @@ type MergeSortNode = {
 type MergeSortState = {
   processing: boolean;
   arr: number[];
-  tree: MergeSortNode;
+  root: MergeSortNode;
   path: string[];
 };
 

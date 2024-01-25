@@ -11,15 +11,10 @@ const mergeSort = (inputState: any) => {
 
   const state = structuredClone(inputState) as MergeSortState;
 
-  // If root node is sorted, stop process
-  if (state.tree.sorted) {
-    state.processing = false;
-    return state;
-  }
-
   const node = _.get(state, state.path);
 
   // If node already sorted, replace in / remove from path
+  console.log(state.path);
   if (node.sorted) {
     switch (state.path[state.path.length - 1]) {
       case 'left':
@@ -28,6 +23,11 @@ const mergeSort = (inputState: any) => {
 
       case 'right':
         state.path.pop();
+        return state;
+
+      // If root node is sorted, stop process
+      case 'root':
+        state.processing = false;
         return state;
     }
   }
