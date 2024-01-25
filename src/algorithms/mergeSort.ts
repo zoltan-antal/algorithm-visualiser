@@ -36,7 +36,7 @@ const mergeSort = (inputState: any) => {
     return state;
   }
 
-  // MERGE STEP
+  // MERGE STEP: Merge the two sorted halves
   if (node.left && node.left.sorted && node.right && node.right.sorted) {
     let i = 0;
     let j = 0;
@@ -71,7 +71,7 @@ const mergeSort = (inputState: any) => {
     return state;
   }
 
-  // RECURSIVE STEP
+  // "RECURSIVE" STEP: Build tree
   const mid = node.start! + Math.ceil((node.end! - node.start!) / 2);
   const left = { start: node.start, end: mid - 1, sorted: false };
   const right = { start: mid, end: node.end, sorted: false };
@@ -79,77 +79,6 @@ const mergeSort = (inputState: any) => {
   _.set(state, [...state.path, 'right'], right);
   state.path.push('left');
   return state;
-
-  // switch (node.step) {
-  //   case 'split': {
-  //     if (node.start === node.end) {
-  //       _.set(state, [...state.path, 'step'], 'merge');
-  //       switch (state.path[state.path.length - 1]) {
-  //         case 'left':
-  //           state.path[state.path.length - 1] = 'right';
-  //           break;
-
-  //         case 'right':
-  //           state.path.pop();
-  //           _.set(state, [...state.path, 'step'], 'merge');
-  //           break;
-  //       }
-  //       return state;
-  //     }
-  //     const mid = node.start! + Math.ceil((node.end! - node.start!) / 2);
-  //     const left = { start: node.start, end: mid - 1, step: 'split' };
-  //     const right = { start: mid, end: node.end, step: 'split' };
-  //     _.set(state, [...state.path, 'left'], left);
-  //     _.set(state, [...state.path, 'right'], right);
-  //     state.path.push('left');
-  //     return state;
-  //   }
-  //   case 'merge': {
-  //     let i = 0;
-  //     let j = 0;
-  //     const iMax = node.left!.end - node.left!.start + 1;
-  //     const jMax = node.right!.end - node.right!.start + 1;
-  //     const left: number[] = state.arr.slice(
-  //       node.left!.start,
-  //       node.left!.end + 1
-  //     );
-  //     const right: number[] = state.arr.slice(
-  //       node.right!.start,
-  //       node.right!.end + 1
-  //     );
-  //     for (let k = node.left!.start; k <= node.right!.end; k++) {
-  //       if (i === iMax) {
-  //         state.arr[k] = right[j];
-  //         j++;
-  //         break;
-  //       } else if (j === jMax) {
-  //         state.arr[k] = left[i];
-  //         i++;
-  //         break;
-  //       } else if (left[i] < right[j]) {
-  //         state.arr[k] = left[i];
-  //         i++;
-  //       } /* right[j] <= left[i] */ else {
-  //         state.arr[k] = right[j];
-  //         j++;
-  //       }
-  //     }
-  //     _.unset(state, [...state.path, 'left']);
-  //     _.unset(state, [...state.path, 'right']);
-  //     switch (state.path[state.path.length - 1]) {
-  //       case 'left':
-  //         state.path[state.path.length - 1] = 'right';
-  //         break;
-
-  //       case 'right':
-  //         state.path.pop();
-  //         _.set(state, [...state.path, 'step'], 'merge');
-  //         state.path[state.path.length - 1] = 'left';
-  //         break;
-  //     }
-  //     return state;
-  //   }
-  // }
 };
 
 mergeSort.algorithmName = 'mergeSort';
