@@ -10,7 +10,7 @@ import Arrays from './types/Arrays.ts';
 function App() {
   const TIMEOUT = 10;
   const MAX_VALUE = 100;
-  const ARRAY_SIZE = 30;
+  const ARRAY_SIZE = 50;
 
   const [arrays, setArrays] = useState<Arrays>(
     Object.fromEntries(
