@@ -34,19 +34,9 @@ const runAlgorithms = async (
       processing: true,
       arr: [...arrays.mergeSort],
       tree: {
-        left: {
-          start: 0,
-          end: Math.floor(arrays.mergeSort.length / 2) - 1,
-          sorted: false,
-        },
-        right: {
-          start: Math.floor(arrays.mergeSort.length / 2),
-          end: arrays.mergeSort.length - 1,
-          sorted: false,
-        },
-        sorted: false,
         start: 0,
         end: arrays.mergeSort.length - 1,
+        sorted: false,
       },
       path: ['tree'],
     },
