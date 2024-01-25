@@ -7,12 +7,12 @@ const selectionSort = (inputState: any) => {
 
   const state = structuredClone(inputState) as SelectionSortState;
 
-  if (state.arr[state.j] < state.arr[state.min_index]) {
-    state.min_index = state.j;
+  if (state.arr[state.j] < state.arr[state.minIndex]) {
+    state.minIndex = state.j;
   }
   if (state.j >= state.n - 1) {
-    [state.arr[state.i], state.arr[state.min_index]] = [
-      state.arr[state.min_index],
+    [state.arr[state.i], state.arr[state.minIndex]] = [
+      state.arr[state.minIndex],
       state.arr[state.i],
     ];
     if (state.i >= state.n - 1) {
@@ -21,7 +21,7 @@ const selectionSort = (inputState: any) => {
     }
     state.i++;
     state.j = state.i + 1;
-    state.min_index = state.i;
+    state.minIndex = state.i;
     return state;
   }
   state.j++;
@@ -36,17 +36,17 @@ selectionSort.algorithmName = 'selectionSort';
 
 //   for (let i = 0; i < n; i++) {
 //     // Assume the current index is the minimum
-//     let min_index = i;
+//     let minIndex = i;
 
 //     // Find the index of the minimum element in the unsorted part
 //     for (let j = i + 1; j < n; j++) {
-//       if (sorted[j] < sorted[min_index]) {
-//         min_index = j;
+//       if (sorted[j] < sorted[minIndex]) {
+//         minIndex = j;
 //       }
 //     }
 
 //     // Swap the found element with the element at the current index
-//     [sorted[i], sorted[min_index]] = [sorted[min_index], sorted[i]];
+//     [sorted[i], sorted[minIndex]] = [sorted[minIndex], sorted[i]];
 //   }
 
 //   return sorted;

@@ -4,7 +4,7 @@ type SelectionSortState = {
   n: number;
   i: number;
   j: number;
-  min_index: number;
+  minIndex: number;
 };
 
 export default SelectionSortState;

@@ -19,7 +19,7 @@ const runAlgorithms = async (
       n: arrays.selectionSort.length,
       i: 0,
       j: 1,
-      min_index: 0,
+      minIndex: 0,
     },
     bubbleSort: {
       processing: true,
