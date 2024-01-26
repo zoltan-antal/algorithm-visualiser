@@ -4,7 +4,7 @@ import MergeSortState from '../types/MergeSortState';
 
 // "STEPPING" ALGORITHM USING STATE
 
-const mergeSort = (inputState: any) => {
+const mergeSort = (inputState: any): MergeSortState => {
   if (!inputState.processing) {
     return inputState;
   }

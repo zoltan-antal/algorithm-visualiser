@@ -2,7 +2,7 @@ import SelectionSortState from '../types/SelectionSortState';
 
 // "STEPPING" ALGORITHM USING STATE
 
-const selectionSort = (inputState: any) => {
+const selectionSort = (inputState: any): SelectionSortState => {
   if (!inputState.processing) {
     return inputState;
   }

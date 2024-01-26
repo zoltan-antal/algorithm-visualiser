@@ -2,7 +2,7 @@ import BubbleSortState from '../types/BubbleSortState';
 
 // "STEPPING" ALGORITHM USING STATE
 
-const bubbleSort = (inputState: any) => {
+const bubbleSort = (inputState: any): BubbleSortState => {
   if (!inputState.processing) {
     return inputState;
   }
