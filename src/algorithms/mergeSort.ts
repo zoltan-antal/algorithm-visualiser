@@ -18,23 +18,24 @@ const mergeSort = (inputState: any): MergeSortState => {
     switch (state.path[state.path.length - 1]) {
       case 'left':
         state.path[state.path.length - 1] = 'right';
-        return state;
+        break;
 
       case 'right':
         state.path.pop();
-        return state;
+        break;
 
       // If root node is sorted, stop process
       case 'root':
         state.processing = false;
-        return state;
+        break;
     }
+    return mergeSort(state);
   }
 
   // Base case
   if (node.start === node.end) {
     _.set(state, [...state.path, 'sorted'], true);
-    return state;
+    return mergeSort(state);
   }
 
   // Merge the two sorted halves
