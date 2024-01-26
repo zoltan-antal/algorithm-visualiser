@@ -14,7 +14,6 @@ const mergeSort = (inputState: any) => {
   const node = _.get(state, state.path);
 
   // If node already sorted, replace in / remove from path
-  console.log(state.path);
   if (node.sorted) {
     switch (state.path[state.path.length - 1]) {
       case 'left':
@@ -40,36 +39,41 @@ const mergeSort = (inputState: any) => {
 
   // Merge the two sorted halves
   if (node.left && node.left.sorted && node.right && node.right.sorted) {
-    let i = 0;
-    let j = 0;
-    const iMax = node.left!.end - node.left!.start + 1;
-    const jMax = node.right!.end - node.right!.start + 1;
-    const left: number[] = state.arr.slice(
-      node.left!.start,
-      node.left!.end + 1
-    );
-    const right: number[] = state.arr.slice(
-      node.right!.start,
-      node.right!.end + 1
-    );
-    for (let k = node.left!.start; k <= node.right!.end; k++) {
-      if (i === iMax) {
-        state.arr[k] = right[j];
-        j++;
-      } else if (j === jMax) {
-        state.arr[k] = left[i];
-        i++;
-      } else if (left[i] < right[j]) {
-        state.arr[k] = left[i];
-        i++;
-      } /* right[j] <= left[i] */ else {
-        state.arr[k] = right[j];
-        j++;
-      }
+    if (!state.merge) {
+      state.merge = {
+        i: 0,
+        j: 0,
+        k: node.left.start,
+        left: state.arr.slice(node.left.start, node.left.end + 1),
+        right: state.arr.slice(node.right.start, node.right.end + 1),
+        iMax: node.left.end - node.left.start + 1,
+        jMax: node.right.end - node.right.start + 1,
+      };
     }
-    _.unset(state, [...state.path, 'left']);
-    _.unset(state, [...state.path, 'right']);
-    _.set(state, [...state.path, 'sorted'], true);
+    if (state.merge.i === state.merge.iMax) {
+      state.arr[state.merge.k] = state.merge.right[state.merge.j];
+      state.merge.j++;
+    } else if (state.merge.j === state.merge.jMax) {
+      state.arr[state.merge.k] = state.merge.left[state.merge.i];
+      state.merge.i++;
+    } else if (
+      state.merge.left[state.merge.i] < state.merge.right[state.merge.j]
+    ) {
+      state.arr[state.merge.k] = state.merge.left[state.merge.i];
+      state.merge.i++;
+    } /* state.merge.right[state.merge.j] <= state.merge.left[state.merge.i] */ else {
+      state.arr[state.merge.k] = state.merge.right[state.merge.j];
+      state.merge.j++;
+    }
+    state.merge!.k++;
+
+    if (state.merge!.k > node.right.end) {
+      _.unset(state, [...state.path, 'left']);
+      _.unset(state, [...state.path, 'right']);
+      _.set(state, [...state.path, 'sorted'], true);
+      delete state.merge;
+    }
+
     return state;
   }
 
