@@ -34,6 +34,7 @@ function App() {
 
   console.log('Selection sort: ' + arrays.selectionSort);
   console.log('Bubble sort: ' + arrays.bubbleSort);
+  console.log('Insertion sort: ' + arrays.mergeSort);
   console.log('Merge sort: ' + arrays.mergeSort);
 
   return (
@@ -51,6 +52,10 @@ function App() {
         <div>
           <h2>Bubble sort</h2>
           <BarChart data={arrays.bubbleSort} />
+        </div>
+        <div>
+          <h2>Insertion sort</h2>
+          <BarChart data={arrays.insertionSort} />
         </div>
         <div>
           <h2>Merge sort</h2>

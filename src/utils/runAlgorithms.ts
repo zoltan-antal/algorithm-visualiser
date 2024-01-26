@@ -1,11 +1,12 @@
 import selectionSort from '../algorithms/selectionSort.ts';
 import bubbleSort from '../algorithms/bubbleSort.ts';
 import mergeSort from '../algorithms/mergeSort.ts';
+import insertionSort from '../algorithms/insertionSort.ts';
 
 import AlgorithmStates from '../types/AlgorithmStates.ts';
 import Arrays from '../types/Arrays.ts';
 
-const algorithms = [selectionSort, bubbleSort, mergeSort];
+const algorithms = [selectionSort, bubbleSort, mergeSort, insertionSort];
 const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
 
 const runAlgorithms = async (
@@ -29,6 +30,14 @@ const runAlgorithms = async (
       i: 0,
       j: 0,
       swap: true,
+    },
+    insertionSort: {
+      processing: true,
+      arr: [...arrays.selectionSort],
+      n: arrays.selectionSort.length,
+      i: 1,
+      j: 0,
+      key: arrays.selectionSort[1],
     },
     mergeSort: {
       processing: true,
