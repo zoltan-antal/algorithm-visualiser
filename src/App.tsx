@@ -33,6 +33,7 @@ function App() {
       ])
     ) as AlgorithmStates
   );
+  const [processing, setProcessing] = useState<boolean>(false);
 
   const generateArrays = () => {
     const randomArray: number[] = generateArray(ARRAY_SIZE, 1, MAX_VALUE);
@@ -61,13 +62,17 @@ function App() {
             algorithms,
             algorithmStates,
             setAlgorithmStates,
-            TIMEOUT
+            TIMEOUT,
+            setProcessing
           )
         }
+        disabled={processing}
       >
         Run
       </button>
-      <button onClick={() => generateArrays()}>Regenerate arrays</button>
+      <button onClick={() => generateArrays()} disabled={processing}>
+        Regenerate
+      </button>
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
         <div>
           <h2>Selection sort</h2>

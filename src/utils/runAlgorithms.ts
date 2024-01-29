@@ -8,8 +8,11 @@ const runAlgorithms = async (
   }[],
   algorithmStates: AlgorithmStates,
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
-  timeout: number
+  timeout: number,
+  setProcessing: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
+  setProcessing(true);
+
   const algorithmSteps = Object.fromEntries(
     algorithms.map((algorithm) => [
       algorithm.algorithmName,
@@ -32,7 +35,8 @@ const runAlgorithms = async (
     });
     await new Promise((resolve) => setTimeout(resolve, timeout));
   }
-  console.log('Done');
+
+  setProcessing(false);
 };
 
 export default runAlgorithms;
