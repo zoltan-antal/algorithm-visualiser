@@ -135,7 +135,7 @@ function App() {
           Regenerate
         </button>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>
         <div>
           <h2>Selection sort</h2>
           <BarChart data={algorithmStates.selectionSort} />

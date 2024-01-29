@@ -17,12 +17,11 @@ const BarChartComponent = ({ data }: any) => {
   return (
     <BarChart
       width={300}
-      height={300}
-      data={data.array.map((value: any, index: any) => ({
-        index: index + 1,
+      height={250}
+      data={data.array.map((value: number, index: number) => ({
+        index,
         value,
       }))}
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
     >
       <Bar dataKey="value" shape={renderCustomBar} />
     </BarChart>
