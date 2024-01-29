@@ -1,4 +1,4 @@
-import { BarChart, Bar } from 'recharts';
+import { BarChart, Bar, YAxis } from 'recharts';
 
 const BarChartComponent = ({ data }: any) => {
   const renderCustomBar = (props: any) => {
@@ -23,6 +23,10 @@ const BarChartComponent = ({ data }: any) => {
         value,
       }))}
     >
+      <YAxis
+        domain={[Math.min(...data.array) - 1, Math.max(...data.array)]}
+        hide
+      />
       <Bar dataKey="value" shape={renderCustomBar} />
     </BarChart>
   );
