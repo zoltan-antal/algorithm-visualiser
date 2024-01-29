@@ -8,6 +8,7 @@ import selectionSort from './algorithms/selectionSort.ts';
 import bubbleSort from './algorithms/bubbleSort.ts';
 import insertionSort from './algorithms/insertionSort.ts';
 import mergeSort from './algorithms/mergeSort.ts';
+import quickSort from './algorithms/quickSort.ts';
 
 import AlgorithmStates from './types/AlgorithmStates.ts';
 
@@ -21,7 +22,7 @@ function App() {
     bubbleSort,
     insertionSort,
     mergeSort,
-    //
+    quickSort,
   ];
   const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
   const [arrays, setArrays] = useState<AlgorithmStates>(
@@ -48,6 +49,7 @@ function App() {
   console.log('Bubble sort: ' + arrays.bubbleSort);
   console.log('Insertion sort: ' + arrays.insertionSort);
   console.log('Merge sort: ' + arrays.mergeSort);
+  console.log('Quicksort: ' + arrays.quickSort);
 
   return (
     <>
@@ -74,6 +76,10 @@ function App() {
         <div>
           <h2>Merge sort</h2>
           <BarChart data={arrays.mergeSort} />
+        </div>
+        <div>
+          <h2>Quicksort</h2>
+          <BarChart data={arrays.quickSort} />
         </div>
       </div>
     </>
