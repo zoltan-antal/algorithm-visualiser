@@ -18,19 +18,19 @@ function App() {
   const MAX_ARRAY_SIZE = 100;
   const ARRAY_SIZE_STEP = 10;
 
-  const DEFAULT_DELAY = 50;
-  const MIN_DELAY = 25;
-  const MAX_DELAY = 500;
-  const DELAY_STEP = 25;
-
   const DEFAULT_MAX_VALUE = 50;
   const MIN_MAX_VALUE = 5;
   const MAX_MAX_VALUE = 100;
   const MAX_VALUE_STEP = 5;
 
+  const DEFAULT_DELAY = 50;
+  const MIN_DELAY = 25;
+  const MAX_DELAY = 500;
+  const DELAY_STEP = 25;
+
   const [arraySize, setArraySize] = useState(DEFAULT_ARRAY_SIZE);
-  const [delay, setDelay] = useState(DEFAULT_DELAY);
   const [maxValue, setMaxValue] = useState(DEFAULT_MAX_VALUE);
+  const [delay, setDelay] = useState(DEFAULT_DELAY);
 
   const algorithms = [
     selectionSort,
@@ -88,18 +88,6 @@ function App() {
         <div>
           <input
             type="range"
-            min={MIN_DELAY}
-            max={MAX_DELAY}
-            step={DELAY_STEP}
-            value={delay}
-            onChange={(e) => setDelay(Number(e.target.value))}
-            disabled={processing}
-          />
-          <p>Timeout: {delay}ms</p>
-        </div>
-        <div>
-          <input
-            type="range"
             min={MIN_MAX_VALUE}
             max={MAX_MAX_VALUE}
             step={MAX_VALUE_STEP}
@@ -109,11 +97,23 @@ function App() {
           />
           <p>Value range: {maxValue}</p>
         </div>
+        <div>
+          <input
+            type="range"
+            min={MIN_DELAY}
+            max={MAX_DELAY}
+            step={DELAY_STEP}
+            value={delay}
+            onChange={(e) => setDelay(Number(e.target.value))}
+            disabled={processing}
+          />
+          <p>Timeout: {delay}ms</p>
+        </div>
         <button
           onClick={() => {
-            setDelay(DEFAULT_DELAY);
-            setMaxValue(DEFAULT_MAX_VALUE);
             setArraySize(DEFAULT_ARRAY_SIZE);
+            setMaxValue(DEFAULT_MAX_VALUE);
+            setDelay(DEFAULT_DELAY);
           }}
           disabled={processing}
         >
