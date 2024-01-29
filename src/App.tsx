@@ -60,7 +60,7 @@ function App() {
         Run
       </button>
       <button onClick={() => generateArrays()}>Regenerate arrays</button>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
         <div>
           <h2>Selection sort</h2>
           <BarChart data={arrays.selectionSort} />

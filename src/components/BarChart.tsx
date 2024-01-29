@@ -16,7 +16,7 @@ const BarChartComponent = ({ data }: any) => {
   return (
     <BarChart
       width={300}
-      height={400}
+      height={300}
       data={data.map((value: any, index: any) => ({ index: index + 1, value }))}
       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
     >
