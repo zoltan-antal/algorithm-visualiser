@@ -1,7 +1,9 @@
+import AlgorithmState from '../types/AlgorithmState';
+
 const bubbleSort = (unsorted: number[]) => {
   const sorted = [...unsorted];
   const n = sorted.length;
-  const steps = [];
+  const steps: AlgorithmState[] = [];
 
   // Continue while at least one swap is made, i.e., the array is unsorted
   let swap = true;
@@ -15,11 +17,12 @@ const bubbleSort = (unsorted: number[]) => {
         swap = true;
         [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
       }
-      steps.push([...sorted]);
+      steps.push({ array: [...sorted], highlights: [j, j + 1] });
     }
     i++;
   }
 
+  steps.push({ array: [...sorted], highlights: [] });
   return steps;
 };
 

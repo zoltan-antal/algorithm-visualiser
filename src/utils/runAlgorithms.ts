@@ -1,31 +1,31 @@
+import AlgorithmState from '../types/AlgorithmState';
 import AlgorithmStates from '../types/AlgorithmStates.ts';
 
 const runAlgorithms = async (
   algorithms: {
-    (unsorted: number[]): number[][];
+    (unsorted: number[]): AlgorithmState[];
     algorithmName: string;
   }[],
-  arrays: AlgorithmStates,
-  setArrays: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
+  algorithmStates: AlgorithmStates,
+  setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
   timeout: number
 ) => {
   const algorithmSteps = Object.fromEntries(
     algorithms.map((algorithm) => [
       algorithm.algorithmName,
-      algorithm(arrays[algorithm.algorithmName]),
+      algorithm(algorithmStates[algorithm.algorithmName].array),
     ])
   );
-  console.log(algorithmSteps);
   const n = Math.max(
     ...Object.values(algorithmSteps).map((steps) => steps.length)
   );
 
   for (let i = 0; i < n; i++) {
-    setArrays((prevStates) => {
+    setAlgorithmStates((prevStates) => {
       const updatedStates: AlgorithmStates = structuredClone(prevStates);
-      Object.entries(algorithmSteps).forEach(([key, value]) => {
-        if (value[i]) {
-          updatedStates[key] = value[i];
+      Object.entries(algorithmSteps).forEach(([key, steps]) => {
+        if (steps[i]) {
+          updatedStates[key] = steps[i];
         }
       });
       return updatedStates;

@@ -1,7 +1,9 @@
+import AlgorithmState from '../types/AlgorithmState';
+
 const selectionSort = (unsorted: number[]) => {
   const sorted = [...unsorted];
   const n = sorted.length;
-  const steps = [];
+  const steps: AlgorithmState[] = [];
 
   for (let i = 0; i < n; i++) {
     // Assume the current index is the minimum
@@ -9,17 +11,18 @@ const selectionSort = (unsorted: number[]) => {
 
     // Find the index of the minimum element in the unsorted part
     for (let j = i + 1; j < n; j++) {
+      steps.push({ array: [...sorted], highlights: [j, minIndex] });
       if (sorted[j] < sorted[minIndex]) {
         minIndex = j;
       }
-      steps.push([...sorted]);
     }
 
     // Swap the found element with the element at the current index
     [sorted[i], sorted[minIndex]] = [sorted[minIndex], sorted[i]];
-    steps.push([...sorted]);
+    steps.push({ array: [...sorted], highlights: [i, minIndex] });
   }
 
+  steps.push({ array: [...sorted], highlights: [] });
   return steps;
 };
 

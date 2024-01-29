@@ -25,18 +25,25 @@ function App() {
     quickSort,
   ];
   const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
-  const [arrays, setArrays] = useState<AlgorithmStates>(
+  const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>(
     Object.fromEntries(
-      algorithmNames.map((algorithmName) => [algorithmName, [] as number[]])
+      algorithmNames.map((algorithmName) => [
+        algorithmName,
+        { array: [], highlights: [] },
+      ])
     ) as AlgorithmStates
   );
 
   const generateArrays = () => {
     const randomArray: number[] = generateArray(ARRAY_SIZE, 1, MAX_VALUE);
-    setArrays((prevStates) => {
+    setAlgorithmStates((prevStates) => {
       const updatedStates: AlgorithmStates = structuredClone(prevStates);
       Object.keys(updatedStates).forEach(
-        (key) => (updatedStates[key as keyof AlgorithmStates] = randomArray)
+        (key) =>
+          (updatedStates[key as keyof AlgorithmStates] = {
+            array: randomArray,
+            highlights: [],
+          })
       );
       return updatedStates;
     });
@@ -45,17 +52,18 @@ function App() {
     generateArrays();
   }, []);
 
-  console.log('Selection sort: ' + arrays.selectionSort);
-  console.log('Bubble sort: ' + arrays.bubbleSort);
-  console.log('Insertion sort: ' + arrays.insertionSort);
-  console.log('Merge sort: ' + arrays.mergeSort);
-  console.log('Quicksort: ' + arrays.quickSort);
-
   return (
     <>
       <h1>Algorithm Visualiser</h1>
       <button
-        onClick={() => runAlgorithms(algorithms, arrays, setArrays, TIMEOUT)}
+        onClick={() =>
+          runAlgorithms(
+            algorithms,
+            algorithmStates,
+            setAlgorithmStates,
+            TIMEOUT
+          )
+        }
       >
         Run
       </button>
@@ -63,23 +71,23 @@ function App() {
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
         <div>
           <h2>Selection sort</h2>
-          <BarChart data={arrays.selectionSort} />
+          <BarChart data={algorithmStates.selectionSort} />
         </div>
         <div>
           <h2>Bubble sort</h2>
-          <BarChart data={arrays.bubbleSort} />
+          <BarChart data={algorithmStates.bubbleSort} />
         </div>
         <div>
           <h2>Insertion sort</h2>
-          <BarChart data={arrays.insertionSort} />
+          <BarChart data={algorithmStates.insertionSort} />
         </div>
         <div>
           <h2>Merge sort</h2>
-          <BarChart data={arrays.mergeSort} />
+          <BarChart data={algorithmStates.mergeSort} />
         </div>
         <div>
           <h2>Quicksort</h2>
-          <BarChart data={arrays.quickSort} />
+          <BarChart data={algorithmStates.quickSort} />
         </div>
       </div>
     </>

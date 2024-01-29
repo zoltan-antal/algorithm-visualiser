@@ -1,5 +1,7 @@
+import AlgorithmState from './AlgorithmState';
+
 type AlgorithmStates = {
-  [key: string]: number[];
+  [key: string]: AlgorithmState;
 };
 
 export default AlgorithmStates;

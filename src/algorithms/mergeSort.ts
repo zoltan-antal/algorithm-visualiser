@@ -1,16 +1,21 @@
+import AlgorithmState from '../types/AlgorithmState';
+
 const mergeSort = (unsorted: number[]) => {
-  const steps = [[...unsorted]];
+  const steps: AlgorithmState[] = [{ array: [...unsorted], highlights: [] }];
 
   const mergeSortRecursive = (
     unsorted: number[],
-    steps: number[][],
+    steps: AlgorithmState[],
     start: number
   ) => {
     const n = unsorted.length;
 
     // Base case
     if (n == 1) {
-      steps.push([...steps[steps.length - 1]]);
+      steps.push({
+        array: [...steps[steps.length - 1].array],
+        highlights: [start],
+      });
       return unsorted;
     }
 
@@ -43,16 +48,20 @@ const mergeSort = (unsorted: number[]) => {
         j++;
       }
 
-      const newStep = [...steps[steps.length - 1]];
-      newStep[start + k] = sorted[k];
-      steps.push(newStep);
+      const array = [...steps[steps.length - 1].array];
+      array[start + k] = sorted[k];
+      steps.push({
+        array: array,
+        highlights: [start + k, start + unsorted.length - 1],
+      });
     }
 
     return sorted;
   };
-  mergeSortRecursive(unsorted, steps, 0);
+  const sorted = mergeSortRecursive(unsorted, steps, 0);
 
-  return steps;
+  steps.push({ array: [...sorted], highlights: [] });
+  return steps.slice(1);
 };
 
 mergeSort.algorithmName = 'mergeSort';
