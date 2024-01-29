@@ -1,6 +1,13 @@
 import { BarChart, Bar, YAxis } from 'recharts';
 
-const BarChartComponent = ({ data }: any) => {
+import AlgorithmState from '../types/AlgorithmState';
+
+interface AlgorithmChartProps {
+  data: AlgorithmState;
+  maxValue: number;
+}
+
+const BarChartComponent = ({ data, maxValue }: AlgorithmChartProps) => {
   const renderCustomBar = (props: any) => {
     const { index } = props;
 
@@ -23,10 +30,7 @@ const BarChartComponent = ({ data }: any) => {
         value,
       }))}
     >
-      <YAxis
-        domain={[Math.min(...data.array) - 1, Math.max(...data.array)]}
-        hide
-      />
+      <YAxis domain={[0, maxValue]} hide />
       <Bar dataKey="value" shape={renderCustomBar} />
     </BarChart>
   );

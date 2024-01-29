@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import BarChart from './components/BarChart.tsx';
+import AlgorithmChart from './components/AlgorithmChart.tsx';
 
 import generateArray from './utils/generateArray.ts';
 import runAlgorithms from './utils/runAlgorithms.ts';
@@ -67,7 +67,7 @@ function App() {
   useEffect(() => {
     generateArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [arraySize, maxValue]);
 
   return (
     <>
@@ -81,6 +81,7 @@ function App() {
             step={ARRAY_SIZE_STEP}
             value={arraySize}
             onChange={(e) => setArraySize(Number(e.target.value))}
+            disabled={processing}
           />
           <p>Array size: {arraySize}</p>
         </div>
@@ -92,6 +93,7 @@ function App() {
             step={DELAY_STEP}
             value={delay}
             onChange={(e) => setDelay(Number(e.target.value))}
+            disabled={processing}
           />
           <p>Timeout: {delay}ms</p>
         </div>
@@ -103,6 +105,7 @@ function App() {
             step={MAX_VALUE_STEP}
             value={maxValue}
             onChange={(e) => setMaxValue(Number(e.target.value))}
+            disabled={processing}
           />
           <p>Value range: {maxValue}</p>
         </div>
@@ -112,6 +115,7 @@ function App() {
             setMaxValue(DEFAULT_MAX_VALUE);
             setArraySize(DEFAULT_ARRAY_SIZE);
           }}
+          disabled={processing}
         >
           Reset
         </button>
@@ -138,23 +142,38 @@ function App() {
       <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>
         <div>
           <h2>Selection sort</h2>
-          <BarChart data={algorithmStates.selectionSort} />
+          <AlgorithmChart
+            data={algorithmStates.selectionSort}
+            maxValue={maxValue}
+          />
         </div>
         <div>
           <h2>Bubble sort</h2>
-          <BarChart data={algorithmStates.bubbleSort} />
+          <AlgorithmChart
+            data={algorithmStates.bubbleSort}
+            maxValue={maxValue}
+          />
         </div>
         <div>
           <h2>Insertion sort</h2>
-          <BarChart data={algorithmStates.insertionSort} />
+          <AlgorithmChart
+            data={algorithmStates.insertionSort}
+            maxValue={maxValue}
+          />
         </div>
         <div>
           <h2>Merge sort</h2>
-          <BarChart data={algorithmStates.mergeSort} />
+          <AlgorithmChart
+            data={algorithmStates.mergeSort}
+            maxValue={maxValue}
+          />
         </div>
         <div>
           <h2>Quicksort</h2>
-          <BarChart data={algorithmStates.quickSort} />
+          <AlgorithmChart
+            data={algorithmStates.quickSort}
+            maxValue={maxValue}
+          />
         </div>
       </div>
     </>
