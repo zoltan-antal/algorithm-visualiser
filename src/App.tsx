@@ -50,6 +50,10 @@ function App() {
   );
   const [processing, setProcessing] = useState<boolean>(false);
 
+  const [selectedAlgorithms, setSelectedAlgorithms] = useState(
+    new Set(algorithmNames)
+  );
+
   const generateArrays = () => {
     const randomArray: number[] = generateArray(arraySize, 1, maxValue);
     setAlgorithmStates((prevStates) => {
@@ -121,10 +125,47 @@ function App() {
         </button>
       </div>
       <div>
+        {algorithmNames.map((algorithmName) => (
+          <div key={algorithmName}>
+            <label>
+              <input
+                type="checkbox"
+                checked={Array.from(selectedAlgorithms).includes(algorithmName)}
+                disabled={processing}
+                onChange={() => {
+                  setSelectedAlgorithms((prev) => {
+                    const updated = new Set(prev);
+                    switch (
+                      Array.from(selectedAlgorithms).includes(algorithmName)
+                    ) {
+                      case true:
+                        updated.delete(algorithmName);
+                        break;
+
+                      case false:
+                        updated.add(algorithmName);
+                        break;
+                    }
+                    return updated;
+                  });
+                }}
+              />
+              {
+                algorithms.find(
+                  (algorithm) => algorithm.algorithmName === algorithmName
+                )!.displayName
+              }
+            </label>
+          </div>
+        ))}
+      </div>
+      <div>
         <button
           onClick={() =>
             runAlgorithms(
-              algorithms,
+              algorithms.filter((algorithm) =>
+                Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
+              ),
               algorithmStates,
               setAlgorithmStates,
               delay,
@@ -146,41 +187,19 @@ function App() {
         </button>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>
-        <div>
-          <h2>Selection sort</h2>
-          <AlgorithmChart
-            data={algorithmStates.selectionSort}
-            maxValue={maxValue}
-          />
-        </div>
-        <div>
-          <h2>Bubble sort</h2>
-          <AlgorithmChart
-            data={algorithmStates.bubbleSort}
-            maxValue={maxValue}
-          />
-        </div>
-        <div>
-          <h2>Insertion sort</h2>
-          <AlgorithmChart
-            data={algorithmStates.insertionSort}
-            maxValue={maxValue}
-          />
-        </div>
-        <div>
-          <h2>Merge sort</h2>
-          <AlgorithmChart
-            data={algorithmStates.mergeSort}
-            maxValue={maxValue}
-          />
-        </div>
-        <div>
-          <h2>Quicksort</h2>
-          <AlgorithmChart
-            data={algorithmStates.quickSort}
-            maxValue={maxValue}
-          />
-        </div>
+        {algorithms
+          .filter((algorithm) =>
+            Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
+          )
+          .map((algorithm) => (
+            <div>
+              <h2>{algorithm.displayName}</h2>
+              <AlgorithmChart
+                data={algorithmStates[algorithm.algorithmName]}
+                maxValue={maxValue}
+              />
+            </div>
+          ))}
       </div>
     </>
   );

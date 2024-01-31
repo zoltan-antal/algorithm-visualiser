@@ -22,5 +22,6 @@ const insertionSort = (unsorted: number[]) => {
 };
 
 insertionSort.algorithmName = 'insertionSort';
+insertionSort.displayName = 'Insertion sort';
 
 export default insertionSort;

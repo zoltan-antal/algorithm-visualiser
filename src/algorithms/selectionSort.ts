@@ -27,5 +27,6 @@ const selectionSort = (unsorted: number[]) => {
 };
 
 selectionSort.algorithmName = 'selectionSort';
+selectionSort.displayName = 'Selection sort';
 
 export default selectionSort;

@@ -65,5 +65,6 @@ const mergeSort = (unsorted: number[]) => {
 };
 
 mergeSort.algorithmName = 'mergeSort';
+mergeSort.displayName = 'Merge sort';
 
 export default mergeSort;

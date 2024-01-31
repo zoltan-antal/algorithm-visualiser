@@ -27,5 +27,6 @@ const bubbleSort = (unsorted: number[]) => {
 };
 
 bubbleSort.algorithmName = 'bubbleSort';
+bubbleSort.displayName = 'Bubble sort';
 
 export default bubbleSort;
