@@ -1,6 +1,8 @@
 import AlgorithmState from '../types/AlgorithmState';
 import AlgorithmStates from '../types/AlgorithmStates.ts';
 
+let stopped = false;
+
 const runAlgorithms = async (
   algorithms: {
     (unsorted: number[]): AlgorithmState[];
@@ -12,6 +14,7 @@ const runAlgorithms = async (
   setProcessing: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setProcessing(true);
+  stopped = false;
 
   const algorithmSteps = Object.fromEntries(
     algorithms.map((algorithm) => [
@@ -24,6 +27,11 @@ const runAlgorithms = async (
   );
 
   for (let i = 0; i < n; i++) {
+    if (stopped) {
+      setProcessing(false);
+      return;
+    }
+
     setAlgorithmStates((prevStates) => {
       const updatedStates: AlgorithmStates = structuredClone(prevStates);
       Object.entries(algorithmSteps).forEach(([key, steps]) => {
@@ -39,4 +47,9 @@ const runAlgorithms = async (
   setProcessing(false);
 };
 
+const stopAlgorithms = () => {
+  stopped = true;
+};
+
 export default runAlgorithms;
+export { stopAlgorithms };

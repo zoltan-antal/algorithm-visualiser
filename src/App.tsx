@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 
 import generateArray from './utils/generateArray.ts';
-import runAlgorithms from './utils/runAlgorithms.ts';
+import runAlgorithms, { stopAlgorithms } from './utils/runAlgorithms.ts';
 
 import selectionSort from './algorithms/selectionSort.ts';
 import bubbleSort from './algorithms/bubbleSort.ts';
@@ -118,6 +118,9 @@ function App() {
           disabled={processing}
         >
           Reset
+        </button>
+        <button onClick={stopAlgorithms} disabled={!processing}>
+          Stop
         </button>
       </div>
       <div>
