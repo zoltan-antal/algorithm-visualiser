@@ -48,11 +48,9 @@ const runAlgorithms = async (
 };
 
 const stopAlgorithms = (
-  // algorithmStates: AlgorithmStates,
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>
 ) => {
   stopped = true;
-  // setAlgorithmStates(Object.fromEntries(Object.entries(algorithmStates).map(([key, state]) => [key, {arrary: ...state.array, highlights: []}])));
   setAlgorithmStates((prevStates) => {
     const updatedStates: AlgorithmStates = structuredClone(prevStates);
     Object.keys(updatedStates).forEach(
