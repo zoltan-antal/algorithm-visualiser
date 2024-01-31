@@ -138,7 +138,7 @@ function App() {
         >
           Run
         </button>
-        <button onClick={() => generateArrays()} disabled={processing}>
+        <button onClick={generateArrays} disabled={processing}>
           Regenerate
         </button>
       </div>
