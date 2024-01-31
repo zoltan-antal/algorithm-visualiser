@@ -117,7 +117,7 @@ function App() {
           }}
           disabled={processing}
         >
-          Reset
+          Reset defaults
         </button>
       </div>
       <div>
