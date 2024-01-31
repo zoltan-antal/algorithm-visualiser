@@ -119,9 +119,6 @@ function App() {
         >
           Reset
         </button>
-        <button onClick={stopAlgorithms} disabled={!processing}>
-          Stop
-        </button>
       </div>
       <div>
         <button
@@ -137,6 +134,12 @@ function App() {
           disabled={processing}
         >
           Run
+        </button>
+        <button
+          onClick={() => stopAlgorithms(setAlgorithmStates)}
+          disabled={!processing}
+        >
+          Abort
         </button>
         <button onClick={generateArrays} disabled={processing}>
           Regenerate
