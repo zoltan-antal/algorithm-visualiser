@@ -25,7 +25,7 @@ function App() {
 
   const DEFAULT_DELAY = 50;
   const MIN_DELAY = 25;
-  const MAX_DELAY = 500;
+  const MAX_DELAY = 1000;
   const DELAY_STEP = 25;
 
   const [arraySize, setArraySize] = useState(DEFAULT_ARRAY_SIZE);
