@@ -10,7 +10,7 @@ const mergeSort = (unsorted: number[]) => {
   ) => {
     const n = unsorted.length;
 
-    // Base case
+    // Base case: if the array size is 1, no sorting is required
     if (n == 1) {
       steps.push({
         array: [...steps[steps.length - 1].array],
