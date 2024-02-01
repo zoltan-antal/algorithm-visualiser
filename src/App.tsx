@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 
-import generateArray from './utils/generateArray.ts';
+import generateRandomArray from './utils/generateRandomArray.ts';
 import runAlgorithms, { stopAlgorithms } from './utils/runAlgorithms.ts';
 
 import selectionSort from './algorithms/selectionSort.ts';
@@ -58,22 +58,46 @@ function App() {
     new Set(algorithmNames)
   );
 
-  const generateArrays = () => {
-    const randomArray: number[] = generateArray(arraySize, 1, maxValue);
+  const updateAlgorithmStates = (array: number[]) => {
     setAlgorithmStates((prevStates) => {
       const updatedStates: AlgorithmStates = structuredClone(prevStates);
       Object.keys(updatedStates).forEach(
         (key) =>
           (updatedStates[key as keyof AlgorithmStates] = {
-            array: randomArray,
+            array,
             highlights: [],
           })
       );
       return updatedStates;
     });
   };
+
+  const generateUnsortedArrays = () => {
+    const array = generateRandomArray(arraySize, 1, maxValue);
+    updateAlgorithmStates(array);
+  };
+
+  const generateSortedArrays = () => {
+    const array = generateRandomArray(arraySize, 1, maxValue);
+    array.sort((a, b) => a - b);
+    updateAlgorithmStates(array);
+  };
+
+  const generateReversedArrays = () => {
+    const array = generateRandomArray(arraySize, 1, maxValue);
+    array.sort((a, b) => b - a);
+    updateAlgorithmStates(array);
+  };
+
+  const generateEqualArrays = () => {
+    const array = new Array(arraySize).fill(
+      Math.floor(Math.random() * (maxValue - 1 + 1)) + 1
+    );
+    updateAlgorithmStates(array);
+  };
+
   useEffect(() => {
-    generateArrays();
+    generateUnsortedArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize, maxValue]);
 
@@ -187,9 +211,21 @@ function App() {
           Reset defaults
         </button>
       </div>
-      <button onClick={generateArrays} disabled={processing}>
-        Regenerate
-      </button>
+      <div>
+        Data:{' '}
+        <button onClick={generateUnsortedArrays} disabled={processing}>
+          Unsorted
+        </button>
+        <button onClick={generateSortedArrays} disabled={processing}>
+          Sorted
+        </button>
+        <button onClick={generateReversedArrays} disabled={processing}>
+          Reversed
+        </button>
+        <button onClick={generateEqualArrays} disabled={processing}>
+          Equal elements
+        </button>
+      </div>
       <div style={{ display: 'flex' }}>
         {algorithmNames.map((algorithmName) => (
           <div key={algorithmName}>

@@ -1,4 +1,4 @@
-const generateArray = (length: number, min: number, max: number) => {
+const generateRandomArray = (length: number, min: number, max: number) => {
   const arr: number[] = [];
   for (let i = 0; i < length; i++) {
     arr[i] = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -6,4 +6,4 @@ const generateArray = (length: number, min: number, max: number) => {
   return arr;
 };
 
-export default generateArray;
+export default generateRandomArray;
