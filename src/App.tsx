@@ -14,7 +14,7 @@ import heapSort from './algorithms/heapSort.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
 
 function App() {
-  const DEFAULT_ARRAY_SIZE = 40;
+  const DEFAULT_ARRAY_SIZE = 20;
   const MIN_ARRAY_SIZE = 10;
   const MAX_ARRAY_SIZE = 100;
   const ARRAY_SIZE_STEP = 10;
@@ -24,7 +24,7 @@ function App() {
   const MAX_MAX_VALUE = 100;
   const MAX_VALUE_STEP = 5;
 
-  const DEFAULT_DELAY = 50;
+  const DEFAULT_DELAY = 100;
   const MIN_DELAY = 25;
   const MAX_DELAY = 1000;
   const DELAY_STEP = 25;
