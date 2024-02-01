@@ -1,3 +1,3 @@
-type ArrayOrder = 'unsorted' | 'sorted' | 'reversed' | 'equal';
+type ArrayOrder = 'unsorted' | 'sorted' | 'reversed' | 'equal' | 'nearlySorted';
 
 export default ArrayOrder;

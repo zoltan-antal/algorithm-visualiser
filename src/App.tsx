@@ -93,6 +93,10 @@ function App() {
       case 'equal':
         array = generateEqualArrays();
         break;
+
+      case 'nearlySorted':
+        array = generateNearlySortedArrays();
+        break;
     }
     updateAlgorithmStates(array);
   };
@@ -118,6 +122,22 @@ function App() {
     const array = new Array(arraySize).fill(
       Math.floor(Math.random() * (maxValue - 1 + 1)) + 1
     );
+    return array;
+  };
+
+  const generateNearlySortedArrays = () => {
+    const array = generateRandomArray(arraySize, 1, maxValue);
+    array.sort((a, b) => a - b);
+    const inversionCount = Math.round(Math.log(arraySize)) - 1;
+    for (let i = 0; i < inversionCount; i++) {
+      const a = Math.floor(Math.random() * arraySize);
+      const b = Math.floor(Math.random() * arraySize);
+      if (a === b) {
+        i--;
+        continue;
+      }
+      [array[a], array[b]] = [array[b], array[a]];
+    }
     return array;
   };
 
@@ -281,6 +301,17 @@ function App() {
             checked={selectedArrayOrder === 'equal'}
           />
           Equal elements
+        </label>
+        <label>
+          <input
+            type="radio"
+            onChange={() => {
+              setSelectedArrayOrder('nearlySorted');
+              generateArrays('nearlySorted');
+            }}
+            checked={selectedArrayOrder === 'nearlySorted'}
+          />
+          Nearly sorted
         </label>
       </div>
       <button onClick={() => generateArrays()}>Regenerate data</button>
