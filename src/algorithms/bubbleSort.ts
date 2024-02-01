@@ -17,7 +17,7 @@ const bubbleSort = (unsorted: number[]) => {
         swap = true;
         [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
       }
-      steps.push({ array: [...sorted], highlights: [j, j + 1, n - i] });
+      steps.push({ array: [...sorted], highlights: [j, j + 1, n - i - 1] });
     }
     i++;
   }
