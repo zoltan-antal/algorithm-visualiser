@@ -44,6 +44,6 @@ const quickSort = (unsorted: number[]) => {
 };
 
 quickSort.algorithmName = 'quickSort';
-quickSort.displayName = 'Quick sort';
+quickSort.displayName = 'Quicksort';
 
 export default quickSort;
