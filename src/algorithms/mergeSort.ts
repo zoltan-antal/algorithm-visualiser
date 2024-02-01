@@ -52,7 +52,7 @@ const mergeSort = (unsorted: number[]) => {
       array[start + k] = sorted[k];
       steps.push({
         array: array,
-        highlights: [start + k, start + unsorted.length - 1],
+        highlights: [start, start + k, start + unsorted.length - 1],
       });
     }
 

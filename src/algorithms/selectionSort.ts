@@ -11,7 +11,7 @@ const selectionSort = (unsorted: number[]) => {
 
     // Find the index of the minimum element in the unsorted part
     for (let j = i + 1; j < n; j++) {
-      steps.push({ array: [...sorted], highlights: [j, minIndex] });
+      steps.push({ array: [...sorted], highlights: [i, j, minIndex] });
       if (sorted[j] < sorted[minIndex]) {
         minIndex = j;
       }

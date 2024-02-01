@@ -10,11 +10,11 @@ const insertionSort = (unsorted: number[]) => {
     let j = i - 1;
     while (j >= 0 && sorted[j] > key) {
       sorted[j + 1] = sorted[j];
-      steps.push({ array: [...sorted], highlights: [j, j + 1] });
+      steps.push({ array: [...sorted], highlights: [j, j + 1, i] });
       j--;
     }
     sorted[j + 1] = key;
-    steps.push({ array: [...sorted], highlights: [j + 1] });
+    steps.push({ array: [...sorted], highlights: [j + 1, i] });
   }
 
   steps.push({ array: [...sorted], highlights: [] });
