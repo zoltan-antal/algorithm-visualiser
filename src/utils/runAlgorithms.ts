@@ -5,20 +5,21 @@ let stopped = false;
 
 const runAlgorithms = async (
   algorithmSteps: AlgorithmSteps,
+  currentStep: React.MutableRefObject<number>,
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
   timeout: number,
   setProcessing: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  setProcessing(true);
   stopped = false;
 
   const n = Math.max(
     ...Object.values(algorithmSteps).map((steps) => steps.length)
   );
 
-  for (let i = 0; i < n; i++) {
+  for (let i = currentStep.current; i < n; i++) {
+    currentStep.current = i;
+
     if (stopped) {
-      setProcessing(false);
       return;
     }
 
@@ -37,17 +38,8 @@ const runAlgorithms = async (
   setProcessing(false);
 };
 
-const stopAlgorithms = (
-  setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>
-) => {
+const stopAlgorithms = () => {
   stopped = true;
-  setAlgorithmStates((prevStates) => {
-    const updatedStates: AlgorithmStates = structuredClone(prevStates);
-    Object.keys(updatedStates).forEach(
-      (key) => (updatedStates[key].highlights = [])
-    );
-    return updatedStates;
-  });
 };
 
 export default runAlgorithms;

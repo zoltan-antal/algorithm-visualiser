@@ -52,6 +52,7 @@ function App() {
     ) as AlgorithmStates
   );
   const [processing, setProcessing] = useState<boolean>(false);
+  const [paused, setPaused] = useState<boolean>(false);
 
   const [selectedAlgorithms, setSelectedAlgorithms] = useState(
     new Set(algorithmNames)
@@ -77,8 +78,9 @@ function App() {
   }, [arraySize, maxValue]);
 
   const algorithmSteps = useRef<AlgorithmSteps>({});
+  const currentStep = useRef<number>(0);
 
-  const handleRun = () => {
+  const calculateAlgorithms = () => {
     algorithmSteps.current = Object.fromEntries(
       algorithms
         .filter((algorithm) =>
@@ -89,13 +91,49 @@ function App() {
           algorithm(algorithmStates[algorithm.algorithmName].array),
         ])
     );
+  };
 
+  const callRunAlgorithms = () => {
     runAlgorithms(
       algorithmSteps.current,
+      currentStep,
       setAlgorithmStates,
       delay,
       setProcessing
     );
+  };
+
+  const handleRun = () => {
+    calculateAlgorithms();
+    currentStep.current = 0;
+    setProcessing(true);
+    callRunAlgorithms();
+  };
+
+  const handleAbort = () => {
+    currentStep.current = 0;
+    setProcessing(false);
+    setPaused(false);
+    stopAlgorithms();
+    // Remove highlights
+    setAlgorithmStates((prevStates) => {
+      const updatedStates: AlgorithmStates = structuredClone(prevStates);
+      Object.keys(updatedStates).forEach(
+        (key) => (updatedStates[key].highlights = [])
+      );
+      return updatedStates;
+    });
+  };
+
+  const handlePause = () => {
+    setPaused(true);
+    stopAlgorithms();
+  };
+
+  const handleContinue = () => {
+    setProcessing(true);
+    setPaused(false);
+    callRunAlgorithms();
   };
 
   return (
@@ -149,7 +187,10 @@ function App() {
           Reset defaults
         </button>
       </div>
-      <div>
+      <button onClick={generateArrays} disabled={processing}>
+        Regenerate
+      </button>
+      <div style={{ display: 'flex' }}>
         {algorithmNames.map((algorithmName) => (
           <div key={algorithmName}>
             <label>
@@ -185,17 +226,19 @@ function App() {
         ))}
       </div>
       <div>
-        <button onClick={handleRun} disabled={processing}>
+        <button onClick={handleRun} disabled={processing || paused}>
           Run
         </button>
-        <button
-          onClick={() => stopAlgorithms(setAlgorithmStates)}
-          disabled={!processing}
-        >
+        <button onClick={handleAbort} disabled={!processing && !paused}>
           Abort
         </button>
-        <button onClick={generateArrays} disabled={processing}>
-          Regenerate
+      </div>
+      <div>
+        <button onClick={handlePause} disabled={!processing || paused}>
+          Pause
+        </button>
+        <button onClick={handleContinue} disabled={!paused}>
+          Continue
         </button>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>
