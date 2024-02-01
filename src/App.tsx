@@ -9,6 +9,7 @@ import bubbleSort from './algorithms/bubbleSort.ts';
 import insertionSort from './algorithms/insertionSort.ts';
 import mergeSort from './algorithms/mergeSort.ts';
 import quickSort from './algorithms/quickSort.ts';
+import heapSort from './algorithms/heapSort.ts';
 
 import AlgorithmStates from './types/AlgorithmStates.ts';
 
@@ -38,6 +39,7 @@ function App() {
     insertionSort,
     mergeSort,
     quickSort,
+    heapSort,
   ];
   const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
   const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>(
