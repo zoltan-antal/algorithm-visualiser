@@ -1,14 +1,10 @@
-import AlgorithmState from '../types/AlgorithmState';
 import AlgorithmStates from '../types/AlgorithmStates.ts';
+import AlgorithmSteps from '../types/AlgorithmSteps.ts';
 
 let stopped = false;
 
 const runAlgorithms = async (
-  algorithms: {
-    (unsorted: number[]): AlgorithmState[];
-    algorithmName: string;
-  }[],
-  algorithmStates: AlgorithmStates,
+  algorithmSteps: AlgorithmSteps,
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
   timeout: number,
   setProcessing: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,12 +12,6 @@ const runAlgorithms = async (
   setProcessing(true);
   stopped = false;
 
-  const algorithmSteps = Object.fromEntries(
-    algorithms.map((algorithm) => [
-      algorithm.algorithmName,
-      algorithm(algorithmStates[algorithm.algorithmName].array),
-    ])
-  );
   const n = Math.max(
     ...Object.values(algorithmSteps).map((steps) => steps.length)
   );

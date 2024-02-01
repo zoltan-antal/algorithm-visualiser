@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 
 import generateArray from './utils/generateArray.ts';
@@ -12,6 +12,7 @@ import quickSort from './algorithms/quickSort.ts';
 import heapSort from './algorithms/heapSort.ts';
 
 import AlgorithmStates from './types/AlgorithmStates.ts';
+import AlgorithmSteps from './types/AlgorithmSteps.ts';
 
 function App() {
   const DEFAULT_ARRAY_SIZE = 20;
@@ -74,6 +75,28 @@ function App() {
     generateArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize, maxValue]);
+
+  const algorithmSteps = useRef<AlgorithmSteps>({});
+
+  const handleRun = () => {
+    algorithmSteps.current = Object.fromEntries(
+      algorithms
+        .filter((algorithm) =>
+          Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
+        )
+        .map((algorithm) => [
+          algorithm.algorithmName,
+          algorithm(algorithmStates[algorithm.algorithmName].array),
+        ])
+    );
+
+    runAlgorithms(
+      algorithmSteps.current,
+      setAlgorithmStates,
+      delay,
+      setProcessing
+    );
+  };
 
   return (
     <>
@@ -162,20 +185,7 @@ function App() {
         ))}
       </div>
       <div>
-        <button
-          onClick={() =>
-            runAlgorithms(
-              algorithms.filter((algorithm) =>
-                Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
-              ),
-              algorithmStates,
-              setAlgorithmStates,
-              delay,
-              setProcessing
-            )
-          }
-          disabled={processing}
-        >
+        <button onClick={handleRun} disabled={processing}>
           Run
         </button>
         <button
