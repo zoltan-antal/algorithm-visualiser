@@ -11,6 +11,7 @@ import mergeSort from './algorithms/mergeSort.ts';
 import quickSort from './algorithms/quickSort.ts';
 import heapSort from './algorithms/heapSort.ts';
 
+import ArrayOrder from './types/ArrayOrder.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
 import AlgorithmSteps from './types/AlgorithmSteps.ts';
 
@@ -54,6 +55,8 @@ function App() {
   const [processing, setProcessing] = useState<boolean>(false);
   const [paused, setPaused] = useState<boolean>(false);
 
+  const [selectedArrayOrder, setSelectedArrayOrder] =
+    useState<ArrayOrder>('unsorted');
   const [selectedAlgorithms, setSelectedAlgorithms] = useState(
     new Set(algorithmNames)
   );
@@ -72,32 +75,54 @@ function App() {
     });
   };
 
+  const generateArrays = (arrayOrder = selectedArrayOrder) => {
+    let array: number[];
+    switch (arrayOrder) {
+      case 'unsorted':
+        array = generateUnsortedArrays();
+        break;
+
+      case 'sorted':
+        array = generateSortedArrays();
+        break;
+
+      case 'reversed':
+        array = generateReversedArrays();
+        break;
+
+      case 'equal':
+        array = generateEqualArrays();
+        break;
+    }
+    updateAlgorithmStates(array);
+  };
+
   const generateUnsortedArrays = () => {
     const array = generateRandomArray(arraySize, 1, maxValue);
-    updateAlgorithmStates(array);
+    return array;
   };
 
   const generateSortedArrays = () => {
     const array = generateRandomArray(arraySize, 1, maxValue);
     array.sort((a, b) => a - b);
-    updateAlgorithmStates(array);
+    return array;
   };
 
   const generateReversedArrays = () => {
     const array = generateRandomArray(arraySize, 1, maxValue);
     array.sort((a, b) => b - a);
-    updateAlgorithmStates(array);
+    return array;
   };
 
   const generateEqualArrays = () => {
     const array = new Array(arraySize).fill(
       Math.floor(Math.random() * (maxValue - 1 + 1)) + 1
     );
-    updateAlgorithmStates(array);
+    return array;
   };
 
   useEffect(() => {
-    generateUnsortedArrays();
+    generateArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize, maxValue]);
 
@@ -213,19 +238,52 @@ function App() {
       </div>
       <div>
         Data:{' '}
-        <button onClick={generateUnsortedArrays} disabled={processing}>
+        <label>
+          <input
+            type="radio"
+            onChange={() => {
+              setSelectedArrayOrder('unsorted');
+              generateArrays('unsorted');
+            }}
+            checked={selectedArrayOrder === 'unsorted'}
+          />
           Unsorted
-        </button>
-        <button onClick={generateSortedArrays} disabled={processing}>
+        </label>
+        <label>
+          <input
+            type="radio"
+            onChange={() => {
+              setSelectedArrayOrder('sorted');
+              generateArrays('sorted');
+            }}
+            checked={selectedArrayOrder === 'sorted'}
+          />
           Sorted
-        </button>
-        <button onClick={generateReversedArrays} disabled={processing}>
+        </label>
+        <label>
+          <input
+            type="radio"
+            onChange={() => {
+              setSelectedArrayOrder('reversed');
+              generateArrays('reversed');
+            }}
+            checked={selectedArrayOrder === 'reversed'}
+          />
           Reversed
-        </button>
-        <button onClick={generateEqualArrays} disabled={processing}>
+        </label>
+        <label>
+          <input
+            type="radio"
+            onChange={() => {
+              setSelectedArrayOrder('equal');
+              generateArrays('equal');
+            }}
+            checked={selectedArrayOrder === 'equal'}
+          />
           Equal elements
-        </button>
+        </label>
       </div>
+      <button onClick={() => generateArrays()}>Regenerate data</button>
       <div style={{ display: 'flex' }}>
         {algorithmNames.map((algorithmName) => (
           <div key={algorithmName}>
