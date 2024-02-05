@@ -299,6 +299,7 @@ function App() {
               generateArrays('unsorted');
             }}
             checked={selectedArrayOrder === 'unsorted'}
+            disabled={processing}
           />
           Unsorted
         </label>
@@ -310,6 +311,7 @@ function App() {
               generateArrays('sorted');
             }}
             checked={selectedArrayOrder === 'sorted'}
+            disabled={processing}
           />
           Sorted
         </label>
@@ -321,6 +323,7 @@ function App() {
               generateArrays('reversed');
             }}
             checked={selectedArrayOrder === 'reversed'}
+            disabled={processing}
           />
           Reversed
         </label>
@@ -332,6 +335,7 @@ function App() {
               generateArrays('equal');
             }}
             checked={selectedArrayOrder === 'equal'}
+            disabled={processing}
           />
           Equal elements
         </label>
@@ -343,6 +347,7 @@ function App() {
               generateArrays('nearlySorted');
             }}
             checked={selectedArrayOrder === 'nearlySorted'}
+            disabled={processing}
           />
           Nearly sorted
         </label>
