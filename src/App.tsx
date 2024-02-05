@@ -197,9 +197,18 @@ function App() {
     );
   };
 
-  const handleRun = () => {
-    calculateAlgorithms();
-    currentStep.current = 0;
+  const handlePlay = () => {
+    switch (paused) {
+      case false:
+        calculateAlgorithms();
+        currentStep.current = 0;
+        callRunAlgorithms();
+        break;
+
+      case true:
+        setPaused(false);
+        break;
+    }
     setProcessing(true);
     callRunAlgorithms();
   };
@@ -222,12 +231,6 @@ function App() {
   const handlePause = () => {
     setPaused(true);
     stopAlgorithms();
-  };
-
-  const handleContinue = () => {
-    setProcessing(true);
-    setPaused(false);
-    callRunAlgorithms();
   };
 
   const handleAdvance = () => {
@@ -401,33 +404,12 @@ function App() {
       </div>
       <div>
         <button
-          onClick={handleRun}
-          disabled={processing || paused}
+          onClick={handleGoToFirstStep}
+          disabled={!paused || currentStep.current <= 0}
           style={buttonStyle}
         >
-          <img src={playImage} style={imageStyle} />
+          <img src={skipBackwardImage} style={imageStyle} />
         </button>
-        <button
-          onClick={handleAbort}
-          disabled={!processing && !paused}
-          style={buttonStyle}
-        >
-          <img src={stopImage} style={imageStyle} />
-        </button>
-      </div>
-      <div>
-        <button
-          onClick={handlePause}
-          disabled={!processing || paused}
-          style={buttonStyle}
-        >
-          <img src={pauseImage} style={imageStyle} />
-        </button>
-        <button onClick={handleContinue} disabled={!paused} style={buttonStyle}>
-          <img src={playImage} style={imageStyle} />
-        </button>
-      </div>
-      <div>
         <button
           onClick={handleRewind}
           disabled={!paused || currentStep.current <= 0}
@@ -436,20 +418,38 @@ function App() {
           <img src={stepBackwardImage} style={imageStyle} />
         </button>
         <button
+          onClick={handleAbort}
+          disabled={!processing && !paused}
+          style={buttonStyle}
+        >
+          <img src={stopImage} style={imageStyle} />
+        </button>
+        <button
+          onClick={handlePlay}
+          disabled={processing && !paused}
+          style={{
+            ...buttonStyle,
+            display: processing && !paused ? 'none' : 'inline',
+          }}
+        >
+          <img src={playImage} style={imageStyle} />
+        </button>
+        <button
+          onClick={handlePause}
+          disabled={!processing || paused}
+          style={{
+            ...buttonStyle,
+            display: !processing || paused ? 'none' : 'inline',
+          }}
+        >
+          <img src={pauseImage} style={imageStyle} />
+        </button>
+        <button
           onClick={handleAdvance}
           disabled={!paused || currentStep.current >= n - 1}
           style={buttonStyle}
         >
           <img src={stepForwardImage} style={imageStyle} />
-        </button>
-      </div>
-      <div>
-        <button
-          onClick={handleGoToFirstStep}
-          disabled={!paused || currentStep.current <= 0}
-          style={buttonStyle}
-        >
-          <img src={skipBackwardImage} style={imageStyle} />
         </button>
         <button
           onClick={handleGoToLastStep}
