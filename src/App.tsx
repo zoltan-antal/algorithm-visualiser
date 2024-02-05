@@ -19,6 +19,14 @@ import AlgorithmStates from './types/AlgorithmStates.ts';
 import AlgorithmSteps from './types/AlgorithmSteps.ts';
 import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
 
+import playImage from './assets/images/play.svg';
+import stopImage from './assets/images/stop.svg';
+import pauseImage from './assets/images/pause.svg';
+import stepForwardImage from './assets/images/step-forward.svg';
+import stepBackwardImage from './assets/images/step-backward.svg';
+import skipForwardImage from './assets/images/skip-forward.svg';
+import skipBackwardImage from './assets/images/skip-backward.svg';
+
 function App() {
   const DEFAULT_ARRAY_SIZE = 20;
   const MIN_ARRAY_SIZE = 10;
@@ -238,6 +246,9 @@ function App() {
     callStepAlgorithms('firstStep');
   };
 
+  const buttonStyle = { height: 25 };
+  const imageStyle = { width: '100%', height: '100%' };
+
   return (
     <>
       <h1>Algorithm Visualiser</h1>
@@ -389,47 +400,63 @@ function App() {
         ))}
       </div>
       <div>
-        <button onClick={handleRun} disabled={processing || paused}>
-          Run
+        <button
+          onClick={handleRun}
+          disabled={processing || paused}
+          style={buttonStyle}
+        >
+          <img src={playImage} style={imageStyle} />
         </button>
-        <button onClick={handleAbort} disabled={!processing && !paused}>
-          Abort
+        <button
+          onClick={handleAbort}
+          disabled={!processing && !paused}
+          style={buttonStyle}
+        >
+          <img src={stopImage} style={imageStyle} />
         </button>
       </div>
       <div>
-        <button onClick={handlePause} disabled={!processing || paused}>
-          Pause
+        <button
+          onClick={handlePause}
+          disabled={!processing || paused}
+          style={buttonStyle}
+        >
+          <img src={pauseImage} style={imageStyle} />
         </button>
-        <button onClick={handleContinue} disabled={!paused}>
-          Continue
+        <button onClick={handleContinue} disabled={!paused} style={buttonStyle}>
+          <img src={playImage} style={imageStyle} />
         </button>
       </div>
       <div>
         <button
           onClick={handleRewind}
           disabled={!paused || currentStep.current <= 0}
+          style={buttonStyle}
         >
-          Rewind
+          <img src={stepBackwardImage} style={imageStyle} />
         </button>
         <button
           onClick={handleAdvance}
           disabled={!paused || currentStep.current >= n - 1}
+          style={buttonStyle}
         >
-          Advance
+          <img src={stepForwardImage} style={imageStyle} />
         </button>
       </div>
       <div>
         <button
           onClick={handleGoToFirstStep}
           disabled={!paused || currentStep.current <= 0}
+          style={buttonStyle}
         >
-          Go to start
+          <img src={skipBackwardImage} style={imageStyle} />
         </button>
         <button
           onClick={handleGoToLastStep}
           disabled={!paused || currentStep.current >= n - 1}
+          style={buttonStyle}
         >
-          Go to end
+          <img src={skipForwardImage} style={imageStyle} />
         </button>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>
