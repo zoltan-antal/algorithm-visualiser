@@ -58,7 +58,7 @@ const mergeSort = (unsorted: number[]) => {
 
     return sorted;
   };
-  const sorted = mergeSortRecursive(unsorted, steps, 0);
+  mergeSortRecursive(unsorted, steps, 0);
 
   return steps.slice(1);
 };
