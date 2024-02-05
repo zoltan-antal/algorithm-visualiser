@@ -17,20 +17,20 @@ const runAlgorithms = async (
     ...Object.values(algorithmSteps).map((steps) => steps.length)
   );
 
-  for (let i = currentStep.current; i <= n; i++) {
+  for (let i = currentStep.current; i < n; i++) {
     if (stopped) {
       return;
     }
 
+    console.log(`i: ${i}`);
     currentStep.current = i;
 
     setAlgorithmStates((prevStates) => {
       const updatedStates: AlgorithmStates = structuredClone(prevStates);
       Object.entries(algorithmSteps).forEach(([key, steps]) => {
-        const step = steps[i]
-          ? steps[i]
-          : { ...steps[steps.length - 1], highlights: [] };
-        updatedStates[key] = step;
+        if (steps[i]) {
+          updatedStates[key] = steps[i];
+        }
       });
       return updatedStates;
     });
