@@ -166,14 +166,10 @@ function App() {
 
   const calculateAlgorithms = () => {
     algorithmSteps.current = Object.fromEntries(
-      algorithms
-        .filter((algorithm) =>
-          Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
-        )
-        .map((algorithm) => [
-          algorithm.algorithmName,
-          algorithm(algorithmStates[algorithm.algorithmName].array),
-        ])
+      algorithms.map((algorithm) => [
+        algorithm.algorithmName,
+        algorithm(algorithmStates[algorithm.algorithmName].array),
+      ])
     );
   };
 
