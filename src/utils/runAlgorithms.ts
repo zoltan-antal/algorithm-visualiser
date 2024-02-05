@@ -77,7 +77,7 @@ const stepAlgorithms = (
     Object.entries(algorithmSteps).forEach(([key, steps]) => {
       const step = steps[currentStep.current]
         ? steps[currentStep.current]
-        : steps[steps.length - 2];
+        : steps[steps.length - 1];
       updatedStates[key] = step;
     });
     return updatedStates;
