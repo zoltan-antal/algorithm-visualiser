@@ -330,7 +330,9 @@ function App() {
           </label>
         ))}
       </div>
-      <button onClick={() => generateArrays()}>Regenerate data</button>
+      <button onClick={() => generateArrays()} disabled={processing}>
+        Regenerate data
+      </button>
       <div style={{ display: 'flex' }}>
         {algorithmNames.map((algorithmName) => (
           <div key={algorithmName}>
