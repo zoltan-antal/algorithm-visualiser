@@ -15,6 +15,7 @@ import quickSort from './algorithms/quickSort.ts';
 import heapSort from './algorithms/heapSort.ts';
 
 import ArrayOrder from './types/ArrayOrder.ts';
+import ArrayOrderOption from './types/ArrayOrderOption.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
 import AlgorithmSteps from './types/AlgorithmSteps.ts';
 import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
@@ -252,6 +253,14 @@ function App() {
   const buttonStyle = { height: 25 };
   const imageStyle = { width: '100%', height: '100%' };
 
+  const arrayOrderOptions: ArrayOrderOption[] = [
+    { name: 'unsorted', displayName: 'Unsorted' },
+    { name: 'sorted', displayName: 'Sorted' },
+    { name: 'reversed', displayName: 'Reversed' },
+    { name: 'equal', displayName: 'Equal elements' },
+    { name: 'nearlySorted', displayName: 'Nearly sorted' },
+  ];
+
   return (
     <>
       <h1>Algorithm Visualiser</h1>
@@ -305,66 +314,20 @@ function App() {
       </div>
       <div>
         Data:{' '}
-        <label>
-          <input
-            type="radio"
-            onChange={() => {
-              setSelectedArrayOrder('unsorted');
-              generateArrays('unsorted');
-            }}
-            checked={selectedArrayOrder === 'unsorted'}
-            disabled={processing}
-          />
-          Unsorted
-        </label>
-        <label>
-          <input
-            type="radio"
-            onChange={() => {
-              setSelectedArrayOrder('sorted');
-              generateArrays('sorted');
-            }}
-            checked={selectedArrayOrder === 'sorted'}
-            disabled={processing}
-          />
-          Sorted
-        </label>
-        <label>
-          <input
-            type="radio"
-            onChange={() => {
-              setSelectedArrayOrder('reversed');
-              generateArrays('reversed');
-            }}
-            checked={selectedArrayOrder === 'reversed'}
-            disabled={processing}
-          />
-          Reversed
-        </label>
-        <label>
-          <input
-            type="radio"
-            onChange={() => {
-              setSelectedArrayOrder('equal');
-              generateArrays('equal');
-            }}
-            checked={selectedArrayOrder === 'equal'}
-            disabled={processing}
-          />
-          Equal elements
-        </label>
-        <label>
-          <input
-            type="radio"
-            onChange={() => {
-              setSelectedArrayOrder('nearlySorted');
-              generateArrays('nearlySorted');
-            }}
-            checked={selectedArrayOrder === 'nearlySorted'}
-            disabled={processing}
-          />
-          Nearly sorted
-        </label>
+        {arrayOrderOptions.map((arrayOrderOption) => (
+          <label>
+            <input
+              type="radio"
+              onChange={() => {
+                setSelectedArrayOrder(arrayOrderOption.name);
+                generateArrays(arrayOrderOption.name);
+              }}
+              checked={selectedArrayOrder === arrayOrderOption.name}
+              disabled={processing}
+            />
+            {arrayOrderOption.displayName}
+          </label>
+        ))}
       </div>
       <button onClick={() => generateArrays()}>Regenerate data</button>
       <div style={{ display: 'flex' }}>
