@@ -67,7 +67,7 @@ function App() {
     ) as AlgorithmStates
   );
   const [processing, setProcessing] = useState<boolean>(false);
-  const [paused, setPaused] = useState<boolean>(false);
+  const [paused, setPaused] = useState<boolean>(true);
 
   const [selectedArrayOrder, setSelectedArrayOrder] =
     useState<ArrayOrder>('unsorted');
@@ -113,6 +113,7 @@ function App() {
         break;
     }
     updateAlgorithmStates(array);
+    algorithmSteps.current = {};
   };
 
   const generateUnsortedArrays = () => {
@@ -180,8 +181,8 @@ function App() {
     ...Object.values(algorithmSteps.current).map((steps) => steps.length)
   );
 
-  const callRunAlgorithms = () => {
-    runAlgorithms(
+  const callRunAlgorithms = async () => {
+    await runAlgorithms(
       algorithmSteps.current,
       currentStep,
       setAlgorithmStates,
@@ -199,26 +200,19 @@ function App() {
     );
   };
 
-  const handlePlay = () => {
-    switch (paused) {
-      case false:
-        calculateAlgorithms();
-        currentStep.current = 0;
-        callRunAlgorithms();
-        break;
-
-      case true:
-        setPaused(false);
-        break;
+  const handlePlay = async () => {
+    if (Object.entries(algorithmSteps.current).length === 0) {
+      calculateAlgorithms();
     }
+    setPaused(false);
     setProcessing(true);
-    callRunAlgorithms();
+    await callRunAlgorithms();
+    setPaused(true);
   };
 
   const handleAbort = () => {
     currentStep.current = 0;
     setProcessing(false);
-    setPaused(false);
     stopAlgorithms();
     // Remove highlights
     setAlgorithmStates((prevStates) => {
@@ -236,18 +230,28 @@ function App() {
   };
 
   const handleAdvance = () => {
+    if (Object.entries(algorithmSteps.current).length === 0) {
+      calculateAlgorithms();
+    }
+    setProcessing(true);
     callStepAlgorithms('advance');
   };
 
   const handleRewind = () => {
+    setProcessing(true);
     callStepAlgorithms('rewind');
   };
 
   const handleGoToLastStep = () => {
+    if (Object.entries(algorithmSteps.current).length === 0) {
+      calculateAlgorithms();
+    }
+    setProcessing(true);
     callStepAlgorithms('lastStep');
   };
 
   const handleGoToFirstStep = () => {
+    setProcessing(true);
     callStepAlgorithms('firstStep');
   };
 
@@ -385,14 +389,16 @@ function App() {
         </button>
         <button
           onClick={handleAbort}
-          disabled={!processing && !paused}
+          disabled={!processing}
           style={buttonStyle}
         >
           <img src={stopImage} style={imageStyle} />
         </button>
         <button
           onClick={handlePlay}
-          disabled={processing && !paused}
+          disabled={
+            (processing && !paused) || (n > 0 && currentStep.current >= n)
+          }
           style={{
             ...buttonStyle,
             display: processing && !paused ? 'none' : 'inline',
@@ -412,14 +418,14 @@ function App() {
         </button>
         <button
           onClick={handleAdvance}
-          disabled={!paused || currentStep.current >= n - 1}
+          disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
           style={buttonStyle}
         >
           <img src={stepForwardImage} style={imageStyle} />
         </button>
         <button
           onClick={handleGoToLastStep}
-          disabled={!paused || currentStep.current >= n - 1}
+          disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
           style={buttonStyle}
         >
           <img src={skipForwardImage} style={imageStyle} />
