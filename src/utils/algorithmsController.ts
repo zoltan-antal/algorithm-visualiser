@@ -84,5 +84,4 @@ const stepAlgorithms = (
   });
 };
 
-export default runAlgorithms;
-export { stopAlgorithms, stepAlgorithms };
+export { runAlgorithms, stopAlgorithms, stepAlgorithms };

@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 
 import generateRandomArray from './utils/generateRandomArray.ts';
-import runAlgorithms, {
+import {
+  runAlgorithms,
   stopAlgorithms,
   stepAlgorithms,
-} from './utils/runAlgorithms.ts';
+} from './utils/algorithmsController.ts';
 
 import selectionSort from './algorithms/selectionSort.ts';
 import bubbleSort from './algorithms/bubbleSort.ts';
