@@ -22,7 +22,6 @@ const selectionSort = (unsorted: number[]) => {
     steps.push({ array: [...sorted], highlights: [i, minIndex] });
   }
 
-  steps.push({ array: [...sorted], highlights: [] });
   return steps;
 };
 

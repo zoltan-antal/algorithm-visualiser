@@ -42,7 +42,6 @@ const heapSort = (unsorted: number[]) => {
     }
   }
 
-  steps.push({ array: [...sorted], highlights: [] });
   return steps;
 };
 

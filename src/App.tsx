@@ -2,7 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 
 import generateRandomArray from './utils/generateRandomArray.ts';
-import runAlgorithms, { stopAlgorithms } from './utils/runAlgorithms.ts';
+import runAlgorithms, {
+  stopAlgorithms,
+  stepAlgorithms,
+} from './utils/runAlgorithms.ts';
 
 import selectionSort from './algorithms/selectionSort.ts';
 import bubbleSort from './algorithms/bubbleSort.ts';
@@ -14,6 +17,7 @@ import heapSort from './algorithms/heapSort.ts';
 import ArrayOrder from './types/ArrayOrder.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
 import AlgorithmSteps from './types/AlgorithmSteps.ts';
+import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
 
 function App() {
   const DEFAULT_ARRAY_SIZE = 20;
@@ -162,6 +166,10 @@ function App() {
     );
   };
 
+  const n = Math.max(
+    ...Object.values(algorithmSteps.current).map((steps) => steps.length)
+  );
+
   const callRunAlgorithms = () => {
     runAlgorithms(
       algorithmSteps.current,
@@ -169,6 +177,15 @@ function App() {
       setAlgorithmStates,
       delay,
       setProcessing
+    );
+  };
+
+  const callStepAlgorithms = (mode: StepAlgorithmsMode) => {
+    stepAlgorithms(
+      algorithmSteps.current,
+      currentStep,
+      setAlgorithmStates,
+      mode
     );
   };
 
@@ -203,6 +220,22 @@ function App() {
     setProcessing(true);
     setPaused(false);
     callRunAlgorithms();
+  };
+
+  const handleAdvance = () => {
+    callStepAlgorithms('advance');
+  };
+
+  const handleRewind = () => {
+    callStepAlgorithms('rewind');
+  };
+
+  const handleGoToLastStep = () => {
+    callStepAlgorithms('lastStep');
+  };
+
+  const handleGoToFirstStep = () => {
+    callStepAlgorithms('firstStep');
   };
 
   return (
@@ -364,6 +397,34 @@ function App() {
         </button>
         <button onClick={handleContinue} disabled={!paused}>
           Continue
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={handleRewind}
+          disabled={!paused || currentStep.current <= 0}
+        >
+          Rewind
+        </button>
+        <button
+          onClick={handleAdvance}
+          disabled={!paused || currentStep.current >= n - 1}
+        >
+          Advance
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={handleGoToFirstStep}
+          disabled={!paused || currentStep.current <= 0}
+        >
+          Go to start
+        </button>
+        <button
+          onClick={handleGoToLastStep}
+          disabled={!paused || currentStep.current >= n - 1}
+        >
+          Go to end
         </button>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>

@@ -49,7 +49,6 @@ const quickSort = (unsorted: number[]) => {
 
   quickSortInPlace(sorted);
 
-  steps.push({ array: [...sorted], highlights: [] });
   return steps.slice(1);
 };
 

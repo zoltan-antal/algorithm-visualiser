@@ -21,7 +21,6 @@ const insertionSort = (unsorted: number[]) => {
     steps.push({ array: [...sorted], highlights: [j + 1, i] });
   }
 
-  steps.push({ array: [...sorted], highlights: [] });
   return steps;
 };
 

@@ -1,5 +1,6 @@
 import AlgorithmStates from '../types/AlgorithmStates.ts';
 import AlgorithmSteps from '../types/AlgorithmSteps.ts';
+import StepAlgorithmsMode from '../types/StepAlgorithmsMode.ts';
 
 let stopped = false;
 
@@ -16,19 +17,20 @@ const runAlgorithms = async (
     ...Object.values(algorithmSteps).map((steps) => steps.length)
   );
 
-  for (let i = currentStep.current; i < n; i++) {
-    currentStep.current = i;
-
+  for (let i = currentStep.current; i <= n; i++) {
     if (stopped) {
       return;
     }
 
+    currentStep.current = i;
+
     setAlgorithmStates((prevStates) => {
       const updatedStates: AlgorithmStates = structuredClone(prevStates);
       Object.entries(algorithmSteps).forEach(([key, steps]) => {
-        if (steps[i]) {
-          updatedStates[key] = steps[i];
-        }
+        const step = steps[i]
+          ? steps[i]
+          : { ...steps[steps.length - 1], highlights: [] };
+        updatedStates[key] = step;
       });
       return updatedStates;
     });
@@ -42,5 +44,45 @@ const stopAlgorithms = () => {
   stopped = true;
 };
 
+const stepAlgorithms = (
+  algorithmSteps: AlgorithmSteps,
+  currentStep: React.MutableRefObject<number>,
+  setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
+  mode: StepAlgorithmsMode
+) => {
+  const n = Math.max(
+    ...Object.values(algorithmSteps).map((steps) => steps.length)
+  );
+
+  switch (mode) {
+    case 'advance':
+      currentStep.current++;
+      break;
+
+    case 'rewind':
+      currentStep.current--;
+      break;
+
+    case 'lastStep':
+      currentStep.current = n - 1;
+      break;
+
+    case 'firstStep':
+      currentStep.current = 0;
+      break;
+  }
+
+  setAlgorithmStates((prevStates) => {
+    const updatedStates: AlgorithmStates = structuredClone(prevStates);
+    Object.entries(algorithmSteps).forEach(([key, steps]) => {
+      const step = steps[currentStep.current]
+        ? steps[currentStep.current]
+        : steps[steps.length - 2];
+      updatedStates[key] = step;
+    });
+    return updatedStates;
+  });
+};
+
 export default runAlgorithms;
-export { stopAlgorithms };
+export { stopAlgorithms, stepAlgorithms };

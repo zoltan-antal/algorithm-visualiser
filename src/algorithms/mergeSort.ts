@@ -60,7 +60,6 @@ const mergeSort = (unsorted: number[]) => {
   };
   const sorted = mergeSortRecursive(unsorted, steps, 0);
 
-  steps.push({ array: [...sorted], highlights: [] });
   return steps.slice(1);
 };
 

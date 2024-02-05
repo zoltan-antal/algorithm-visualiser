@@ -25,7 +25,6 @@ const bubbleSort = (unsorted: number[]) => {
     i++;
   }
 
-  steps.push({ array: [...sorted], highlights: [] });
   return steps;
 };
 
