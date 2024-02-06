@@ -182,14 +182,14 @@ function App() {
           disabled={processing}
         ></Slider>
         <Slider
-          label="Timeout"
+          label="Step delay"
           value={delay}
           units="ms"
           min={DELAY.min}
           max={DELAY.max}
           step={DELAY.step}
           handleChange={setDelay}
-          disabled={processing}
+          disabled={!paused}
         ></Slider>
         <button
           onClick={() => {
