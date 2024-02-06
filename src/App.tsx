@@ -53,6 +53,7 @@ function App() {
       )
     );
     algorithmSteps.current = {};
+    currentStep.current = 0;
   };
 
   useEffect(() => {
