@@ -37,7 +37,9 @@ const quickSort = (unsorted: number[]) => {
   ) => {
     // Base case: if the partition size is 1 or less, no sorting is required
     if (end <= start) {
-      steps.push({ array: [...arr], highlights: [start] });
+      if (start === end) {
+        steps.push({ array: [...arr], highlights: [start] });
+      }
       return;
     }
     // Partition the array and get the index of the pivot
