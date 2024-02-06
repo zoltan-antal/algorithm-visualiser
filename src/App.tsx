@@ -2,45 +2,50 @@ import './styles/App.css';
 
 import { useState, useEffect, useRef } from 'react';
 
-import AlgorithmChart from './components/AlgorithmChart.tsx';
-import Slider from './components/Slider.tsx';
-
-import generateArray from './utils/generateArray.ts';
+import ArrayOrder from './types/ArrayOrder.ts';
+import AlgorithmStates from './types/AlgorithmStates.ts';
+import AlgorithmSteps from './types/AlgorithmSteps.ts';
+import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
 
 import ARRAY_SIZE from './constants/arraySize.ts';
 import VALUE_RANGE from './constants/valueRange.ts';
 import DELAY from './constants/delay.ts';
 import ARRAY_ORDER_OPTIONS from './constants/arrayOrderOptions.ts';
 
-import algorithms, { algorithmNames } from './algorithms';
+import controlButtonImages from './assets/images/controlButtons';
 
+import AlgorithmChart from './components/AlgorithmChart.tsx';
+import Slider from './components/Slider.tsx';
+
+import algorithms, { algorithmNames } from './algorithms';
+import generateArray from './utils/generateArray.ts';
 import {
   runAlgorithms,
   stopAlgorithms,
   stepAlgorithms,
 } from './utils/algorithmsController.ts';
 
-import ArrayOrder from './types/ArrayOrder.ts';
-import AlgorithmStates from './types/AlgorithmStates.ts';
-import AlgorithmSteps from './types/AlgorithmSteps.ts';
-import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
-
-import controlButtonImages from './assets/images/controlButtons';
-
 function App() {
   const [arraySize, setArraySize] = useState(ARRAY_SIZE.default);
   const [maxValue, setMaxValue] = useState(VALUE_RANGE.default);
   const [delay, setDelay] = useState(DELAY.default);
-
-  const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>({});
-  const [processing, setProcessing] = useState<boolean>(false);
-  const [paused, setPaused] = useState<boolean>(true);
 
   const [selectedArrayOrder, setSelectedArrayOrder] =
     useState<ArrayOrder>('unsorted');
   const [selectedAlgorithms, setSelectedAlgorithms] = useState(
     new Set(algorithmNames)
   );
+
+  const algorithmSteps = useRef<AlgorithmSteps>({});
+  const currentStep = useRef<number>(0);
+  const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>({});
+  const [processing, setProcessing] = useState<boolean>(false);
+  const [paused, setPaused] = useState<boolean>(true);
+
+  useEffect(() => {
+    generateArrays();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [arraySize, maxValue, selectedArrayOrder]);
 
   const generateArrays = () => {
     const array = generateArray(arraySize, 1, maxValue, selectedArrayOrder);
@@ -55,14 +60,6 @@ function App() {
     algorithmSteps.current = {};
     currentStep.current = 0;
   };
-
-  useEffect(() => {
-    generateArrays();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arraySize, maxValue, selectedArrayOrder]);
-
-  const algorithmSteps = useRef<AlgorithmSteps>({});
-  const currentStep = useRef<number>(0);
 
   const calculateAlgorithms = () => {
     algorithmSteps.current = Object.fromEntries(
