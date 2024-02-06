@@ -12,46 +12,26 @@ import VALUE_RANGE from './constants/valueRange.ts';
 import DELAY from './constants/delay.ts';
 import ARRAY_ORDER_OPTIONS from './constants/arrayOrderOptions.ts';
 
+import algorithms, { algorithmNames } from './algorithms';
+
 import {
   runAlgorithms,
   stopAlgorithms,
   stepAlgorithms,
 } from './utils/algorithmsController.ts';
 
-import selectionSort from './algorithms/selectionSort.ts';
-import bubbleSort from './algorithms/bubbleSort.ts';
-import insertionSort from './algorithms/insertionSort.ts';
-import mergeSort from './algorithms/mergeSort.ts';
-import quickSort from './algorithms/quickSort.ts';
-import heapSort from './algorithms/heapSort.ts';
-
 import ArrayOrder from './types/ArrayOrder.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
 import AlgorithmSteps from './types/AlgorithmSteps.ts';
 import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
 
-import playImage from './assets/images/play.svg';
-import stopImage from './assets/images/stop.svg';
-import pauseImage from './assets/images/pause.svg';
-import stepForwardImage from './assets/images/step-forward.svg';
-import stepBackwardImage from './assets/images/step-backward.svg';
-import skipForwardImage from './assets/images/skip-forward.svg';
-import skipBackwardImage from './assets/images/skip-backward.svg';
+import controlButtonImages from './assets/images/controlButtons';
 
 function App() {
   const [arraySize, setArraySize] = useState(ARRAY_SIZE.default);
   const [maxValue, setMaxValue] = useState(VALUE_RANGE.default);
   const [delay, setDelay] = useState(DELAY.default);
 
-  const algorithms = [
-    selectionSort,
-    bubbleSort,
-    insertionSort,
-    mergeSort,
-    quickSort,
-    heapSort,
-  ];
-  const algorithmNames = algorithms.map((algorithm) => algorithm.algorithmName);
   const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>(
     Object.fromEntries(
       algorithmNames.map((algorithmName) => [
@@ -287,16 +267,16 @@ function App() {
           onClick={handleGoToFirstStep}
           disabled={!paused || currentStep.current <= 0}
         >
-          <img src={skipBackwardImage} />
+          <img src={controlButtonImages.skipBackward} />
         </button>
         <button
           onClick={handleRewind}
           disabled={!paused || currentStep.current <= 0}
         >
-          <img src={stepBackwardImage} />
+          <img src={controlButtonImages.stepBackward} />
         </button>
         <button onClick={handleAbort} disabled={!processing}>
-          <img src={stopImage} />
+          <img src={controlButtonImages.stop} />
         </button>
         <button
           onClick={handlePlay}
@@ -305,26 +285,26 @@ function App() {
           }
           className={processing && !paused ? 'hidden' : ''}
         >
-          <img src={playImage} />
+          <img src={controlButtonImages.play} />
         </button>
         <button
           onClick={handlePause}
           disabled={!processing || paused}
           className={!processing || paused ? 'hidden' : ''}
         >
-          <img src={pauseImage} />
+          <img src={controlButtonImages.pause} />
         </button>
         <button
           onClick={handleAdvance}
           disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
         >
-          <img src={stepForwardImage} />
+          <img src={controlButtonImages.stepForward} />
         </button>
         <button
           onClick={handleGoToLastStep}
           disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
         >
-          <img src={skipForwardImage} />
+          <img src={controlButtonImages.skipForward} />
         </button>
       </div>
       <div className="charts">
