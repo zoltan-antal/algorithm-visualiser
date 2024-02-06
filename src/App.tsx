@@ -7,7 +7,10 @@ import Slider from './components/Slider.tsx';
 
 import generateArrays from './utils/generateArrays.ts';
 
-import CONSTANTS from './utils/constants.ts';
+import ARRAY_SIZE from './constants/arraySize.ts';
+import VALUE_RANGE from './constants/valueRange.ts';
+import DELAY from './constants/delay.ts';
+import ARRAY_ORDER_OPTIONS from './constants/arrayOrderOptions.ts';
 
 import {
   runAlgorithms,
@@ -23,7 +26,6 @@ import quickSort from './algorithms/quickSort.ts';
 import heapSort from './algorithms/heapSort.ts';
 
 import ArrayOrder from './types/ArrayOrder.ts';
-import ArrayOrderOption from './types/ArrayOrderOption.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
 import AlgorithmSteps from './types/AlgorithmSteps.ts';
 import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
@@ -37,9 +39,9 @@ import skipForwardImage from './assets/images/skip-forward.svg';
 import skipBackwardImage from './assets/images/skip-backward.svg';
 
 function App() {
-  const [arraySize, setArraySize] = useState(CONSTANTS.ARRAY_SIZE.DEFAULT);
-  const [maxValue, setMaxValue] = useState(CONSTANTS.VALUE_RANGE.DEFAULT);
-  const [delay, setDelay] = useState(CONSTANTS.DELAY.DEFAULT);
+  const [arraySize, setArraySize] = useState(ARRAY_SIZE.default);
+  const [maxValue, setMaxValue] = useState(VALUE_RANGE.default);
+  const [delay, setDelay] = useState(DELAY.default);
 
   const algorithms = [
     selectionSort,
@@ -186,14 +188,6 @@ function App() {
     callStepAlgorithms('firstStep');
   };
 
-  const arrayOrderOptions: ArrayOrderOption[] = [
-    { name: 'unsorted', displayName: 'Unsorted' },
-    { name: 'sorted', displayName: 'Sorted' },
-    { name: 'nearlySorted', displayName: 'Nearly sorted' },
-    { name: 'reversed', displayName: 'Reversed' },
-    { name: 'equal', displayName: 'Equal elements' },
-  ];
-
   return (
     <>
       <h1>Algorithm Visualiser</h1>
@@ -201,35 +195,35 @@ function App() {
         <Slider
           label="Array size"
           value={arraySize}
-          min={CONSTANTS.ARRAY_SIZE.MIN}
-          max={CONSTANTS.ARRAY_SIZE.MAX}
-          step={CONSTANTS.ARRAY_SIZE.STEP}
+          min={ARRAY_SIZE.min}
+          max={ARRAY_SIZE.max}
+          step={ARRAY_SIZE.step}
           handleChange={setArraySize}
           disabled={processing}
         ></Slider>
         <Slider
           label="Value range"
           value={maxValue}
-          min={CONSTANTS.VALUE_RANGE.MIN}
-          max={CONSTANTS.VALUE_RANGE.MAX}
-          step={CONSTANTS.VALUE_RANGE.STEP}
+          min={VALUE_RANGE.min}
+          max={VALUE_RANGE.max}
+          step={VALUE_RANGE.step}
           handleChange={setMaxValue}
           disabled={processing}
         ></Slider>
         <Slider
           label="Timeout"
           value={delay}
-          min={CONSTANTS.DELAY.MIN}
-          max={CONSTANTS.DELAY.MAX}
-          step={CONSTANTS.DELAY.STEP}
+          min={DELAY.min}
+          max={DELAY.max}
+          step={DELAY.step}
           handleChange={setDelay}
           disabled={processing}
         ></Slider>
         <button
           onClick={() => {
-            setArraySize(CONSTANTS.ARRAY_SIZE.DEFAULT);
-            setMaxValue(CONSTANTS.VALUE_RANGE.DEFAULT);
-            setDelay(CONSTANTS.DELAY.DEFAULT);
+            setArraySize(ARRAY_SIZE.default);
+            setMaxValue(VALUE_RANGE.default);
+            setDelay(DELAY.default);
           }}
           disabled={processing}
         >
@@ -238,7 +232,7 @@ function App() {
       </div>
       <div>
         Data:{' '}
-        {arrayOrderOptions.map((arrayOrderOption) => (
+        {ARRAY_ORDER_OPTIONS.map((arrayOrderOption) => (
           <label>
             <input
               type="radio"
