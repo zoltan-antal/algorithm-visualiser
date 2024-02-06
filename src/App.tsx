@@ -61,6 +61,16 @@ function App() {
     currentStep.current = 0;
   };
 
+  const removeHighlights = () => {
+    setAlgorithmStates((prevStates) => {
+      const updatedStates: AlgorithmStates = structuredClone(prevStates);
+      Object.keys(updatedStates).forEach(
+        (key) => (updatedStates[key].highlights = [])
+      );
+      return updatedStates;
+    });
+  };
+
   const calculateAlgorithms = () => {
     algorithmSteps.current = Object.fromEntries(
       algorithms.map((algorithm) => {
@@ -110,14 +120,7 @@ function App() {
     setProcessing(false);
     setPaused(true);
     stopAlgorithms();
-    // Remove highlights
-    setAlgorithmStates((prevStates) => {
-      const updatedStates: AlgorithmStates = structuredClone(prevStates);
-      Object.keys(updatedStates).forEach(
-        (key) => (updatedStates[key].highlights = [])
-      );
-      return updatedStates;
-    });
+    removeHighlights();
   };
 
   const handlePause = () => {
