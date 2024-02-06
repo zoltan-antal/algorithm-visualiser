@@ -262,9 +262,9 @@ function App() {
   const arrayOrderOptions: ArrayOrderOption[] = [
     { name: 'unsorted', displayName: 'Unsorted' },
     { name: 'sorted', displayName: 'Sorted' },
+    { name: 'nearlySorted', displayName: 'Nearly sorted' },
     { name: 'reversed', displayName: 'Reversed' },
     { name: 'equal', displayName: 'Equal elements' },
-    { name: 'nearlySorted', displayName: 'Nearly sorted' },
   ];
 
   return (
