@@ -7,7 +7,7 @@ interface AlgorithmChartProps {
   maxValue: number;
 }
 
-const BarChartComponent = ({ data, maxValue }: AlgorithmChartProps) => {
+const AlgorithmChart = ({ data, maxValue }: AlgorithmChartProps) => {
   const renderCustomBar = (props: any) => {
     const { index } = props;
 
@@ -36,4 +36,4 @@ const BarChartComponent = ({ data, maxValue }: AlgorithmChartProps) => {
   );
 };
 
-export default BarChartComponent;
+export default AlgorithmChart;
