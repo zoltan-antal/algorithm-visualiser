@@ -72,6 +72,10 @@ function App() {
   };
 
   const calculateAlgorithms = () => {
+    if (!(Object.entries(algorithmSteps.current).length === 0)) {
+      return;
+    }
+
     algorithmSteps.current = Object.fromEntries(
       algorithms
         .filter((algorithm) =>
@@ -110,9 +114,7 @@ function App() {
   };
 
   const handlePlay = async () => {
-    if (Object.entries(algorithmSteps.current).length === 0) {
-      calculateAlgorithms();
-    }
+    calculateAlgorithms();
     setPaused(false);
     setProcessing(true);
     await callRunAlgorithms();
@@ -134,9 +136,7 @@ function App() {
   };
 
   const handleAdvance = () => {
-    if (Object.entries(algorithmSteps.current).length === 0) {
-      calculateAlgorithms();
-    }
+    calculateAlgorithms();
     setProcessing(true);
     callStepAlgorithms('advance');
   };
@@ -147,9 +147,7 @@ function App() {
   };
 
   const handleGoToLastStep = () => {
-    if (Object.entries(algorithmSteps.current).length === 0) {
-      calculateAlgorithms();
-    }
+    calculateAlgorithms();
     setProcessing(true);
     callStepAlgorithms('lastStep');
   };
