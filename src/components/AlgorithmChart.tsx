@@ -7,7 +7,10 @@ interface AlgorithmChartProps {
   maxValue: number;
 }
 
-const AlgorithmChart = ({ data, maxValue }: AlgorithmChartProps) => {
+const AlgorithmChart = ({
+  data = { array: [], highlights: [] },
+  maxValue,
+}: AlgorithmChartProps) => {
   const renderCustomBar = (props: any) => {
     const { index } = props;
 

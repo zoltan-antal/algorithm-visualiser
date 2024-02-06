@@ -32,14 +32,7 @@ function App() {
   const [maxValue, setMaxValue] = useState(VALUE_RANGE.default);
   const [delay, setDelay] = useState(DELAY.default);
 
-  const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>(
-    Object.fromEntries(
-      algorithmNames.map((algorithmName) => [
-        algorithmName,
-        { array: [], highlights: [] },
-      ])
-    ) as AlgorithmStates
-  );
+  const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>({});
   const [processing, setProcessing] = useState<boolean>(false);
   const [paused, setPaused] = useState<boolean>(true);
 
@@ -49,23 +42,15 @@ function App() {
     new Set(algorithmNames)
   );
 
-  const updateAlgorithmStates = (array: number[]) => {
-    setAlgorithmStates((prevStates) => {
-      const updatedStates: AlgorithmStates = structuredClone(prevStates);
-      Object.keys(updatedStates).forEach(
-        (key) =>
-          (updatedStates[key as keyof AlgorithmStates] = {
-            array,
-            highlights: [],
-          })
-      );
-      return updatedStates;
-    });
-  };
-
   const generateArrays = () => {
-    updateAlgorithmStates(
-      generateArray(arraySize, 1, maxValue, selectedArrayOrder)
+    const array = generateArray(arraySize, 1, maxValue, selectedArrayOrder);
+    setAlgorithmStates(
+      Object.fromEntries(
+        algorithmNames.map((algorithmName) => [
+          algorithmName,
+          { array, highlights: [] },
+        ])
+      )
     );
     algorithmSteps.current = {};
   };
