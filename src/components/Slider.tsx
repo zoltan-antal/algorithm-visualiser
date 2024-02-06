@@ -1,6 +1,7 @@
 interface SliderProps {
   label: string;
   value: number;
+  units: string;
   min: number;
   max: number;
   step: number;
@@ -11,6 +12,7 @@ interface SliderProps {
 const Slider = ({
   label,
   value,
+  units,
   min,
   max,
   step,
@@ -30,6 +32,7 @@ const Slider = ({
       />
       <p>
         {label}: {value}
+        {units}
       </p>
     </div>
   );

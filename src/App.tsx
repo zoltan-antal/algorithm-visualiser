@@ -164,6 +164,7 @@ function App() {
         <Slider
           label="Array size"
           value={arraySize}
+          units=""
           min={ARRAY_SIZE.min}
           max={ARRAY_SIZE.max}
           step={ARRAY_SIZE.step}
@@ -173,6 +174,7 @@ function App() {
         <Slider
           label="Value range"
           value={maxValue}
+          units=""
           min={VALUE_RANGE.min}
           max={VALUE_RANGE.max}
           step={VALUE_RANGE.step}
@@ -182,6 +184,7 @@ function App() {
         <Slider
           label="Timeout"
           value={delay}
+          units="ms"
           min={DELAY.min}
           max={DELAY.max}
           step={DELAY.step}
