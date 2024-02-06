@@ -73,12 +73,16 @@ function App() {
 
   const calculateAlgorithms = () => {
     algorithmSteps.current = Object.fromEntries(
-      algorithms.map((algorithm) => {
-        const arr = algorithm(algorithmStates[algorithm.algorithmName].array);
-        arr.unshift({ ...arr[0], highlights: [] });
-        arr.push({ ...arr[arr.length - 1], highlights: [] });
-        return [algorithm.algorithmName, arr];
-      })
+      algorithms
+        .filter((algorithm) =>
+          Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
+        )
+        .map((algorithm) => {
+          const arr = algorithm(algorithmStates[algorithm.algorithmName].array);
+          arr.unshift({ ...arr[0], highlights: [] });
+          arr.push({ ...arr[arr.length - 1], highlights: [] });
+          return [algorithm.algorithmName, arr];
+        })
     );
   };
 
@@ -121,6 +125,7 @@ function App() {
     setPaused(true);
     stopAlgorithms();
     removeHighlights();
+    algorithmSteps.current = {};
   };
 
   const handlePause = () => {
