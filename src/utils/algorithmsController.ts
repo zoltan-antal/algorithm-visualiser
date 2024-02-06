@@ -22,7 +22,6 @@ const runAlgorithms = async (
       return;
     }
 
-    console.log(`i: ${i}`);
     currentStep.current = i;
 
     setAlgorithmStates((prevStates) => {
