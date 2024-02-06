@@ -129,8 +129,8 @@ function App() {
   };
 
   const handlePause = () => {
-    setPaused(true);
     stopAlgorithms();
+    setPaused(true);
   };
 
   const handleAdvance = () => {
