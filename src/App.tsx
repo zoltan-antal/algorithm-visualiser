@@ -1,7 +1,9 @@
 import './styles/App.css';
 
 import { useState, useEffect, useRef } from 'react';
+
 import AlgorithmChart from './components/AlgorithmChart.tsx';
+import Slider from './components/Slider.tsx';
 
 import generateRandomArray from './utils/generateRandomArray.ts';
 import {
@@ -268,42 +270,33 @@ function App() {
     <>
       <h1>Algorithm Visualiser</h1>
       <div className="sliders">
-        <div>
-          <input
-            type="range"
-            min={MIN_ARRAY_SIZE}
-            max={MAX_ARRAY_SIZE}
-            step={ARRAY_SIZE_STEP}
-            value={arraySize}
-            onChange={(e) => setArraySize(Number(e.target.value))}
-            disabled={processing}
-          />
-          <p>Array size: {arraySize}</p>
-        </div>
-        <div>
-          <input
-            type="range"
-            min={MIN_MAX_VALUE}
-            max={MAX_MAX_VALUE}
-            step={MAX_VALUE_STEP}
-            value={maxValue}
-            onChange={(e) => setMaxValue(Number(e.target.value))}
-            disabled={processing}
-          />
-          <p>Value range: {maxValue}</p>
-        </div>
-        <div>
-          <input
-            type="range"
-            min={MIN_DELAY}
-            max={MAX_DELAY}
-            step={DELAY_STEP}
-            value={delay}
-            onChange={(e) => setDelay(Number(e.target.value))}
-            disabled={processing}
-          />
-          <p>Timeout: {delay}ms</p>
-        </div>
+        <Slider
+          label="Array size"
+          value={arraySize}
+          min={MIN_ARRAY_SIZE}
+          max={MAX_ARRAY_SIZE}
+          step={ARRAY_SIZE_STEP}
+          handleChange={setArraySize}
+          disabled={processing}
+        ></Slider>
+        <Slider
+          label="Value range"
+          value={maxValue}
+          min={MIN_MAX_VALUE}
+          max={MAX_MAX_VALUE}
+          step={MAX_VALUE_STEP}
+          handleChange={setMaxValue}
+          disabled={processing}
+        ></Slider>
+        <Slider
+          label="Timeout"
+          value={delay}
+          min={MIN_DELAY}
+          max={MAX_DELAY}
+          step={DELAY_STEP}
+          handleChange={setDelay}
+          disabled={processing}
+        ></Slider>
         <button
           onClick={() => {
             setArraySize(DEFAULT_ARRAY_SIZE);
