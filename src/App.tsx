@@ -7,6 +7,8 @@ import Slider from './components/Slider.tsx';
 
 import generateArrays from './utils/generateArrays.ts';
 
+import CONSTANTS from './utils/constants.ts';
+
 import {
   runAlgorithms,
   stopAlgorithms,
@@ -35,24 +37,9 @@ import skipForwardImage from './assets/images/skip-forward.svg';
 import skipBackwardImage from './assets/images/skip-backward.svg';
 
 function App() {
-  const DEFAULT_ARRAY_SIZE = 20;
-  const MIN_ARRAY_SIZE = 10;
-  const MAX_ARRAY_SIZE = 100;
-  const ARRAY_SIZE_STEP = 10;
-
-  const DEFAULT_VALUE_RANGE = 50;
-  const MIN_VALUE_RANGE = 5;
-  const MAX_VALUE_RANGE = 100;
-  const VALUE_RANGE_STEP = 5;
-
-  const DEFAULT_DELAY = 100;
-  const MIN_DELAY = 25;
-  const MAX_DELAY = 1000;
-  const DELAY_STEP = 25;
-
-  const [arraySize, setArraySize] = useState(DEFAULT_ARRAY_SIZE);
-  const [maxValue, setMaxValue] = useState(DEFAULT_VALUE_RANGE);
-  const [delay, setDelay] = useState(DEFAULT_DELAY);
+  const [arraySize, setArraySize] = useState(CONSTANTS.ARRAY_SIZE.DEFAULT);
+  const [maxValue, setMaxValue] = useState(CONSTANTS.VALUE_RANGE.DEFAULT);
+  const [delay, setDelay] = useState(CONSTANTS.DELAY.DEFAULT);
 
   const algorithms = [
     selectionSort,
@@ -234,35 +221,35 @@ function App() {
         <Slider
           label="Array size"
           value={arraySize}
-          min={MIN_ARRAY_SIZE}
-          max={MAX_ARRAY_SIZE}
-          step={ARRAY_SIZE_STEP}
+          min={CONSTANTS.ARRAY_SIZE.MIN}
+          max={CONSTANTS.ARRAY_SIZE.MAX}
+          step={CONSTANTS.ARRAY_SIZE.STEP}
           handleChange={setArraySize}
           disabled={processing}
         ></Slider>
         <Slider
           label="Value range"
           value={maxValue}
-          min={MIN_VALUE_RANGE}
-          max={MAX_VALUE_RANGE}
-          step={VALUE_RANGE_STEP}
+          min={CONSTANTS.VALUE_RANGE.MIN}
+          max={CONSTANTS.VALUE_RANGE.MAX}
+          step={CONSTANTS.VALUE_RANGE.STEP}
           handleChange={setMaxValue}
           disabled={processing}
         ></Slider>
         <Slider
           label="Timeout"
           value={delay}
-          min={MIN_DELAY}
-          max={MAX_DELAY}
-          step={DELAY_STEP}
+          min={CONSTANTS.DELAY.MIN}
+          max={CONSTANTS.DELAY.MAX}
+          step={CONSTANTS.DELAY.STEP}
           handleChange={setDelay}
           disabled={processing}
         ></Slider>
         <button
           onClick={() => {
-            setArraySize(DEFAULT_ARRAY_SIZE);
-            setMaxValue(DEFAULT_VALUE_RANGE);
-            setDelay(DEFAULT_DELAY);
+            setArraySize(CONSTANTS.ARRAY_SIZE.DEFAULT);
+            setMaxValue(CONSTANTS.VALUE_RANGE.DEFAULT);
+            setDelay(CONSTANTS.DELAY.DEFAULT);
           }}
           disabled={processing}
         >
