@@ -5,7 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 import Slider from './components/Slider.tsx';
 
-import generateRandomArray from './utils/generateRandomArray.ts';
+import generateArrays from './utils/generateArrays.ts';
+
 import {
   runAlgorithms,
   stopAlgorithms,
@@ -93,75 +94,35 @@ function App() {
     });
   };
 
-  const generateArrays = (arrayOrder = selectedArrayOrder) => {
+  const regenerateArrays = (arrayOrder = selectedArrayOrder) => {
     let array: number[];
     switch (arrayOrder) {
       case 'unsorted':
-        array = generateUnsortedArrays();
+        array = generateArrays(arraySize, 1, maxValue, 'unsorted');
         break;
 
       case 'sorted':
-        array = generateSortedArrays();
+        array = generateArrays(arraySize, 1, maxValue, 'sorted');
         break;
 
       case 'reversed':
-        array = generateReversedArrays();
+        array = generateArrays(arraySize, 1, maxValue, 'reversed');
         break;
 
       case 'equal':
-        array = generateEqualArrays();
+        array = generateArrays(arraySize, 1, maxValue, 'equal');
         break;
 
       case 'nearlySorted':
-        array = generateNearlySortedArrays();
+        array = generateArrays(arraySize, 1, maxValue, 'nearlySorted');
         break;
     }
     updateAlgorithmStates(array);
     algorithmSteps.current = {};
   };
 
-  const generateUnsortedArrays = () => {
-    const array = generateRandomArray(arraySize, 1, maxValue);
-    return array;
-  };
-
-  const generateSortedArrays = () => {
-    const array = generateRandomArray(arraySize, 1, maxValue);
-    array.sort((a, b) => a - b);
-    return array;
-  };
-
-  const generateReversedArrays = () => {
-    const array = generateRandomArray(arraySize, 1, maxValue);
-    array.sort((a, b) => b - a);
-    return array;
-  };
-
-  const generateEqualArrays = () => {
-    const array = new Array(arraySize).fill(
-      Math.floor(Math.random() * (maxValue - 1 + 1)) + 1
-    );
-    return array;
-  };
-
-  const generateNearlySortedArrays = () => {
-    const array = generateRandomArray(arraySize, 1, maxValue);
-    array.sort((a, b) => a - b);
-    const inversionCount = Math.round(Math.log(arraySize)) - 1;
-    for (let i = 0; i < inversionCount; i++) {
-      const a = Math.floor(Math.random() * arraySize);
-      const b = Math.floor(Math.random() * arraySize);
-      if (a === b) {
-        i--;
-        continue;
-      }
-      [array[a], array[b]] = [array[b], array[a]];
-    }
-    return array;
-  };
-
   useEffect(() => {
-    generateArrays();
+    regenerateArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize, maxValue]);
 
@@ -316,7 +277,7 @@ function App() {
               type="radio"
               onChange={() => {
                 setSelectedArrayOrder(arrayOrderOption.name);
-                generateArrays(arrayOrderOption.name);
+                regenerateArrays(arrayOrderOption.name);
               }}
               checked={selectedArrayOrder === arrayOrderOption.name}
               disabled={processing}
@@ -325,7 +286,7 @@ function App() {
           </label>
         ))}
       </div>
-      <button onClick={() => generateArrays()} disabled={processing}>
+      <button onClick={() => regenerateArrays()} disabled={processing}>
         Regenerate data
       </button>
       <div className="checkboxes">
