@@ -175,8 +175,6 @@ function App() {
     );
   };
 
-  console.log(`currentStep: ${currentStep.current}`);
-
   const n = Math.max(
     ...Object.values(algorithmSteps.current).map((steps) => steps.length)
   );
