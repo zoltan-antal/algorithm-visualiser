@@ -2,7 +2,7 @@ import generateRandomArray from './generateRandomArray';
 
 import ArrayOrder from '../types/ArrayOrder';
 
-const generateArrays = (
+const generateArray = (
   size: number,
   min: number,
   max: number,
@@ -49,4 +49,4 @@ const generateArrays = (
   return array;
 };
 
-export default generateArrays;
+export default generateArray;

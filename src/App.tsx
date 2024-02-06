@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 import Slider from './components/Slider.tsx';
 
-import generateArrays from './utils/generateArrays.ts';
+import generateArray from './utils/generateArray.ts';
 
 import ARRAY_SIZE from './constants/arraySize.ts';
 import VALUE_RANGE from './constants/valueRange.ts';
@@ -63,15 +63,15 @@ function App() {
     });
   };
 
-  const regenerateArrays = () => {
+  const generateArrays = () => {
     updateAlgorithmStates(
-      generateArrays(arraySize, 1, maxValue, selectedArrayOrder)
+      generateArray(arraySize, 1, maxValue, selectedArrayOrder)
     );
     algorithmSteps.current = {};
   };
 
   useEffect(() => {
-    regenerateArrays();
+    generateArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arraySize, maxValue, selectedArrayOrder]);
 
@@ -224,7 +224,7 @@ function App() {
           </label>
         ))}
       </div>
-      <button onClick={regenerateArrays} disabled={processing}>
+      <button onClick={generateArrays} disabled={processing}>
         Regenerate data
       </button>
       <div className="checkboxes">
