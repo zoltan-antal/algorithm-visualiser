@@ -120,11 +120,11 @@ function App() {
   };
 
   const handleAbort = () => {
-    currentStep.current = 0;
-    setProcessing(false);
-    setPaused(true);
     stopAlgorithms();
+    setPaused(true);
+    setProcessing(false);
     removeHighlights();
+    currentStep.current = 0;
     algorithmSteps.current = {};
   };
 
