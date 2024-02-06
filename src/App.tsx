@@ -272,7 +272,7 @@ function App() {
         <button
           onClick={handlePlay}
           disabled={
-            (processing && !paused) || (n > 0 && currentStep.current >= n)
+            (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
           }
           className={processing && !paused ? 'hidden' : ''}
         >
