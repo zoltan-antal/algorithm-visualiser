@@ -81,37 +81,17 @@ function App() {
     });
   };
 
-  const regenerateArrays = (arrayOrder = selectedArrayOrder) => {
-    let array: number[];
-    switch (arrayOrder) {
-      case 'unsorted':
-        array = generateArrays(arraySize, 1, maxValue, 'unsorted');
-        break;
-
-      case 'sorted':
-        array = generateArrays(arraySize, 1, maxValue, 'sorted');
-        break;
-
-      case 'reversed':
-        array = generateArrays(arraySize, 1, maxValue, 'reversed');
-        break;
-
-      case 'equal':
-        array = generateArrays(arraySize, 1, maxValue, 'equal');
-        break;
-
-      case 'nearlySorted':
-        array = generateArrays(arraySize, 1, maxValue, 'nearlySorted');
-        break;
-    }
-    updateAlgorithmStates(array);
+  const regenerateArrays = () => {
+    updateAlgorithmStates(
+      generateArrays(arraySize, 1, maxValue, selectedArrayOrder)
+    );
     algorithmSteps.current = {};
   };
 
   useEffect(() => {
     regenerateArrays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arraySize, maxValue]);
+  }, [arraySize, maxValue, selectedArrayOrder]);
 
   const algorithmSteps = useRef<AlgorithmSteps>({});
   const currentStep = useRef<number>(0);
@@ -262,10 +242,7 @@ function App() {
           <label>
             <input
               type="radio"
-              onChange={() => {
-                setSelectedArrayOrder(arrayOrderOption.name);
-                regenerateArrays(arrayOrderOption.name);
-              }}
+              onChange={() => setSelectedArrayOrder(arrayOrderOption.name)}
               checked={selectedArrayOrder === arrayOrderOption.name}
               disabled={processing}
             />
@@ -273,7 +250,7 @@ function App() {
           </label>
         ))}
       </div>
-      <button onClick={() => regenerateArrays()} disabled={processing}>
+      <button onClick={regenerateArrays} disabled={processing}>
         Regenerate data
       </button>
       <div className="checkboxes">
