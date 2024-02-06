@@ -39,10 +39,10 @@ function App() {
   const MAX_ARRAY_SIZE = 100;
   const ARRAY_SIZE_STEP = 10;
 
-  const DEFAULT_MAX_VALUE = 50;
-  const MIN_MAX_VALUE = 5;
-  const MAX_MAX_VALUE = 100;
-  const MAX_VALUE_STEP = 5;
+  const DEFAULT_VALUE_RANGE = 50;
+  const MIN_VALUE_RANGE = 5;
+  const MAX_VALUE_RANGE = 100;
+  const VALUE_RANGE_STEP = 5;
 
   const DEFAULT_DELAY = 100;
   const MIN_DELAY = 25;
@@ -50,7 +50,7 @@ function App() {
   const DELAY_STEP = 25;
 
   const [arraySize, setArraySize] = useState(DEFAULT_ARRAY_SIZE);
-  const [maxValue, setMaxValue] = useState(DEFAULT_MAX_VALUE);
+  const [maxValue, setMaxValue] = useState(DEFAULT_VALUE_RANGE);
   const [delay, setDelay] = useState(DEFAULT_DELAY);
 
   const algorithms = [
@@ -282,9 +282,9 @@ function App() {
         <Slider
           label="Value range"
           value={maxValue}
-          min={MIN_MAX_VALUE}
-          max={MAX_MAX_VALUE}
-          step={MAX_VALUE_STEP}
+          min={MIN_VALUE_RANGE}
+          max={MAX_VALUE_RANGE}
+          step={VALUE_RANGE_STEP}
           handleChange={setMaxValue}
           disabled={processing}
         ></Slider>
@@ -300,7 +300,7 @@ function App() {
         <button
           onClick={() => {
             setArraySize(DEFAULT_ARRAY_SIZE);
-            setMaxValue(DEFAULT_MAX_VALUE);
+            setMaxValue(DEFAULT_VALUE_RANGE);
             setDelay(DEFAULT_DELAY);
           }}
           disabled={processing}
