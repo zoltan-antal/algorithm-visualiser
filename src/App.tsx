@@ -1,3 +1,5 @@
+import './styles/App.css';
+
 import { useState, useEffect, useRef } from 'react';
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 
@@ -254,9 +256,6 @@ function App() {
     callStepAlgorithms('firstStep');
   };
 
-  const buttonStyle = { height: 25 };
-  const imageStyle = { width: '100%', height: '100%' };
-
   const arrayOrderOptions: ArrayOrderOption[] = [
     { name: 'unsorted', displayName: 'Unsorted' },
     { name: 'sorted', displayName: 'Sorted' },
@@ -268,7 +267,7 @@ function App() {
   return (
     <>
       <h1>Algorithm Visualiser</h1>
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      <div className="sliders">
         <div>
           <input
             type="range"
@@ -336,7 +335,7 @@ function App() {
       <button onClick={() => generateArrays()} disabled={processing}>
         Regenerate data
       </button>
-      <div style={{ display: 'flex' }}>
+      <div className="checkboxes">
         {algorithmNames.map((algorithmName) => (
           <div key={algorithmName}>
             <label>
@@ -371,66 +370,52 @@ function App() {
           </div>
         ))}
       </div>
-      <div>
+      <div className="controlButtons">
         <button
           onClick={handleGoToFirstStep}
           disabled={!paused || currentStep.current <= 0}
-          style={buttonStyle}
         >
-          <img src={skipBackwardImage} style={imageStyle} />
+          <img src={skipBackwardImage} />
         </button>
         <button
           onClick={handleRewind}
           disabled={!paused || currentStep.current <= 0}
-          style={buttonStyle}
         >
-          <img src={stepBackwardImage} style={imageStyle} />
+          <img src={stepBackwardImage} />
         </button>
-        <button
-          onClick={handleAbort}
-          disabled={!processing}
-          style={buttonStyle}
-        >
-          <img src={stopImage} style={imageStyle} />
+        <button onClick={handleAbort} disabled={!processing}>
+          <img src={stopImage} />
         </button>
         <button
           onClick={handlePlay}
           disabled={
             (processing && !paused) || (n > 0 && currentStep.current >= n)
           }
-          style={{
-            ...buttonStyle,
-            display: processing && !paused ? 'none' : 'inline',
-          }}
+          className={processing && !paused ? 'hidden' : ''}
         >
-          <img src={playImage} style={imageStyle} />
+          <img src={playImage} />
         </button>
         <button
           onClick={handlePause}
           disabled={!processing || paused}
-          style={{
-            ...buttonStyle,
-            display: !processing || paused ? 'none' : 'inline',
-          }}
+          className={!processing || paused ? 'hidden' : ''}
         >
-          <img src={pauseImage} style={imageStyle} />
+          <img src={pauseImage} />
         </button>
         <button
           onClick={handleAdvance}
           disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-          style={buttonStyle}
         >
-          <img src={stepForwardImage} style={imageStyle} />
+          <img src={stepForwardImage} />
         </button>
         <button
           onClick={handleGoToLastStep}
           disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-          style={buttonStyle}
         >
-          <img src={skipForwardImage} style={imageStyle} />
+          <img src={skipForwardImage} />
         </button>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>
+      <div className="charts">
         {algorithms
           .filter((algorithm) =>
             Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
