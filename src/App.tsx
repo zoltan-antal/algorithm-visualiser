@@ -1,6 +1,6 @@
 import './styles/App.css';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 import ArrayOrder from './types/ArrayOrder.ts';
 import AlgorithmStates from './types/AlgorithmStates.ts';
@@ -42,12 +42,7 @@ function App() {
   const [processing, setProcessing] = useState<boolean>(false);
   const [paused, setPaused] = useState<boolean>(true);
 
-  useEffect(() => {
-    generateArrays();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arraySize, maxValue, selectedArrayOrder]);
-
-  const generateArrays = () => {
+  const generateArrays = useCallback(() => {
     const array = generateArray(arraySize, 1, maxValue, selectedArrayOrder);
     setAlgorithmStates(
       Object.fromEntries(
@@ -59,7 +54,11 @@ function App() {
     );
     algorithmSteps.current = {};
     currentStep.current = 0;
-  };
+  }, [arraySize, maxValue, selectedArrayOrder]);
+
+  useEffect(() => {
+    generateArrays();
+  }, [generateArrays]);
 
   const removeHighlights = () => {
     setAlgorithmStates((prevStates) => {
