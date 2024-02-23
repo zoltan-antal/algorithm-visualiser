@@ -204,7 +204,7 @@ function App() {
       <div>
         Data:{' '}
         {ARRAY_ORDER_OPTIONS.map((arrayOrderOption) => (
-          <label>
+          <label key={arrayOrderOption.name}>
             <input
               type="radio"
               onChange={() => setSelectedArrayOrder(arrayOrderOption.name)}
@@ -304,7 +304,7 @@ function App() {
             Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
           )
           .map((algorithm) => (
-            <div>
+            <div key={algorithm.algorithmName}>
               <h2>{algorithm.displayName}</h2>
               <AlgorithmChart
                 data={algorithmStates[algorithm.algorithmName]}
