@@ -17,7 +17,10 @@ const AlgorithmChart = ({
     return (
       <g>
         <rect
-          {...props}
+          x={props.x}
+          y={props.y}
+          width={props.width}
+          height={props.height}
           fill={data.highlights.includes(index) ? 'red' : '#8884d8'}
         />
       </g>
