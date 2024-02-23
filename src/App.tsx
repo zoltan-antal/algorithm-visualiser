@@ -37,6 +37,7 @@ function App() {
   );
 
   const algorithmSteps = useRef<AlgorithmSteps>({});
+  const [algorithmPlacings, setAlgorithmPlacings] = useState<string[]>([]);
   const currentStep = useRef<number>(0);
   const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>({});
   const [processing, setProcessing] = useState<boolean>(false);
@@ -86,6 +87,11 @@ function App() {
           arr.push({ ...arr[arr.length - 1], highlights: [] });
           return [algorithm.algorithmName, arr];
         })
+    );
+    setAlgorithmPlacings(
+      Object.entries(algorithmSteps.current)
+        .sort((a, b) => a[1].length - b[1].length)
+        .map(([key]) => key)
     );
   };
 
@@ -298,14 +304,24 @@ function App() {
           <img src={controlButtonImages.skipForward} />
         </button>
       </div>
-      <div className="charts">
+      <div className="algorithms">
         {algorithms
           .filter((algorithm) =>
             Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
           )
           .map((algorithm) => (
-            <div key={algorithm.algorithmName}>
-              <h2>{algorithm.displayName}</h2>
+            <div key={algorithm.algorithmName} className="algorithm">
+              <div className="header">
+                <h2 className="name">{algorithm.displayName}</h2>
+                {algorithmSteps.current[algorithm.algorithmName] &&
+                  currentStep.current >=
+                    algorithmSteps.current[algorithm.algorithmName].length -
+                      1 && (
+                    <div className="placing">
+                      {algorithmPlacings.indexOf(algorithm.algorithmName) + 1}
+                    </div>
+                  )}
+              </div>
               <AlgorithmChart
                 data={algorithmStates[algorithm.algorithmName]}
                 maxValue={maxValue}
