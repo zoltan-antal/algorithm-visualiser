@@ -164,7 +164,8 @@ function App() {
   };
 
   const handleGoToFirstStep = () => {
-    setProcessing(true);
+    // setProcessing(true);
+    setProcessing(false);
     callStepAlgorithms('firstStep');
   };
 
@@ -278,7 +279,10 @@ function App() {
         >
           <img src={controlButtonImages.stepBackward} />
         </button>
-        <button onClick={handleAbort} disabled={!processing}>
+        <button
+          onClick={handleAbort}
+          disabled={!processing && currentStep.current !== n - 1}
+        >
           <img src={controlButtonImages.stop} />
         </button>
         <button
