@@ -190,21 +190,10 @@ function App() {
           handleChange={setMaxValue}
           disabled={processing}
         ></Slider>
-        <Slider
-          label="Step delay"
-          value={delay}
-          units="ms"
-          min={DELAY.min}
-          max={DELAY.max}
-          step={DELAY.step}
-          handleChange={setDelay}
-          disabled={!paused}
-        ></Slider>
         <button
           onClick={() => {
             setArraySize(ARRAY_SIZE.default);
             setMaxValue(VALUE_RANGE.default);
-            setDelay(DELAY.default);
           }}
           disabled={processing}
         >
@@ -263,53 +252,65 @@ function App() {
           </div>
         ))}
       </div>
-      <div className="controlButtons">
-        <button
-          onClick={handleGoToFirstStep}
-          disabled={!paused || currentStep.current <= 0}
-        >
-          <img src={controlButtonImages.skipBackward} />
-        </button>
-        <button
-          onClick={handleRewind}
-          disabled={!paused || currentStep.current <= 0}
-        >
-          <img src={controlButtonImages.stepBackward} />
-        </button>
-        <button
-          onClick={handleAbort}
-          disabled={!processing && currentStep.current !== n - 1}
-        >
-          <img src={controlButtonImages.stop} />
-        </button>
-        <button
-          onClick={handlePlay}
-          disabled={
-            (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
-          }
-          className={processing && !paused ? 'hidden' : ''}
-        >
-          <img src={controlButtonImages.play} />
-        </button>
-        <button
-          onClick={handlePause}
-          disabled={!processing || paused}
-          className={!processing || paused ? 'hidden' : ''}
-        >
-          <img src={controlButtonImages.pause} />
-        </button>
-        <button
-          onClick={handleAdvance}
-          disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-        >
-          <img src={controlButtonImages.stepForward} />
-        </button>
-        <button
-          onClick={handleGoToLastStep}
-          disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-        >
-          <img src={controlButtonImages.skipForward} />
-        </button>
+      <div className="controls">
+        <div className="buttons">
+          <button
+            onClick={handleGoToFirstStep}
+            disabled={!paused || currentStep.current <= 0}
+          >
+            <img src={controlButtonImages.skipBackward} />
+          </button>
+          <button
+            onClick={handleRewind}
+            disabled={!paused || currentStep.current <= 0}
+          >
+            <img src={controlButtonImages.stepBackward} />
+          </button>
+          <button
+            onClick={handleAbort}
+            disabled={!processing && currentStep.current !== n - 1}
+          >
+            <img src={controlButtonImages.stop} />
+          </button>
+          <button
+            onClick={handlePlay}
+            disabled={
+              (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
+            }
+            className={processing && !paused ? 'hidden' : ''}
+          >
+            <img src={controlButtonImages.play} />
+          </button>
+          <button
+            onClick={handlePause}
+            disabled={!processing || paused}
+            className={!processing || paused ? 'hidden' : ''}
+          >
+            <img src={controlButtonImages.pause} />
+          </button>
+          <button
+            onClick={handleAdvance}
+            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+          >
+            <img src={controlButtonImages.stepForward} />
+          </button>
+          <button
+            onClick={handleGoToLastStep}
+            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+          >
+            <img src={controlButtonImages.skipForward} />
+          </button>
+        </div>
+        <Slider
+          label="Step delay"
+          value={delay}
+          units="ms"
+          min={DELAY.min}
+          max={DELAY.max}
+          step={DELAY.step}
+          handleChange={setDelay}
+          disabled={!paused}
+        ></Slider>
       </div>
       <div className="algorithms">
         {algorithms
