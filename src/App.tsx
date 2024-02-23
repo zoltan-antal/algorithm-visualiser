@@ -72,9 +72,6 @@ function App() {
   };
 
   const calculateAlgorithms = () => {
-    // if (!(Object.entries(algorithmSteps.current).length === 0)) {
-    //   return;
-    // }
     if (
       Object.keys(algorithmSteps.current).toSorted().toString() ===
       Array.from(selectedAlgorithms).toSorted().toString()
