@@ -1,7 +1,7 @@
 const ARRAY_SIZE = {
   default: 20,
   min: 10,
-  max: 100,
+  max: 50,
   step: 10,
 };
 
