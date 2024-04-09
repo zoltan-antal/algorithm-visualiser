@@ -12,7 +12,7 @@ const quickSort = (unsorted: number[]) => {
     // Arranging elements around pivot using Dutch national flag partitioning
     let [left, right] = [start, end];
     let i = start;
-    while (left < right && i <= right) {
+    while (i <= right) {
       steps.push({
         array: [...arr],
         highlights: [left, right, i, p, start, end],
