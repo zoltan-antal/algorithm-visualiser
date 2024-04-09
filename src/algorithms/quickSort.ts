@@ -6,27 +6,35 @@ const quickSort = (unsorted: number[]) => {
 
   // Partition sub-routine for rearranging elements around a random pivot
   const partition = (arr: number[], start: number, end: number) => {
-    // Randomly choose pivot and move it to the beginning of the section
+    // Randomly choose pivot
     let p = Math.floor(Math.random() * (end - start + 1)) + start;
-    steps.push({ array: [...arr], highlights: [p, start, end] });
-    [arr[p], arr[start]] = [arr[start], arr[p]];
-    p = start;
 
-    // i tracks the boundary between the part with elements less than the pivot
-    // and the part with elements greater than the pivot
-    let i = start + 1;
-    for (let j = start + 1; j <= end; j++) {
-      steps.push({ array: [...arr], highlights: [i, j, p, end] });
-      // If an element is less than the pivot move it to the first part
-      if (arr[j] < arr[p]) {
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+    // Arranging elements around pivot using Dutch national flag partitioning
+    let [left, right] = [start, end];
+    let i = start;
+    while (left < right && i <= right) {
+      steps.push({
+        array: [...arr],
+        highlights: [left, right, i, p, start, end],
+      });
+      if (arr[i] < arr[p]) {
+        [arr[i], arr[left]] = [arr[left], arr[i]];
+        if (p === left) {
+          p = i;
+        }
+        left++;
+        i++;
+      } else if (arr[i] > arr[p]) {
+        [arr[i], arr[right]] = [arr[right], arr[i]];
+        if (p === right) {
+          p = i;
+        }
+        right--;
+      } else {
         i++;
       }
     }
-    steps.push({ array: [...arr], highlights: [i - 1, p, end] });
-    // Insert the pivot to its correct position
-    [arr[p], arr[i - 1]] = [arr[i - 1], arr[p]];
-    return i - 1;
+    return p;
   };
 
   // Recursive in-place sorting function
