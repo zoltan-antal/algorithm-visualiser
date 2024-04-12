@@ -17,7 +17,9 @@ const insertionSort = (unsorted: number[]) => {
       [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
       j--;
     }
-    steps.push({ array: [...sorted], highlights: [j, i] });
+    if (i === n - 1) {
+      steps.push({ array: [...sorted], highlights: [j, i] });
+    }
   }
   return steps;
 };
