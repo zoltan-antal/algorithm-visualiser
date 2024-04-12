@@ -3,11 +3,7 @@ import AlgorithmState from '../types/AlgorithmState';
 const mergeSort = (unsorted: number[]) => {
   const steps: AlgorithmState[] = [{ array: [...unsorted], highlights: [] }];
 
-  const mergeSortRecursive = (
-    unsorted: number[],
-    steps: AlgorithmState[],
-    start: number
-  ) => {
+  const mergeSortRecursive = (unsorted: number[], start: number) => {
     const n = unsorted.length;
 
     // Base case: if the array size is 1, no sorting is required
@@ -20,10 +16,9 @@ const mergeSort = (unsorted: number[]) => {
     }
 
     // Recursively sort the two halves of the array
-    const left = mergeSortRecursive(unsorted.slice(0, n / 2), steps, start);
+    const left = mergeSortRecursive(unsorted.slice(0, n / 2), start);
     const right = mergeSortRecursive(
       unsorted.slice(n / 2),
-      steps,
       start + Math.floor(n / 2)
     );
 
@@ -58,7 +53,7 @@ const mergeSort = (unsorted: number[]) => {
 
     return sorted;
   };
-  mergeSortRecursive(unsorted, steps, 0);
+  mergeSortRecursive(unsorted, 0);
 
   return steps.slice(1);
 };
