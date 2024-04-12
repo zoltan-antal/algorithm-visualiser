@@ -14,6 +14,7 @@ const selectionSort = (unsorted: number[]) => {
       steps.push({ array: [...sorted], highlights: [i, j, minIndex] });
       if (sorted[j] < sorted[minIndex]) {
         minIndex = j;
+        steps.push({ array: [...sorted], highlights: [i, j, minIndex] });
       }
     }
 

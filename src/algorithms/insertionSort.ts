@@ -15,6 +15,7 @@ const insertionSort = (unsorted: number[]) => {
       }
       // Swap elements to propagate the new element downwards
       [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
+      steps.push({ array: [...sorted], highlights: [j, j + 1, i] });
       j--;
     }
     if (i === n - 1) {

@@ -29,6 +29,11 @@ const mergeSort = (unsorted: number[]) => {
     const iMax = left.length;
     const jMax = right.length;
     for (let k = 0; k < n; k++) {
+      steps.push({
+        array: [...steps[steps.length - 1].array],
+        highlights: [start, start + k, start + unsorted.length - 1],
+      });
+
       if (i === iMax) {
         sorted.push(right[j]);
         j++;

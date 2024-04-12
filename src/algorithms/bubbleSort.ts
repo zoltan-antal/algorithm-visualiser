@@ -13,13 +13,11 @@ const bubbleSort = (unsorted: number[]) => {
     // Iterate through the whole array
     for (let j = 0; j < n - i - 1; j++) {
       // Swap neighbouring elements if they're out of order
-      steps.push({
-        array: [...sorted],
-        highlights: [j, j + 1, n - i - 1],
-      });
+      steps.push({ array: [...sorted], highlights: [j, j + 1, n - i - 1] });
       if (sorted[j] > sorted[j + 1]) {
         swap = true;
         [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
+        steps.push({ array: [...sorted], highlights: [j, j + 1, n - i - 1] });
       }
     }
     i++;

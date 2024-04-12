@@ -18,16 +18,28 @@ const quickSort = (unsorted: number[]) => {
         highlights: [left, right, i, p, start, end],
       });
       if (arr[i] < arr[p]) {
-        [arr[i], arr[left]] = [arr[left], arr[i]];
-        if (p === left) {
-          p = i;
+        if (i !== left) {
+          [arr[i], arr[left]] = [arr[left], arr[i]];
+          if (p === left) {
+            p = i;
+          }
+          steps.push({
+            array: [...arr],
+            highlights: [left, right, i, p, start, end],
+          });
         }
         left++;
         i++;
       } else if (arr[i] > arr[p]) {
-        [arr[i], arr[right]] = [arr[right], arr[i]];
-        if (p === right) {
-          p = i;
+        if (i !== right) {
+          [arr[i], arr[right]] = [arr[right], arr[i]];
+          if (p === right) {
+            p = i;
+          }
+          steps.push({
+            array: [...arr],
+            highlights: [left, right, i, p, start, end],
+          });
         }
         right--;
       } else {

@@ -18,7 +18,7 @@ const heapSort = (unsorted: number[]) => {
     } /* HEAP EXTRACTION */ else {
       // Swap first and last elements of the heap
       // - the first element will be percolated down during Heapify
-      [sorted[0], sorted[end]] = [sorted[end], sorted[0]];
+      [sorted[start], sorted[end]] = [sorted[end], sorted[start]];
       steps.push({ array: [...sorted], highlights: [start, end] });
       // Decrement end so that the element moved to the end will remain there
       end--;
@@ -30,16 +30,23 @@ const heapSort = (unsorted: number[]) => {
     while (curr * 2 + 1 <= end) {
       // Select the child with the larger value
       let child = curr * 2 + 1;
-      if (child + 1 <= end && sorted[child + 1] > sorted[child]) {
-        child++;
+      if (child + 1 <= end) {
+        steps.push({
+          array: [...sorted],
+          highlights: [start, end, curr, child, child + 1],
+        });
+        if (sorted[child + 1] > sorted[child]) {
+          child++;
+        }
       }
-      steps.push({
-        array: [...sorted],
-        highlights: [start, end, curr, child],
-      });
+      steps.push({ array: [...sorted], highlights: [start, end, curr, child] });
       // Swap current node with the larger child if necessary
       if (sorted[child] > sorted[curr]) {
         [sorted[curr], sorted[child]] = [sorted[child], sorted[curr]];
+        steps.push({
+          array: [...sorted],
+          highlights: [start, end, curr, child],
+        });
         curr = child;
       } /* Break if the heap property is satisfied */ else {
         break;
