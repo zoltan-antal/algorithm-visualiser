@@ -7,18 +7,18 @@ const insertionSort = (unsorted: number[]) => {
 
   for (let i = 1; i < n; i++) {
     let j = i - 1;
-    steps.push({ array: [...sorted], highlights: [j, i] });
     // Iterate through elements in reverse order whilst they are greater than the element travelling down
-    while (j >= 0 && sorted[j] > sorted[j + 1]) {
-      if (j < i - 1) {
-        steps.push({ array: [...sorted], highlights: [j, j + 1, i] });
+    while (j >= 0) {
+      steps.push({ array: [...sorted], highlights: [j, j + 1, i] });
+      if (!(sorted[j] > sorted[j + 1])) {
+        break;
       }
       // Swap elements to propagate the new element downwards
       [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
       j--;
     }
+    steps.push({ array: [...sorted], highlights: [j, i] });
   }
-
   return steps;
 };
 
