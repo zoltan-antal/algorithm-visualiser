@@ -168,175 +168,198 @@ function App() {
 
   return (
     <>
-      <h1>Algorithm Visualiser</h1>
-      <div className="sliders">
-        <Slider
-          label="Array size"
-          value={arraySize}
-          units=""
-          min={ARRAY_SIZE.min}
-          max={ARRAY_SIZE.max}
-          step={ARRAY_SIZE.step}
-          handleChange={setArraySize}
-          disabled={processing}
-        ></Slider>
-        <Slider
-          label="Value range"
-          value={maxValue}
-          units=""
-          min={VALUE_RANGE.min}
-          max={VALUE_RANGE.max}
-          step={VALUE_RANGE.step}
-          handleChange={setMaxValue}
-          disabled={processing}
-        ></Slider>
-        <button
-          onClick={() => {
-            setArraySize(ARRAY_SIZE.default);
-            setMaxValue(VALUE_RANGE.default);
-          }}
-          disabled={processing}
-        >
-          Reset defaults
-        </button>
-      </div>
-      <div>
-        Data:{' '}
-        {ARRAY_ORDER_OPTIONS.map((arrayOrderOption) => (
-          <label key={arrayOrderOption.name}>
-            <input
-              type="radio"
-              onChange={() => setSelectedArrayOrder(arrayOrderOption.name)}
-              checked={selectedArrayOrder === arrayOrderOption.name}
-              disabled={processing}
-            />
-            {arrayOrderOption.displayName}
-          </label>
-        ))}
-      </div>
-      <button onClick={generateArrays} disabled={processing}>
-        Regenerate data
-      </button>
-      <div className="checkboxes">
-        {algorithmNames.map((algorithmName) => (
-          <div key={algorithmName}>
-            <label>
-              <input
-                type="checkbox"
-                checked={Array.from(selectedAlgorithms).includes(algorithmName)}
-                disabled={processing}
-                onChange={() => {
-                  setSelectedAlgorithms((prev) => {
-                    const updated = new Set(prev);
-                    switch (
-                      Array.from(selectedAlgorithms).includes(algorithmName)
-                    ) {
-                      case true:
-                        updated.delete(algorithmName);
-                        break;
-
-                      case false:
-                        updated.add(algorithmName);
-                        break;
-                    }
-                    return updated;
-                  });
-                }}
-              />
-              {
-                algorithms.find(
-                  (algorithm) => algorithm.algorithmName === algorithmName
-                )!.displayName
-              }
-            </label>
+      <header>
+        <h1>Algorithm Visualiser</h1>
+        <nav></nav>
+      </header>
+      <aside>
+        <h2>Settings</h2>
+        <div className="section" id="algorithms-displayed">
+          <div className="header">
+            <h3 className="title">Algorithms displayed</h3>
           </div>
-        ))}
-      </div>
-      <div className="controls">
-        <div className="buttons">
-          <button
-            onClick={handleGoToFirstStep}
-            disabled={!paused || currentStep.current <= 0}
-          >
-            <img src={controlButtonImages.skipBackward} />
-          </button>
-          <button
-            onClick={handleRewind}
-            disabled={!paused || currentStep.current <= 0}
-          >
-            <img src={controlButtonImages.stepBackward} />
-          </button>
-          <button
-            onClick={handleAbort}
-            disabled={!processing && currentStep.current !== n - 1}
-          >
-            <img src={controlButtonImages.stop} />
-          </button>
-          <button
-            onClick={handlePlay}
-            disabled={
-              (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
-            }
-            className={processing && !paused ? 'hidden' : ''}
-          >
-            <img src={controlButtonImages.play} />
-          </button>
-          <button
-            onClick={handlePause}
-            disabled={!processing || paused}
-            className={!processing || paused ? 'hidden' : ''}
-          >
-            <img src={controlButtonImages.pause} />
-          </button>
-          <button
-            onClick={handleAdvance}
-            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-          >
-            <img src={controlButtonImages.stepForward} />
-          </button>
-          <button
-            onClick={handleGoToLastStep}
-            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-          >
-            <img src={controlButtonImages.skipForward} />
-          </button>
-        </div>
-        <Slider
-          label="Step delay"
-          value={delay}
-          units="ms"
-          min={DELAY.min}
-          max={DELAY.max}
-          step={DELAY.step}
-          handleChange={setDelay}
-          disabled={!paused}
-        ></Slider>
-      </div>
-      <div className="algorithms">
-        {algorithms
-          .filter((algorithm) =>
-            Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
-          )
-          .map((algorithm) => (
-            <div key={algorithm.algorithmName} className="algorithm">
-              <div className="header">
-                <h2 className="name">{algorithm.displayName}</h2>
-                {algorithmSteps.current[algorithm.algorithmName] &&
-                  currentStep.current >=
-                    algorithmSteps.current[algorithm.algorithmName].length -
-                      1 && (
-                    <div className="placing">
-                      {algorithmPlacings.indexOf(algorithm.algorithmName) + 1}
-                    </div>
+          <div className="items">
+            {algorithmNames.map((algorithmName) => (
+              <label key={algorithmName}>
+                <input
+                  type="checkbox"
+                  checked={Array.from(selectedAlgorithms).includes(
+                    algorithmName
                   )}
+                  disabled={processing}
+                  onChange={() => {
+                    setSelectedAlgorithms((prev) => {
+                      const updated = new Set(prev);
+                      switch (
+                        Array.from(selectedAlgorithms).includes(algorithmName)
+                      ) {
+                        case true:
+                          updated.delete(algorithmName);
+                          break;
+                        case false:
+                          updated.add(algorithmName);
+                          break;
+                      }
+                      return updated;
+                    });
+                  }}
+                />
+                {
+                  algorithms.find(
+                    (algorithm) => algorithm.algorithmName === algorithmName
+                  )!.displayName
+                }
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="section" id="input-ordering">
+          <div className="header">
+            <h3 className="title">Input ordering</h3>
+            <button onClick={generateArrays} disabled={processing}>
+              Regenerate data
+            </button>
+          </div>
+          <div className="items">
+            {ARRAY_ORDER_OPTIONS.map((arrayOrderOption) => (
+              <label key={arrayOrderOption.name}>
+                <input
+                  type="radio"
+                  onChange={() => setSelectedArrayOrder(arrayOrderOption.name)}
+                  checked={selectedArrayOrder === arrayOrderOption.name}
+                  disabled={processing}
+                />
+                {arrayOrderOption.displayName}
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="section" id="input-parameters">
+          <div className="header">
+            <h3>Input parameters</h3>
+            <button
+              onClick={() => {
+                setArraySize(ARRAY_SIZE.default);
+                setMaxValue(VALUE_RANGE.default);
+              }}
+              disabled={processing}
+            >
+              Reset defaults
+            </button>
+          </div>
+          <div className="items">
+            <Slider
+              label="Input size"
+              value={arraySize}
+              units=""
+              min={ARRAY_SIZE.min}
+              max={ARRAY_SIZE.max}
+              step={ARRAY_SIZE.step}
+              handleChange={setArraySize}
+              disabled={processing}
+            ></Slider>
+            <Slider
+              label="Value range"
+              value={maxValue}
+              units=""
+              min={VALUE_RANGE.min}
+              max={VALUE_RANGE.max}
+              step={VALUE_RANGE.step}
+              handleChange={setMaxValue}
+              disabled={processing}
+            ></Slider>
+          </div>
+        </div>
+      </aside>
+      <main>
+        <div id="visualisation-controls">
+          <div className="items">
+            <button
+              onClick={handleGoToFirstStep}
+              disabled={!paused || currentStep.current <= 0}
+            >
+              <img src={controlButtonImages.skipBackward} />
+            </button>
+            <button
+              onClick={handleRewind}
+              disabled={!paused || currentStep.current <= 0}
+            >
+              <img src={controlButtonImages.stepBackward} />
+            </button>
+            <button
+              onClick={handleAbort}
+              disabled={!processing && currentStep.current !== n - 1}
+            >
+              <img src={controlButtonImages.stop} />
+            </button>
+            <button
+              onClick={handlePlay}
+              disabled={
+                (processing && !paused) ||
+                (n > 0 && currentStep.current >= n - 1)
+              }
+              className={processing && !paused ? 'hidden' : ''}
+            >
+              <img src={controlButtonImages.play} />
+            </button>
+            <button
+              onClick={handlePause}
+              disabled={!processing || paused}
+              className={!processing || paused ? 'hidden' : ''}
+            >
+              <img src={controlButtonImages.pause} />
+            </button>
+            <button
+              onClick={handleAdvance}
+              disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+            >
+              <img src={controlButtonImages.stepForward} />
+            </button>
+            <button
+              onClick={handleGoToLastStep}
+              disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+            >
+              <img src={controlButtonImages.skipForward} />
+            </button>
+          </div>
+          <Slider
+            label="Step delay"
+            value={delay}
+            units="ms"
+            min={DELAY.min}
+            max={DELAY.max}
+            step={DELAY.step}
+            handleChange={setDelay}
+            disabled={!paused}
+          ></Slider>
+        </div>
+        <div id="visualisation-display">
+          {algorithms
+            .filter((algorithm) =>
+              Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
+            )
+            .map((algorithm) => (
+              <div key={algorithm.algorithmName} className="item">
+                <div className="header">
+                  <h2 className="title">{algorithm.displayName}</h2>
+                  {algorithmSteps.current[algorithm.algorithmName] &&
+                    currentStep.current >=
+                      algorithmSteps.current[algorithm.algorithmName].length -
+                        1 && (
+                      <div className="placing">
+                        {algorithmPlacings.indexOf(algorithm.algorithmName) + 1}
+                      </div>
+                    )}
+                </div>
+                <AlgorithmChart
+                  data={algorithmStates[algorithm.algorithmName]}
+                  maxValue={maxValue}
+                />
               </div>
-              <AlgorithmChart
-                data={algorithmStates[algorithm.algorithmName]}
-                maxValue={maxValue}
-              />
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      </main>
+      <footer></footer>
     </>
   );
 }
