@@ -1,5 +1,4 @@
-import { BarChart, Bar, YAxis } from 'recharts';
-
+import { BarChart, Bar, YAxis, ResponsiveContainer } from 'recharts';
 import AlgorithmState from '../types/AlgorithmState';
 
 interface AlgorithmChartProps {
@@ -28,17 +27,19 @@ const AlgorithmChart = ({
   };
 
   return (
-    <BarChart
-      width={300}
-      height={250}
-      data={data.array.map((value: number, index: number) => ({
-        index,
-        value,
-      }))}
-    >
-      <YAxis domain={[0, maxValue]} hide />
-      <Bar dataKey="value" shape={renderCustomBar} />
-    </BarChart>
+    <div className="chart">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          data={data.array.map((value: number, index: number) => ({
+            index,
+            value,
+          }))}
+        >
+          <YAxis domain={[0, maxValue]} hide />
+          <Bar dataKey="value" shape={renderCustomBar} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
