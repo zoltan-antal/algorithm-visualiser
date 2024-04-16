@@ -36,6 +36,9 @@ function App() {
     new Set(algorithmNames)
   );
 
+  const [numColumns, setNumColumns] = useState(3);
+  const [numRows, setNumRows] = useState(2);
+
   const algorithmSteps = useRef<AlgorithmSteps>({});
   const [algorithmPlacings, setAlgorithmPlacings] = useState<string[]>([]);
   const currentStep = useRef<number>(0);
@@ -60,6 +63,20 @@ function App() {
   useEffect(() => {
     generateArrays();
   }, [generateArrays]);
+
+  useEffect(() => {
+    const algorithmCount = selectedAlgorithms.size;
+    if (algorithmCount <= 2) {
+      setNumColumns(1);
+      setNumRows(2);
+    } else if (algorithmCount <= 4) {
+      setNumColumns(2);
+      setNumRows(2);
+    } else if (algorithmCount <= 6) {
+      setNumColumns(3);
+      setNumRows(2);
+    }
+  }, [selectedAlgorithms.size]);
 
   const removeHighlights = () => {
     setAlgorithmStates((prevStates) => {
@@ -200,6 +217,8 @@ function App() {
                           updated.add(algorithmName);
                           break;
                       }
+                      // setNumColumns(calculateNumColumns(updated.size));
+                      // setNumRows(calculateNumRows(updated.size));
                       return updated;
                     });
                   }}
@@ -333,7 +352,13 @@ function App() {
             disabled={!paused}
           ></Slider>
         </div>
-        <div id="visualisation-display">
+        <div
+          id="visualisation-display"
+          style={{
+            gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
+            gridTemplateRows: `repeat(${numRows}, 1fr)`,
+          }}
+        >
           {algorithms
             .filter((algorithm) =>
               Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
