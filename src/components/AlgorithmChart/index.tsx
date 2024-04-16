@@ -1,5 +1,5 @@
 import { BarChart, Bar, YAxis, ResponsiveContainer } from 'recharts';
-import AlgorithmState from '../types/AlgorithmState';
+import AlgorithmState from '../../types/AlgorithmState';
 
 interface AlgorithmChartProps {
   data: AlgorithmState;

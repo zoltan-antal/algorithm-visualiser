@@ -1,3 +1,5 @@
+import './index.css';
+
 interface SliderProps {
   label: string;
   value: number;

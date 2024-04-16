@@ -8,7 +8,7 @@ import VALUE_RANGE from '../../constants/valueRange.ts';
 
 import algorithms from '../../algorithms';
 
-import Slider from '../Slider.tsx';
+import Slider from '../Slider';
 
 interface AsideProps {
   processing: boolean;

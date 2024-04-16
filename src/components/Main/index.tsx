@@ -17,8 +17,8 @@ import {
   stepAlgorithms,
 } from '../../utils/algorithmsController.ts';
 
-import Slider from '../Slider.tsx';
-import AlgorithmChart from '../AlgorithmChart.tsx';
+import Slider from '../Slider';
+import AlgorithmChart from '../AlgorithmChart';
 
 interface MainProps {
   maxValue: number;
