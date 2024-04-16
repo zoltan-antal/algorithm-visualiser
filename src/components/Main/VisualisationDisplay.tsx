@@ -6,6 +6,7 @@ import AlgorithmStates from '../../types/AlgorithmStates.ts';
 import AlgorithmSteps from '../../types/AlgorithmSteps.ts';
 
 import algorithms from '../../algorithms';
+import getOrdinalNumber from '../../utils/getOrdinalNumber.ts';
 
 import AlgorithmChart from './AlgorithmChart';
 
@@ -67,7 +68,9 @@ const VisualisationDisplay = ({
                 <h2 className="title">{algorithm.displayName}</h2>
                 {finished && (
                   <div className="placing">
-                    {algorithmPlacings.indexOf(algorithm.algorithmName) + 1}
+                    {getOrdinalNumber(
+                      algorithmPlacings.indexOf(algorithm.algorithmName) + 1
+                    )}
                   </div>
                 )}
               </div>
