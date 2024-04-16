@@ -151,71 +151,85 @@ const VisualisationControls = ({
 
   return (
     <div id="visualisation-controls">
-      <div className="items">
-        <button
-          id="skipBackwardButton"
-          onClick={handleGoToFirstStep}
-          disabled={!paused || currentStep.current <= 0}
-        >
-          <img src={controlButtonImages.skipBackward} />
-        </button>
-        <button
-          id="stepBackwardButton"
-          onClick={handleRewind}
-          disabled={!paused || currentStep.current <= 0}
-        >
-          <img src={controlButtonImages.stepBackward} />
-        </button>
-        <button
-          id="stopButton"
-          onClick={handleAbort}
-          disabled={!processing && currentStep.current !== n - 1}
-        >
-          <img src={controlButtonImages.stop} />
-        </button>
-        <button
-          id="playButton"
-          onClick={handlePlay}
-          disabled={
-            (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
-          }
-          className={processing && !paused ? 'hidden' : ''}
-        >
-          <img src={controlButtonImages.play} />
-        </button>
-        <button
-          id="pauseButton"
-          onClick={handlePause}
-          disabled={!processing || paused}
-          className={!processing || paused ? 'hidden' : ''}
-        >
-          <img src={controlButtonImages.pause} />
-        </button>
-        <button
-          id="stepForwardButton"
-          onClick={handleAdvance}
-          disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-        >
-          <img src={controlButtonImages.stepForward} />
-        </button>
-        <button
-          id="skipForwardButton"
-          onClick={handleGoToLastStep}
-          disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
-        >
-          <img src={controlButtonImages.skipForward} />
-        </button>
+      <div className="controls">
+        <div className="buttons">
+          <button
+            id="skipBackwardButton"
+            onClick={handleGoToFirstStep}
+            disabled={!paused || currentStep.current <= 0}
+          >
+            <img src={controlButtonImages.skipBackward} />
+          </button>
+          <button
+            id="stepBackwardButton"
+            onClick={handleRewind}
+            disabled={!paused || currentStep.current <= 0}
+          >
+            <img src={controlButtonImages.stepBackward} />
+          </button>
+          <button
+            id="stopButton"
+            onClick={handleAbort}
+            disabled={!processing && currentStep.current !== n - 1}
+          >
+            <img src={controlButtonImages.stop} />
+          </button>
+          <button
+            id="playButton"
+            onClick={handlePlay}
+            disabled={
+              (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
+            }
+            className={processing && !paused ? 'hidden' : ''}
+          >
+            <img src={controlButtonImages.play} />
+          </button>
+          <button
+            id="pauseButton"
+            onClick={handlePause}
+            disabled={!processing || paused}
+            className={!processing || paused ? 'hidden' : ''}
+          >
+            <img src={controlButtonImages.pause} />
+          </button>
+          <button
+            id="stepForwardButton"
+            onClick={handleAdvance}
+            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+          >
+            <img src={controlButtonImages.stepForward} />
+          </button>
+          <button
+            id="skipForwardButton"
+            onClick={handleGoToLastStep}
+            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+          >
+            <img src={controlButtonImages.skipForward} />
+          </button>
+        </div>
+        <Slider
+          label="Animation speed (steps/s)"
+          value={speed}
+          units=""
+          min={ANIMATION_SPEED.min}
+          max={ANIMATION_SPEED.max}
+          step={ANIMATION_SPEED.step}
+          handleChange={setSpeed}
+          disabled={!paused}
+        ></Slider>
       </div>
-      <Slider
-        label="Animation speed (steps/s)"
-        value={speed}
-        units=""
-        min={ANIMATION_SPEED.min}
-        max={ANIMATION_SPEED.max}
-        step={ANIMATION_SPEED.step}
-        handleChange={setSpeed}
-        disabled={!paused}
-      ></Slider>
+      <div className="info">
+        <p>
+          Total steps: {currentStep.current ? currentStep.current : '-'} /{' '}
+          {n >= 0 ? n - 1 : '-'}
+        </p>
+        <p>
+          Estimated finish:{' '}
+          {n >= 0
+            ? Math.ceil((n - (currentStep.current + 1)) / speed) + 's'
+            : '-'}
+        </p>
+      </div>
     </div>
   );
 };
