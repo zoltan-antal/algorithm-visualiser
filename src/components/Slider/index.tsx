@@ -23,19 +23,21 @@ const Slider = ({
 }: SliderProps) => {
   return (
     <div className="slider">
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => handleChange(Number(e.target.value))}
-        disabled={disabled}
-      />
-      <p>
-        {label}: {value}
-        {units}
-      </p>
+      <p>{label}</p>
+      <div>
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => handleChange(Number(e.target.value))}
+          disabled={disabled}
+        />
+        <p>
+          {value} {units} / {max} {units}
+        </p>
+      </div>
     </div>
   );
 };
