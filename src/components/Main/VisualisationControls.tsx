@@ -10,7 +10,7 @@ import algorithms from '../../algorithms';
 
 import controlButtonImages from '../../assets/images/controlButtons';
 
-import DELAY from '../../constants/delay.ts';
+import ANIMATION_SPEED from '../../constants/animationSpeed.ts';
 
 import {
   runAlgorithms,
@@ -41,7 +41,7 @@ const VisualisationControls = ({
   setAlgorithmStates,
   setAlgorithmPlacings,
 }: VisualisationControlsProps) => {
-  const [delay, setDelay] = useState(DELAY.default);
+  const [speed, setSpeed] = useState(ANIMATION_SPEED.default);
   const [paused, setPaused] = useState<boolean>(true);
 
   const removeHighlights = () => {
@@ -90,7 +90,7 @@ const VisualisationControls = ({
       algorithmSteps.current,
       currentStep,
       setAlgorithmStates,
-      delay,
+      Math.round(1000 / speed),
       setProcessing
     );
   };
@@ -200,13 +200,13 @@ const VisualisationControls = ({
         </button>
       </div>
       <Slider
-        label="Step delay"
-        value={delay}
-        units="ms"
-        min={DELAY.min}
-        max={DELAY.max}
-        step={DELAY.step}
-        handleChange={setDelay}
+        label="Animation speed (steps/s)"
+        value={speed}
+        units=""
+        min={ANIMATION_SPEED.min}
+        max={ANIMATION_SPEED.max}
+        step={ANIMATION_SPEED.step}
+        handleChange={setSpeed}
         disabled={!paused}
       ></Slider>
     </div>
