@@ -55,7 +55,6 @@ function App() {
       <Header></Header>
       <Aside
         processing={processing}
-        algorithmNames={algorithmNames}
         arraySize={arraySize}
         setArraySize={setArraySize}
         maxValue={maxValue}

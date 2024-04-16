@@ -7,12 +7,12 @@ import ARRAY_SIZE from '../../constants/arraySize.ts';
 import VALUE_RANGE from '../../constants/valueRange.ts';
 
 import algorithms from '../../algorithms';
+import { algorithmNames } from '../../algorithms';
 
 import Slider from '../Slider';
 
 interface AsideProps {
   processing: boolean;
-  algorithmNames: string[];
   arraySize: number;
   setArraySize: React.Dispatch<React.SetStateAction<number>>;
   maxValue: number;
@@ -26,7 +26,6 @@ interface AsideProps {
 
 const Aside = ({
   processing,
-  algorithmNames,
   arraySize,
   setArraySize,
   maxValue,
@@ -43,6 +42,11 @@ const Aside = ({
       <div className="section" id="algorithms-displayed">
         <div className="header">
           <h3 className="title">Algorithms displayed</h3>
+          <button
+            onClick={() => setSelectedAlgorithms(new Set(algorithmNames))}
+          >
+            Select all
+          </button>
         </div>
         <div className="items">
           {algorithmNames.map((algorithmName) => (
