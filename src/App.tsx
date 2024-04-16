@@ -13,7 +13,6 @@ import DELAY from './constants/delay.ts';
 import ARRAY_ORDER_OPTIONS from './constants/arrayOrderOptions.ts';
 
 import controlButtonImages from './assets/images/controlButtons';
-import githubIcon from './assets/images/icons/github.svg';
 
 import AlgorithmChart from './components/AlgorithmChart.tsx';
 import Slider from './components/Slider.tsx';
@@ -25,6 +24,9 @@ import {
   stopAlgorithms,
   stepAlgorithms,
 } from './utils/algorithmsController.ts';
+
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 function App() {
   const [arraySize, setArraySize] = useState(ARRAY_SIZE.default);
@@ -186,10 +188,7 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>Algorithm Visualiser</h1>
-        <nav></nav>
-      </header>
+      <Header></Header>
       <aside>
         <h2>Settings</h2>
         <div className="section" id="algorithms-displayed">
@@ -385,23 +384,7 @@ function App() {
             ))}
         </div>
       </main>
-      <footer>
-        <pre>Built by </pre>
-        <a className="user" href="https://github.com/zoltan-antal">
-          <pre>Zoltan Antal</pre>
-        </a>
-        <pre> </pre>
-        <a href="https://github.com/zoltan-antal">
-          <img src={githubIcon} alt="GitHub" />
-        </a>
-        <pre> | </pre>
-        <a
-          className="repo"
-          href="https://github.com/zoltan-antal/algorithm-visualiser"
-        >
-          Source code
-        </a>
-      </footer>
+      <Footer></Footer>
     </>
   );
 }
