@@ -10,7 +10,6 @@ import StepAlgorithmsMode from './types/StepAlgorithmsMode.ts';
 import ARRAY_SIZE from './constants/arraySize.ts';
 import VALUE_RANGE from './constants/valueRange.ts';
 import DELAY from './constants/delay.ts';
-import ARRAY_ORDER_OPTIONS from './constants/arrayOrderOptions.ts';
 
 import controlButtonImages from './assets/images/controlButtons';
 
@@ -25,8 +24,9 @@ import {
   stepAlgorithms,
 } from './utils/algorithmsController.ts';
 
-import Footer from './components/Footer';
 import Header from './components/Header';
+import Aside from './components/Aside';
+import Footer from './components/Footer';
 
 function App() {
   const [arraySize, setArraySize] = useState(ARRAY_SIZE.default);
@@ -189,107 +189,19 @@ function App() {
   return (
     <>
       <Header></Header>
-      <aside>
-        <h2>Settings</h2>
-        <div className="section" id="algorithms-displayed">
-          <div className="header">
-            <h3 className="title">Algorithms displayed</h3>
-          </div>
-          <div className="items">
-            {algorithmNames.map((algorithmName) => (
-              <label key={algorithmName}>
-                <input
-                  type="checkbox"
-                  checked={Array.from(selectedAlgorithms).includes(
-                    algorithmName
-                  )}
-                  disabled={processing}
-                  onChange={() => {
-                    setSelectedAlgorithms((prev) => {
-                      const updated = new Set(prev);
-                      switch (
-                        Array.from(selectedAlgorithms).includes(algorithmName)
-                      ) {
-                        case true:
-                          updated.delete(algorithmName);
-                          break;
-                        case false:
-                          updated.add(algorithmName);
-                          break;
-                      }
-                      // setNumColumns(calculateNumColumns(updated.size));
-                      // setNumRows(calculateNumRows(updated.size));
-                      return updated;
-                    });
-                  }}
-                />
-                {
-                  algorithms.find(
-                    (algorithm) => algorithm.algorithmName === algorithmName
-                  )!.displayName
-                }
-              </label>
-            ))}
-          </div>
-        </div>
-        <div className="section" id="input-ordering">
-          <div className="header">
-            <h3 className="title">Input ordering</h3>
-            <button onClick={generateArrays} disabled={processing}>
-              Regenerate data
-            </button>
-          </div>
-          <div className="items">
-            {ARRAY_ORDER_OPTIONS.map((arrayOrderOption) => (
-              <label key={arrayOrderOption.name}>
-                <input
-                  type="radio"
-                  onChange={() => setSelectedArrayOrder(arrayOrderOption.name)}
-                  checked={selectedArrayOrder === arrayOrderOption.name}
-                  disabled={processing}
-                />
-                {arrayOrderOption.displayName}
-              </label>
-            ))}
-          </div>
-        </div>
-        <div className="section" id="input-parameters">
-          <div className="header">
-            <h3>Input parameters</h3>
-            <button
-              onClick={() => {
-                setArraySize(ARRAY_SIZE.default);
-                setMaxValue(VALUE_RANGE.default);
-              }}
-              disabled={processing}
-            >
-              Reset defaults
-            </button>
-          </div>
-          <div className="items">
-            <Slider
-              label="Input size"
-              value={arraySize}
-              units=""
-              min={ARRAY_SIZE.min}
-              max={ARRAY_SIZE.max}
-              step={ARRAY_SIZE.step}
-              handleChange={setArraySize}
-              disabled={processing}
-            ></Slider>
-            <Slider
-              label="Value range"
-              value={maxValue}
-              units=""
-              min={VALUE_RANGE.min}
-              max={VALUE_RANGE.max}
-              step={VALUE_RANGE.step}
-              handleChange={setMaxValue}
-              disabled={processing}
-            ></Slider>
-          </div>
-        </div>
-      </aside>
+      <Aside
+        processing={processing}
+        algorithmNames={algorithmNames}
+        arraySize={arraySize}
+        setArraySize={setArraySize}
+        maxValue={maxValue}
+        setMaxValue={setMaxValue}
+        selectedAlgorithms={selectedAlgorithms}
+        setSelectedAlgorithms={setSelectedAlgorithms}
+        selectedArrayOrder={selectedArrayOrder}
+        setSelectedArrayOrder={setSelectedArrayOrder}
+        generateArrays={generateArrays}
+      ></Aside>
       <main>
         <div id="visualisation-controls">
           <div className="items">
