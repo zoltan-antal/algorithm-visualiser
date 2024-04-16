@@ -55,25 +55,30 @@ const VisualisationDisplay = ({
         .filter((algorithm) =>
           Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
         )
-        .map((algorithm) => (
-          <div key={algorithm.algorithmName} className="item">
-            <div className="header">
-              <h2 className="title">{algorithm.displayName}</h2>
-              {algorithmSteps.current[algorithm.algorithmName] &&
-                currentStep.current >=
-                  algorithmSteps.current[algorithm.algorithmName].length -
-                    1 && (
+        .map((algorithm) => {
+          const finished =
+            algorithmSteps.current[algorithm.algorithmName] &&
+            currentStep.current >=
+              algorithmSteps.current[algorithm.algorithmName].length - 1;
+
+          return (
+            <div key={algorithm.algorithmName} className="item">
+              <div className="header">
+                <h2 className="title">{algorithm.displayName}</h2>
+                {finished && (
                   <div className="placing">
                     {algorithmPlacings.indexOf(algorithm.algorithmName) + 1}
                   </div>
                 )}
+              </div>
+              <AlgorithmChart
+                data={algorithmStates[algorithm.algorithmName]}
+                maxValue={maxValue}
+                finished={finished}
+              />
             </div>
-            <AlgorithmChart
-              data={algorithmStates[algorithm.algorithmName]}
-              maxValue={maxValue}
-            />
-          </div>
-        ))}
+          );
+        })}
     </div>
   );
 };

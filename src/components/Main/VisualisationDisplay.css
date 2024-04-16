@@ -18,9 +18,9 @@
       justify-content: space-between;
       align-items: center;
 
-      &:has(.placing)~.chart .recharts-wrapper {
+      /* &:has(.placing)~.chart .recharts-wrapper {
         background-color: honeydew;
-      }
+      } */
     }
 
     .chart {

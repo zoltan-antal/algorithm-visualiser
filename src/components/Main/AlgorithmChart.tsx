@@ -4,14 +4,25 @@ import AlgorithmState from '../../types/AlgorithmState';
 interface AlgorithmChartProps {
   data: AlgorithmState;
   maxValue: number;
+  finished: boolean;
 }
 
 const AlgorithmChart = ({
   data = { array: [], highlights: [] },
   maxValue,
+  finished,
 }: AlgorithmChartProps) => {
   const renderCustomBar = (props: any) => {
     const { index } = props;
+    const fillColour = (() => {
+      if (finished) {
+        return 'green';
+      } else if (data.highlights.includes(index)) {
+        return 'red';
+      } else {
+        return '#8884d8';
+      }
+    })();
 
     return (
       <g>
@@ -20,7 +31,7 @@ const AlgorithmChart = ({
           y={props.y}
           width={props.width}
           height={props.height}
-          fill={data.highlights.includes(index) ? 'red' : '#8884d8'}
+          fill={fillColour}
         />
       </g>
     );
