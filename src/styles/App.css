@@ -3,6 +3,17 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+  font-family: 'Lucida Sans',
+    'Lucida Sans Regular',
+    'Lucida Grande',
+    'Lucida Sans Unicode',
+    Geneva,
+    Verdana,
+    sans-serif;
+
+  a {
+    color: black;
+  }
 }
 
 html {
@@ -131,6 +142,11 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  & img {
+    height: 1rem;
+    filter: invert(80%) sepia(38%) saturate(1%) hue-rotate(6deg) brightness(103%) contrast(92%);
+  }
 }
 
 .slider {
