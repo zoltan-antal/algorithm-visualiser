@@ -1,8 +1,8 @@
 const ARRAY_SIZE = {
-  default: 20,
+  default: 15,
   min: 10,
   max: 50,
-  step: 10,
+  step: 5,
 };
 
 export default ARRAY_SIZE;
