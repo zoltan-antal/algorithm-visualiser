@@ -5,8 +5,20 @@
   align-items: center;
 
   .items {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    gap: 3px;
+
     button {
-      height: 25px;
+      height: 45px;
+
+      &#playButton,
+      &#pauseButton,
+      &#stopButton {
+        height: 55px;
+      }
 
       &:disabled {
         img {

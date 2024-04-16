@@ -153,24 +153,28 @@ const VisualisationControls = ({
     <div id="visualisation-controls">
       <div className="items">
         <button
+          id="skipBackwardButton"
           onClick={handleGoToFirstStep}
           disabled={!paused || currentStep.current <= 0}
         >
           <img src={controlButtonImages.skipBackward} />
         </button>
         <button
+          id="stepBackwardButton"
           onClick={handleRewind}
           disabled={!paused || currentStep.current <= 0}
         >
           <img src={controlButtonImages.stepBackward} />
         </button>
         <button
+          id="stopButton"
           onClick={handleAbort}
           disabled={!processing && currentStep.current !== n - 1}
         >
           <img src={controlButtonImages.stop} />
         </button>
         <button
+          id="playButton"
           onClick={handlePlay}
           disabled={
             (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
@@ -180,6 +184,7 @@ const VisualisationControls = ({
           <img src={controlButtonImages.play} />
         </button>
         <button
+          id="pauseButton"
           onClick={handlePause}
           disabled={!processing || paused}
           className={!processing || paused ? 'hidden' : ''}
@@ -187,12 +192,14 @@ const VisualisationControls = ({
           <img src={controlButtonImages.pause} />
         </button>
         <button
+          id="stepForwardButton"
           onClick={handleAdvance}
           disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
         >
           <img src={controlButtonImages.stepForward} />
         </button>
         <button
+          id="skipForwardButton"
           onClick={handleGoToLastStep}
           disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
         >
