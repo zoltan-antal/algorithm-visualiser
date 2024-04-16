@@ -1,0 +1,27 @@
+#visualisation-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .items {
+    button {
+      height: 25px;
+
+      &:disabled {
+        img {
+          filter: opacity(25%);
+        }
+      }
+
+      &.hidden {
+        display: none;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
