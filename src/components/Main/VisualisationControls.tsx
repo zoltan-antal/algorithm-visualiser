@@ -191,10 +191,7 @@ const VisualisationControls = ({
             ? Math.floor((currentStep.current / (n - 1)) * 100) + '%'
             : '-'}
         </p>
-        <p>
-          Total steps: {n >= 0 ? currentStep.current : '-'} /{' '}
-          {n >= 0 ? n - 1 : '-'}
-        </p>
+        <p>Total steps: {n >= 0 ? `${currentStep.current} / ${n - 1}` : '-'}</p>
         <p>
           Estimated finish:{' '}
           {n >= 0
