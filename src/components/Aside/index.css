@@ -26,6 +26,7 @@ aside {
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
+      gap: 10px;
 
       .title {
         font-size: 1.15rem;
@@ -36,6 +37,7 @@ aside {
         padding: 4px 6px;
         border: 1px solid black;
         border-radius: 4px;
+        flex-grow: 0;
 
         &:hover {
           cursor: pointer;
