@@ -6,8 +6,6 @@ import StepAlgorithmsMode from '../../types/StepAlgorithmsMode.ts';
 import AlgorithmStates from '../../types/AlgorithmStates.ts';
 import AlgorithmSteps from '../../types/AlgorithmSteps.ts';
 
-import algorithms from '../../algorithms';
-
 import controlButtonImages from '../../assets/images/controlButtons';
 
 import ANIMATION_SPEED from '../../constants/animationSpeed.ts';
@@ -21,25 +19,21 @@ import {
 import Slider from '../Slider';
 
 interface VisualisationControlsProps {
-  selectedAlgorithms: Set<string>;
+  processing: boolean;
   currentStep: React.MutableRefObject<number>;
   algorithmSteps: React.MutableRefObject<AlgorithmSteps>;
-  processing: boolean;
   setProcessing: React.Dispatch<React.SetStateAction<boolean>>;
-  algorithmStates: AlgorithmStates;
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>;
-  setAlgorithmPlacings: React.Dispatch<React.SetStateAction<string[]>>;
+  calculateAlgorithms: () => void;
 }
 
 const VisualisationControls = ({
-  selectedAlgorithms,
+  processing,
   currentStep,
   algorithmSteps,
-  processing,
   setProcessing,
-  algorithmStates,
   setAlgorithmStates,
-  setAlgorithmPlacings,
+  calculateAlgorithms,
 }: VisualisationControlsProps) => {
   const [speed, setSpeed] = useState(ANIMATION_SPEED.default);
   const [paused, setPaused] = useState<boolean>(true);
@@ -52,33 +46,6 @@ const VisualisationControls = ({
       );
       return updatedStates;
     });
-  };
-
-  const calculateAlgorithms = () => {
-    if (
-      Object.keys(algorithmSteps.current).toSorted().toString() ===
-      Array.from(selectedAlgorithms).toSorted().toString()
-    ) {
-      return;
-    }
-
-    algorithmSteps.current = Object.fromEntries(
-      algorithms
-        .filter((algorithm) =>
-          Array.from(selectedAlgorithms).includes(algorithm.algorithmName)
-        )
-        .map((algorithm) => {
-          const arr = algorithm(algorithmStates[algorithm.algorithmName].array);
-          arr.unshift({ ...arr[0], highlights: [] });
-          arr.push({ ...arr[arr.length - 1], highlights: [] });
-          return [algorithm.algorithmName, arr];
-        })
-    );
-    setAlgorithmPlacings(
-      Object.entries(algorithmSteps.current)
-        .sort((a, b) => a[1].length - b[1].length)
-        .map(([key]) => key)
-    );
   };
 
   const n = Math.max(
@@ -144,7 +111,6 @@ const VisualisationControls = ({
   };
 
   const handleGoToFirstStep = () => {
-    // setProcessing(true);
     setProcessing(false);
     callStepAlgorithms('firstStep');
   };
@@ -226,7 +192,7 @@ const VisualisationControls = ({
             : '-'}
         </p>
         <p>
-          Total steps: {currentStep.current ? currentStep.current : '-'} /{' '}
+          Total steps: {n >= 0 ? currentStep.current : '-'} /{' '}
           {n >= 0 ? n - 1 : '-'}
         </p>
         <p>
