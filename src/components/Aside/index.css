@@ -27,6 +27,10 @@ aside {
       justify-content: space-between;
       align-items: flex-start;
 
+      .title {
+        font-size: 1.15rem;
+      }
+
       button {
         font-size: 0.9rem;
         padding: 4px 6px;

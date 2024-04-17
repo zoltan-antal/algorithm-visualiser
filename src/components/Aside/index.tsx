@@ -105,7 +105,7 @@ const Aside = ({
       </div>
       <div className="section" id="input-parameters">
         <div className="header">
-          <h3>Input parameters</h3>
+          <h3 className="title">Input parameters</h3>
           <button
             onClick={() => {
               setArraySize(ARRAY_SIZE.default);
