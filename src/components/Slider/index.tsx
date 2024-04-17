@@ -22,8 +22,8 @@ const Slider = ({
   disabled,
 }: SliderProps) => {
   return (
-    <div className="slider">
-      <p className="title">{label}</p>
+    <label className="slider">
+      {label}
       <div className="display">
         <input
           type="range"
@@ -38,7 +38,7 @@ const Slider = ({
           {value} {units} / {max} {units}
         </p>
       </div>
-    </div>
+    </label>
   );
 };
 

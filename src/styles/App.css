@@ -25,7 +25,7 @@ html {
   height: 100vh;
   display: grid;
   grid-template-columns: clamp(300px, 20vw, 450px) 1fr;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header"
     "aside main"

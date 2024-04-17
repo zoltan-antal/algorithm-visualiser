@@ -10,6 +10,8 @@
     justify-content: flex-start;
     align-items: center;
 
+    gap: 10px;
+
     .buttons {
       display: flex;
       flex-direction: row;
@@ -64,5 +66,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
+
+    font-size: 0.95rem;
   }
 }

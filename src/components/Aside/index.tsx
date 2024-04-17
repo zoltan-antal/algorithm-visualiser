@@ -38,7 +38,7 @@ const Aside = ({
 }: AsideProps) => {
   return (
     <aside>
-      <h2>Settings</h2>
+      <h2 className="title">Settings</h2>
       <div className="section" id="algorithms-displayed">
         <div className="header">
           <h3 className="title">Algorithms displayed</h3>
@@ -50,7 +50,7 @@ const Aside = ({
         </div>
         <div className="items">
           {algorithmNames.map((algorithmName) => (
-            <label key={algorithmName}>
+            <label key={algorithmName} className="item">
               <input
                 type="checkbox"
                 checked={Array.from(selectedAlgorithms).includes(algorithmName)}

@@ -1,10 +1,14 @@
 footer {
   grid-area: footer;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+
   background-color: cornflowerblue;
+  padding: 7px 0 3px;
+  font-size: 0.96rem;
 
   & img {
     height: 1rem;
