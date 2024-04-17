@@ -19,25 +19,26 @@ aside {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    gap: 4px;
+    gap: 8px;
 
     .header {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
+      gap: 15px;
 
       .title {
         font-size: 1.15rem;
       }
 
       button {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         padding: 4px 6px;
         border: 1px solid black;
         border-radius: 4px;
-        flex-grow: 0;
+        /* flex-basis: 0; */
+        flex-shrink: 0;
 
         &:hover {
           cursor: pointer;
