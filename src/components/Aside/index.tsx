@@ -44,6 +44,7 @@ const Aside = ({
           <h3 className="title">Algorithms displayed</h3>
           <button
             onClick={() => setSelectedAlgorithms(new Set(algorithmNames))}
+            disabled={processing}
           >
             Select all
           </button>
