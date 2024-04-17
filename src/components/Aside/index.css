@@ -16,7 +16,18 @@ aside {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
+
+      button {
+        font-size: 0.9rem;
+        padding: 4px 6px;
+        border: 1px solid black;
+        border-radius: 4px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .items {
