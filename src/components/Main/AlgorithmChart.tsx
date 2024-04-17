@@ -16,11 +16,11 @@ const AlgorithmChart = ({
     const { index } = props;
     const fillColour = (() => {
       if (finished) {
-        return 'green';
+        return '#16a34a';
       } else if (data.highlights.includes(index)) {
-        return 'red';
+        return '#f97316';
       } else {
-        return '#8884d8';
+        return '#0284c7';
       }
     })();
 

@@ -16,6 +16,18 @@ html {
   overflow: hidden;
 }
 
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input[type='radio'],
+input[type='checkbox'],
+input[type='range'] {
+  accent-color: #0369a1;
+}
+
 #root {
   height: 100vh;
   display: grid;

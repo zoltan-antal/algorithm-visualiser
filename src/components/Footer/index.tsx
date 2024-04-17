@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <pre>Built by </pre>
       <a className="user" href="https://github.com/zoltan-antal">
-        <pre>Zoltan Antal</pre>
+        Zoltan Antal
       </a>
       <pre> </pre>
       <a href="https://github.com/zoltan-antal">
