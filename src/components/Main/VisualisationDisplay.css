@@ -11,12 +11,17 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+    gap: 8px;
 
     .header {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+
+      .placing {
+        font-size: 1.1rem;
+      }
 
       /* &:has(.placing)~.chart .recharts-wrapper {
         background-color: honeydew;
