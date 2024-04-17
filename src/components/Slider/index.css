@@ -5,7 +5,7 @@
   align-items: center;
   gap: 20px;
 
-  div {
+  .display {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

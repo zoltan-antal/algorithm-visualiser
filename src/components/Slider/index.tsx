@@ -23,8 +23,8 @@ const Slider = ({
 }: SliderProps) => {
   return (
     <div className="slider">
-      <p>{label}</p>
-      <div>
+      <p className="title">{label}</p>
+      <div className="display">
         <input
           type="range"
           min={min}

@@ -42,6 +42,18 @@
         }
       }
     }
+
+    .slider {
+      /* align-self: stretch; */
+
+      .display {
+        flex-grow: 1;
+
+        input {
+          flex-grow: 1;
+        }
+      }
+    }
   }
 
   .info {
