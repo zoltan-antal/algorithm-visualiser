@@ -198,7 +198,16 @@ const VisualisationControls = ({
         <p>
           Estimated finish:{' '}
           {n >= 0
-            ? Math.ceil((n - (currentStep.current + 1)) / speed) + 's'
+            ? (() => {
+                const t = Math.ceil((n - (currentStep.current + 1)) / speed);
+                if (t >= 60) {
+                  const minutes = Math.floor(t / 60);
+                  const seconds = t - 60 * minutes;
+                  return `${minutes}m ${seconds}s`;
+                } else {
+                  return `${t}s`;
+                }
+              })()
             : '-'}
         </p>
       </div>
