@@ -1,6 +1,8 @@
 import './index.css';
 
 import ArrayOrder from '../../types/ArrayOrder.ts';
+import AlgorithmStates from '../../types/AlgorithmStates.ts';
+import AlgorithmSteps from '../../types/AlgorithmSteps.ts';
 
 import ARRAY_ORDER_OPTIONS from '../../constants/arrayOrderOptions.ts';
 import ARRAY_SIZE from '../../constants/arraySize.ts';
@@ -13,6 +15,9 @@ import Slider from '../Slider';
 
 interface AsideProps {
   processing: boolean;
+  currentStep: React.MutableRefObject<number>;
+  algorithmStates: AlgorithmStates;
+  algorithmSteps: React.MutableRefObject<AlgorithmSteps>;
   arraySize: number;
   setArraySize: React.Dispatch<React.SetStateAction<number>>;
   maxValue: number;
@@ -26,6 +31,9 @@ interface AsideProps {
 
 const Aside = ({
   processing,
+  currentStep,
+  algorithmStates,
+  algorithmSteps,
   arraySize,
   setArraySize,
   maxValue,
@@ -71,6 +79,13 @@ const Aside = ({
                     }
                     return updated;
                   });
+                  Object.keys(algorithmSteps.current).forEach(
+                    (algorithmName) => {
+                      algorithmStates[algorithmName] =
+                        algorithmSteps.current[algorithmName][0];
+                    }
+                  );
+                  currentStep.current = 0;
                 }}
               />
               {

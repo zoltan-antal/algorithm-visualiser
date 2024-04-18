@@ -62,6 +62,9 @@ function App() {
       <Header darkMode={darkMode} setDarkMode={setDarkMode}></Header>
       <Aside
         processing={processing}
+        currentStep={currentStep}
+        algorithmStates={algorithmStates}
+        algorithmSteps={algorithmSteps}
         arraySize={arraySize}
         setArraySize={setArraySize}
         maxValue={maxValue}
