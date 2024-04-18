@@ -33,8 +33,10 @@ function App() {
   const [processing, setProcessing] = useState<boolean>(false);
 
   const [darkMode, setDarkMode] = useState<boolean>(
-    window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+    localStorage.getItem('algorithmVisualiserDarkMode') !== null
+      ? JSON.parse(localStorage.getItem('algorithmVisualiserDarkMode')!)
+      : window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches
   );
 
   const generateArrays = useCallback(() => {

@@ -20,7 +20,13 @@ const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
             <input
               type="checkbox"
               checked={darkMode}
-              onChange={(e) => setDarkMode(e.target.checked)}
+              onChange={(e) => {
+                setDarkMode(e.target.checked);
+                localStorage.setItem(
+                  'algorithmVisualiserDarkMode',
+                  JSON.stringify(e.target.checked)
+                );
+              }}
             ></input>
             <span className="slider round"></span>
           </label>
