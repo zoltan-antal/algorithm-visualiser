@@ -64,6 +64,14 @@ html {
   --control-button-hover: #0c4a6e;
 }
 
+/* Dummy settings to make dark theme extensions detect dark theme */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000;
+    color: #ffffff;
+  }
+}
+
 button {
   &:hover {
     cursor: pointer;
