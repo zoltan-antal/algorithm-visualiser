@@ -1,1 +1,8 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0,0,256,256"><g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="translate(-32.81264,79.87554) rotate(-30) scale(10.66667,10.66667)"><path d="M2,12c-0.00019,3.18447 1.51633,6.17865 4.08368,8.06269c2.56735,1.88404 5.87853,2.43266 8.91632,1.47731c-4.167,-1.30953 -7.00193,-5.17208 -7.00193,-9.54c0,-4.36792 2.83493,-8.23047 7.00193,-9.54c-3.0378,-0.95534 -6.34898,-0.40672 -8.91632,1.47731c-2.56735,1.88404 -4.08387,4.87821 -4.08368,8.06269z"></path></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" width="24px" height="24px" viewBox="0,0,256,256" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal" transform="matrix(1, 0, 0, 1, -16, 0)">
+    <g transform="translate(-32.81264,79.87554) rotate(-30) scale(10.66667,10.66667)">
+      <path d="M2,12c-0.00019,3.18447 1.51633,6.17865 4.08368,8.06269c2.56735,1.88404 5.87853,2.43266 8.91632,1.47731c-4.167,-1.30953 -7.00193,-5.17208 -7.00193,-9.54c0,-4.36792 2.83493,-8.23047 7.00193,-9.54c-3.0378,-0.95534 -6.34898,-0.40672 -8.91632,1.47731c-2.56735,1.88404 -4.08387,4.87821 -4.08368,8.06269z"/>
+    </g>
+  </g>
+</svg>
