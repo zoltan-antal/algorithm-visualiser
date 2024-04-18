@@ -7,7 +7,7 @@ aside {
   align-items: stretch;
   gap: 20px;
 
-  background-color: #e0f2fe;
+  background-color: var(--medium-background);
   padding: 15px 15px;
 
   >.title {
@@ -34,27 +34,24 @@ aside {
       }
 
       button {
-        font-size: 0.85rem;
-        padding: 5px 6px;
         /* flex-basis: 0; */
         flex-shrink: 0;
 
-        /* border: 1px solid black;
-        background-color: white;
-        color: black; */
+        font-size: 0.85rem;
+        padding: 5px 6px;
         border: none;
         border-radius: 0;
-        background-color: #075985;
-        color: white;
+
+        background-color: var(--button-background);
+        color: var(--button-text);
 
         &:hover {
-          background-color: #0c4a6e;
+          background-color: var(--button-hover);
         }
 
         &:disabled {
-          color: #94a3b8;
-          background-color: #e2e8f0;
-          border-color: #94a3b8;
+          background-color: var(--button-disabled-background);
+          color: var(--button-disabled-text);
         }
       }
     }

@@ -1,5 +1,6 @@
 import { BarChart, Bar, YAxis, ResponsiveContainer } from 'recharts';
 import AlgorithmState from '../../types/AlgorithmState';
+import CHART_COLOURS from '../../constants/chartColours';
 
 interface AlgorithmChartProps {
   data: AlgorithmState;
@@ -16,11 +17,11 @@ const AlgorithmChart = ({
     const { index } = props;
     const fillColour = (() => {
       if (finished) {
-        return '#16a34a';
+        return CHART_COLOURS.finished;
       } else if (data.highlights.includes(index)) {
-        return '#f97316';
+        return CHART_COLOURS.highlight;
       } else {
-        return '#0284c7';
+        return CHART_COLOURS.default;
       }
     })();
 

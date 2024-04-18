@@ -7,6 +7,6 @@ main {
   align-items: stretch;
   gap: 30px;
 
-  background-color: white;
+  background-color: var(--light-background);
   padding: 15px 25px 25px;
 }

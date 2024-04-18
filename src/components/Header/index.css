@@ -6,14 +6,14 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  background-color: #075985;
+  background-color: var(--dark-background);
   padding: 15px 15px;
 
   .title {
     font-size: 2.2rem;
 
     a {
-      color: white;
+      color: var(--white-text);
     }
   }
 }

@@ -16,6 +16,23 @@ html {
   overflow: hidden;
 }
 
+:root {
+  --dark-background: #075985;
+  --medium-background: #e0f2fe;
+  --light-background: white;
+  --light-text: #f0f9ff;
+  --light-text-hover: #cbd5e1;
+  --white-text: white;
+  --input-accent-color: #0369a1;
+  --button-background: #075985;
+  --button-text: white;
+  --button-hover: #0c4a6e;
+  --button-disabled-background: #e2e8f0;
+  --button-disabled-text: #94a3b8;
+  --control-button-background: #0c4a6e;
+  --control-button-hover: #082f49;
+}
+
 button {
   &:hover {
     cursor: pointer;
@@ -25,7 +42,7 @@ button {
 input[type='radio'],
 input[type='checkbox'],
 input[type='range'] {
-  accent-color: #0369a1;
+  accent-color: var(--input-accent-color);
 }
 
 #root {
