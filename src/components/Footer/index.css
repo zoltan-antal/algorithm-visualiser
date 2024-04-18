@@ -12,14 +12,14 @@ footer {
 
   pre,
   a {
-    color: var(--light-text);
+    color: var(--medium-text);
   }
 
   a {
     text-decoration: underline;
 
     &:hover {
-      color: var(--light-text-hover);
+      color: var(--medium-text-hover);
     }
   }
 

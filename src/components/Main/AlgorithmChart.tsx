@@ -6,22 +6,36 @@ interface AlgorithmChartProps {
   data: AlgorithmState;
   maxValue: number;
   finished: boolean;
+  darkMode: boolean;
 }
 
 const AlgorithmChart = ({
   data = { array: [], highlights: [] },
   maxValue,
   finished,
+  darkMode,
 }: AlgorithmChartProps) => {
   const renderCustomBar = (props: any) => {
     const { index } = props;
     const fillColour = (() => {
-      if (finished) {
-        return CHART_COLOURS.finished;
-      } else if (data.highlights.includes(index)) {
-        return CHART_COLOURS.highlight;
-      } else {
-        return CHART_COLOURS.default;
+      switch (darkMode) {
+        case false:
+          if (finished) {
+            return CHART_COLOURS.light.finished;
+          } else if (data.highlights.includes(index)) {
+            return CHART_COLOURS.light.highlight;
+          } else {
+            return CHART_COLOURS.light.default;
+          }
+
+        case true:
+          if (finished) {
+            return CHART_COLOURS.dark.finished;
+          } else if (data.highlights.includes(index)) {
+            return CHART_COLOURS.dark.highlight;
+          } else {
+            return CHART_COLOURS.dark.default;
+          }
       }
     })();
 

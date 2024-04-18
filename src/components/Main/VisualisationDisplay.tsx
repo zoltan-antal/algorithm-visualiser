@@ -17,6 +17,7 @@ interface VisualisationDisplayProps {
   selectedAlgorithms: Set<string>;
   algorithmSteps: React.MutableRefObject<AlgorithmSteps>;
   algorithmStates: AlgorithmStates;
+  darkMode: boolean;
 }
 
 const VisualisationDisplay = ({
@@ -26,6 +27,7 @@ const VisualisationDisplay = ({
   selectedAlgorithms,
   algorithmSteps,
   algorithmStates,
+  darkMode,
 }: VisualisationDisplayProps) => {
   const [numColumns, setNumColumns] = useState(3);
   const [numRows, setNumRows] = useState(2);
@@ -67,17 +69,18 @@ const VisualisationDisplay = ({
               <div className="header">
                 <h2 className="title">{algorithm.displayName}</h2>
                 {finished && (
-                  <div className="placing">
+                  <p className="placing">
                     {getOrdinalNumber(
                       algorithmPlacings.indexOf(algorithm.algorithmName) + 1
                     )}
-                  </div>
+                  </p>
                 )}
               </div>
               <AlgorithmChart
                 data={algorithmStates[algorithm.algorithmName]}
                 maxValue={maxValue}
                 finished={finished}
+                darkMode={darkMode}
               />
             </div>
           );

@@ -4,10 +4,20 @@
   padding: 0;
   text-decoration: none;
   font-family: Helvetica, Arial, sans-serif;
+}
 
-  a {
-    color: black;
-  }
+p,
+pre,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+a,
+label {
+  color: var(--dark-text);
 }
 
 html {
@@ -16,13 +26,14 @@ html {
   overflow: hidden;
 }
 
-:root {
+:root:has(.lightTheme) {
   --dark-background: #075985;
   --medium-background: #e0f2fe;
   --light-background: white;
-  --light-text: #f0f9ff;
-  --light-text-hover: #cbd5e1;
+  --medium-text: #f0f9ff;
+  --medium-text-hover: #cbd5e1;
   --white-text: white;
+  --dark-text: black;
   --input-accent-color: #0369a1;
   --button-background: #075985;
   --button-text: white;
@@ -31,6 +42,26 @@ html {
   --button-disabled-text: #94a3b8;
   --control-button-background: #0c4a6e;
   --control-button-hover: #082f49;
+}
+
+:root:has(.darkTheme) {
+  --dark-background: #075985;
+  /* --medium-background: #34343a;
+  --light-background: #27272a; */
+  --medium-background: #353535;
+  --light-background: #262626;
+  --medium-text: #f0f9ff;
+  --medium-text-hover: #cbd5e1;
+  --white-text: white;
+  --dark-text: white;
+  --input-accent-color: #0369a1;
+  --button-background: #075985;
+  --button-text: white;
+  --button-hover: #0c4a6e;
+  --button-disabled-background: #737373;
+  --button-disabled-text: #404040;
+  --control-button-background: #075985;
+  --control-button-hover: #0c4a6e;
 }
 
 button {

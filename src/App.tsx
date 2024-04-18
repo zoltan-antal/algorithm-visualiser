@@ -32,6 +32,11 @@ function App() {
   const [algorithmStates, setAlgorithmStates] = useState<AlgorithmStates>({});
   const [processing, setProcessing] = useState<boolean>(false);
 
+  const [darkMode, setDarkMode] = useState<boolean>(
+    window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
+
   const generateArrays = useCallback(() => {
     const array = generateArray(arraySize, 1, maxValue, selectedArrayOrder);
     setAlgorithmStates(
@@ -52,7 +57,7 @@ function App() {
 
   return (
     <>
-      <Header></Header>
+      <Header darkMode={darkMode} setDarkMode={setDarkMode}></Header>
       <Aside
         processing={processing}
         arraySize={arraySize}
@@ -74,6 +79,7 @@ function App() {
         setProcessing={setProcessing}
         algorithmStates={algorithmStates}
         setAlgorithmStates={setAlgorithmStates}
+        darkMode={darkMode}
       ></Main>
       <Footer></Footer>
     </>
