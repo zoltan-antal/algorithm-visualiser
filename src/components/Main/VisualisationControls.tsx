@@ -67,6 +67,7 @@ const VisualisationControls = ({
       algorithmSteps.current,
       currentStep,
       setAlgorithmStates,
+      setProcessing,
       mode
     );
   };

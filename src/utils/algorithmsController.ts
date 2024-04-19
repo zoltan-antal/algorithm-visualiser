@@ -47,6 +47,7 @@ const stepAlgorithms = (
   algorithmSteps: AlgorithmSteps,
   currentStep: React.MutableRefObject<number>,
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
+  setProcessing: React.Dispatch<React.SetStateAction<boolean>>,
   mode: StepAlgorithmsMode
 ) => {
   const n = Math.max(
@@ -81,6 +82,10 @@ const stepAlgorithms = (
     });
     return updatedStates;
   });
+
+  if (currentStep.current === n - 1) {
+    setProcessing(false);
+  }
 };
 
 export { runAlgorithms, stopAlgorithms, stepAlgorithms };
