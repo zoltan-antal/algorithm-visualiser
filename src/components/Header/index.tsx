@@ -15,7 +15,7 @@ const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
       </h1>
       <nav>
         <div className="dark-mode-switch">
-          <img src={lightModeIcon} alt="Light mode" />
+          <img src={lightModeIcon} alt="light mode" />
           <label className="switch">
             <input
               type="checkbox"
