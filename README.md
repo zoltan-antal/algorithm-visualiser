@@ -13,6 +13,7 @@ The visualisation is enhanced with interactive control buttons, allowing users t
 - Side-by-side visualisation of sorting algorithms
 - Interactive control buttons
 - Customisable input arrays
+- Dark mode and high-contrast (colourblind-friendly) mode
 
 ## Technologies used
 
@@ -32,7 +33,6 @@ Features and improvements planned for future releases:
 - **Additional algorithm categories**: Incorporate a wider range of algorithms beyond sorting algorithms, such as pathfinding algorithms.
 - **Performance optimisations**: Optimise performance when handling larger input sizes and higher animation speeds in order to provide a smooth user experience across different devices and browsers.
 - **Mobile support**: Enhance the app to provide a responsive design, ensuring compatibility and usability on mobile devices.
-- **Accessibility improvements**: Enhance accessibility features to ensure that the app is usable by individuals with disabilities.
 
 ## License
 
