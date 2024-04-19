@@ -42,12 +42,11 @@ html {
   --button-disabled-text: #94a3b8;
   --control-button-background: #0c4a6e;
   --control-button-hover: #082f49;
+  --slider-background: #94a3b8;
 }
 
 :root:has(.darkTheme) {
   --dark-background: #075985;
-  /* --medium-background: #34343a;
-  --light-background: #27272a; */
   --medium-background: #353535;
   --light-background: #262626;
   --medium-text: #f0f9ff;
@@ -62,6 +61,19 @@ html {
   --button-disabled-text: #404040;
   --control-button-background: #075985;
   --control-button-hover: #0c4a6e;
+  --slider-background: #94a3b8;
+
+  &:has(.highContrastTheme) {
+    --medium-background: #262626;
+    --light-background: black;
+    --input-accent-color: #38bdf8;
+    --button-background: #0284c7;
+    --button-hover: #0369a1;
+    --button-disabled-background: #a3a3a3;
+    --button-disabled-text: #525252;
+    --control-button-background: #0284c7;
+    --control-button-hover: #0369a1;
+  }
 }
 
 /* Dummy settings to make dark theme extensions detect dark theme */
@@ -75,6 +87,10 @@ html {
 button {
   &:hover {
     cursor: pointer;
+
+    &:disabled {
+      cursor: auto;
+    }
   }
 }
 
@@ -82,6 +98,36 @@ input[type='radio'],
 input[type='checkbox'],
 input[type='range'] {
   accent-color: var(--input-accent-color);
+}
+
+[data-tooltip] {
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    background-color: white;
+    color: black;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 6px;
+    position: absolute;
+    text-align: center;
+    text-wrap: nowrap;
+    bottom: 0px;
+    left: 50%;
+    content: attr(data-tooltip);
+    transform: translate(-50%, 110%) scale(0);
+    transform-origin: top;
+    transition: 0.14s;
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(0, 0, 0, .05);
+  }
+
+  &:hover::after {
+    display: block;
+    transform: translate(-50%, 110%) scale(1);
+  }
 }
 
 #root {

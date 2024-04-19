@@ -18,6 +18,7 @@ interface VisualisationDisplayProps {
   algorithmSteps: React.MutableRefObject<AlgorithmSteps>;
   algorithmStates: AlgorithmStates;
   darkMode: boolean;
+  highContrastMode: boolean;
 }
 
 const VisualisationDisplay = ({
@@ -28,6 +29,7 @@ const VisualisationDisplay = ({
   algorithmSteps,
   algorithmStates,
   darkMode,
+  highContrastMode,
 }: VisualisationDisplayProps) => {
   const [numColumns, setNumColumns] = useState(3);
   const [numRows, setNumRows] = useState(2);
@@ -81,6 +83,7 @@ const VisualisationDisplay = ({
                 maxValue={maxValue}
                 finished={finished}
                 darkMode={darkMode}
+                highContrastMode={highContrastMode}
               />
             </div>
           );

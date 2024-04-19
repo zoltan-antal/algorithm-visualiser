@@ -7,6 +7,7 @@ interface AlgorithmChartProps {
   maxValue: number;
   finished: boolean;
   darkMode: boolean;
+  highContrastMode: boolean;
 }
 
 const AlgorithmChart = ({
@@ -14,28 +15,43 @@ const AlgorithmChart = ({
   maxValue,
   finished,
   darkMode,
+  highContrastMode,
 }: AlgorithmChartProps) => {
   const renderCustomBar = (props: any) => {
     const { index } = props;
     const fillColour = (() => {
-      switch (darkMode) {
-        case false:
-          if (finished) {
-            return CHART_COLOURS.light.finished;
-          } else if (data.highlights.includes(index)) {
-            return CHART_COLOURS.light.highlight;
-          } else {
-            return CHART_COLOURS.light.default;
-          }
-
-        case true:
-          if (finished) {
-            return CHART_COLOURS.dark.finished;
-          } else if (data.highlights.includes(index)) {
-            return CHART_COLOURS.dark.highlight;
-          } else {
-            return CHART_COLOURS.dark.default;
-          }
+      if (!darkMode && !highContrastMode) {
+        if (finished) {
+          return CHART_COLOURS.light.normal.finished;
+        } else if (data.highlights.includes(index)) {
+          return CHART_COLOURS.light.normal.highlight;
+        } else {
+          return CHART_COLOURS.light.normal.default;
+        }
+      } else if (!darkMode && highContrastMode) {
+        if (finished) {
+          return CHART_COLOURS.light.highContrast.finished;
+        } else if (data.highlights.includes(index)) {
+          return CHART_COLOURS.light.highContrast.highlight;
+        } else {
+          return CHART_COLOURS.light.highContrast.default;
+        }
+      } else if (darkMode && !highContrastMode) {
+        if (finished) {
+          return CHART_COLOURS.dark.normal.finished;
+        } else if (data.highlights.includes(index)) {
+          return CHART_COLOURS.dark.normal.highlight;
+        } else {
+          return CHART_COLOURS.dark.normal.default;
+        }
+      } else if (darkMode && highContrastMode) {
+        if (finished) {
+          return CHART_COLOURS.dark.highContrast.finished;
+        } else if (data.highlights.includes(index)) {
+          return CHART_COLOURS.dark.highContrast.highlight;
+        } else {
+          return CHART_COLOURS.dark.highContrast.default;
+        }
       }
     })();
 

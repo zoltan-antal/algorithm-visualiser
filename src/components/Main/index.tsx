@@ -20,6 +20,7 @@ interface MainProps {
   algorithmStates: AlgorithmStates;
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>;
   darkMode: boolean;
+  highContrastMode: boolean;
 }
 
 const Main = ({
@@ -32,6 +33,7 @@ const Main = ({
   algorithmStates,
   setAlgorithmStates,
   darkMode,
+  highContrastMode,
 }: MainProps) => {
   const [algorithmPlacings, setAlgorithmPlacings] = useState<string[]>([]);
 
@@ -87,6 +89,7 @@ const Main = ({
         algorithmSteps={algorithmSteps}
         algorithmStates={algorithmStates}
         darkMode={darkMode}
+        highContrastMode={highContrastMode}
       ></VisualisationDisplay>
     </main>
   );

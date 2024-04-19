@@ -38,6 +38,9 @@ function App() {
       : window.matchMedia &&
           window.matchMedia('(prefers-color-scheme: dark)').matches
   );
+  const [highContrastMode, setHighContrastMode] = useState<boolean>(
+    !!JSON.parse(localStorage.getItem('algorithmVisualiserHighContrastMode')!)
+  );
 
   const generateArrays = useCallback(() => {
     const array = generateArray(arraySize, 1, maxValue, selectedArrayOrder);
@@ -59,7 +62,12 @@ function App() {
 
   return (
     <>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode}></Header>
+      <Header
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        highContrastMode={highContrastMode}
+        setHighContrastMode={setHighContrastMode}
+      ></Header>
       <Aside
         processing={processing}
         currentStep={currentStep}
@@ -85,6 +93,7 @@ function App() {
         algorithmStates={algorithmStates}
         setAlgorithmStates={setAlgorithmStates}
         darkMode={darkMode}
+        highContrastMode={highContrastMode}
       ></Main>
       <Footer></Footer>
     </>
