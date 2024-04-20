@@ -4,7 +4,7 @@ const ARRAY_ORDER_OPTIONS: ArrayOrderOption[] = [
   { name: 'unsorted', displayName: 'Unsorted' },
   { name: 'sorted', displayName: 'Sorted' },
   { name: 'nearlySorted', displayName: 'Nearly sorted' },
-  { name: 'reversed', displayName: 'Reversed' },
+  { name: 'reversed', displayName: 'Reverse-sorted' },
   { name: 'equal', displayName: 'Equal elements' },
 ];
 
