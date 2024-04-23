@@ -84,21 +84,20 @@ const Header = ({
           </label>
           <img src={darkModeIcon} alt="dark mode" />
         </div>
-        <div id="dark-mode-button">
-          <button
-            data-tooltip={`${darkMode ? 'Light' : 'Dark'} mode`}
-            onClick={() => {
-              setDarkMode((val) => !val);
-              localStorage.setItem(
-                'algorithmVisualiserDarkMode',
-                JSON.stringify(!darkMode)
-              );
-            }}
-          >
-            {darkMode && <img src={lightModeIcon} alt="light mode" />}
-            {!darkMode && <img src={darkModeIcon} alt="dark mode" />}
-          </button>
-        </div>
+        <button
+          id="dark-mode-button"
+          data-tooltip={`${darkMode ? 'Light' : 'Dark'} mode`}
+          onClick={() => {
+            setDarkMode((val) => !val);
+            localStorage.setItem(
+              'algorithmVisualiserDarkMode',
+              JSON.stringify(!darkMode)
+            );
+          }}
+        >
+          {darkMode && <img src={lightModeIcon} alt="light mode" />}
+          {!darkMode && <img src={darkModeIcon} alt="dark mode" />}
+        </button>
       </nav>
     </header>
   );
