@@ -27,10 +27,6 @@
         }
       }
 
-      /* &:has(.placing)~.chart .recharts-wrapper {
-        background-color: honeydew;
-      } */
-
       @media only screen and (max-width: 768px) {
         flex-direction: column;
         justify-content: flex-start;

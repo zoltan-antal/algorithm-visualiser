@@ -53,10 +53,6 @@ header {
         }
 
         &.on {
-          /* img {
-          filter: invert(92%) sepia(67%) saturate(1502%) hue-rotate(350deg) brightness(102%) contrast(110%);
-        } */
-
           div {
             color: yellow;
           }

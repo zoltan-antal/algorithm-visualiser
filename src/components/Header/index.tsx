@@ -4,9 +4,6 @@ import menuOpenIcon from '../../assets/images/icons/menu.svg';
 import menuCloseIcon from '../../assets/images/icons/close.svg';
 import lightModeIcon from '../../assets/images/icons/sun.svg';
 import darkModeIcon from '../../assets/images/icons/moon.svg';
-// import highContrastModeOffIcon from '../../assets/images/icons/lightbulb-off.svg';
-// import highContrastModeOnIcon from '../../assets/images/icons/lightbulb-on.svg';
-// import highContrastModeIcon from '../../assets/images/icons/lightbulb-on-50.svg';
 
 interface HeaderProps {
   darkMode: boolean;

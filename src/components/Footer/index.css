@@ -28,8 +28,4 @@ footer {
     /* white filter */
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(102%) contrast(102%);
   }
-
-  @media only screen and (max-width: 768px) {
-    /* font-size: 0.8rem; */
-  }
 }

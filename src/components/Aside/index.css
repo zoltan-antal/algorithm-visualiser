@@ -34,7 +34,6 @@ aside {
       }
 
       button {
-        /* flex-basis: 0; */
         flex-shrink: 0;
 
         font-size: 0.85rem;
