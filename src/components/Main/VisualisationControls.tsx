@@ -179,7 +179,13 @@ const VisualisationControls = ({
           value={speed}
           units=""
           min={ANIMATION_SPEED.min}
-          max={ANIMATION_SPEED.max}
+          max={
+            !/Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              navigator.userAgent
+            )
+              ? ANIMATION_SPEED.max
+              : Math.min(40, ANIMATION_SPEED.max)
+          }
           step={ANIMATION_SPEED.step}
           handleChange={setSpeed}
           disabled={!paused}

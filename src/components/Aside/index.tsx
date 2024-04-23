@@ -137,7 +137,13 @@ const Aside = ({
             value={arraySize}
             units=""
             min={ARRAY_SIZE.min}
-            max={ARRAY_SIZE.max}
+            max={
+              !/Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+              )
+                ? ARRAY_SIZE.max
+                : Math.min(30, ARRAY_SIZE.max)
+            }
             step={ARRAY_SIZE.step}
             handleChange={setArraySize}
             disabled={processing}
