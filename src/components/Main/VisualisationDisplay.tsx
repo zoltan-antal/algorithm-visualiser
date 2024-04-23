@@ -70,13 +70,11 @@ const VisualisationDisplay = ({
             <div key={algorithm.algorithmName} className="item">
               <div className="header">
                 <h2 className="title">{algorithm.displayName}</h2>
-                {finished && (
-                  <p className="placing">
-                    {getOrdinalNumber(
-                      algorithmPlacings.indexOf(algorithm.algorithmName) + 1
-                    )}
-                  </p>
-                )}
+                <p className={`placing ${finished ? 'visible' : 'hidden'}`}>
+                  {getOrdinalNumber(
+                    algorithmPlacings.indexOf(algorithm.algorithmName) + 1
+                  )}
+                </p>
               </div>
               <AlgorithmChart
                 data={algorithmStates[algorithm.algorithmName]}

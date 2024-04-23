@@ -21,6 +21,10 @@
 
       .placing {
         font-size: 1.1rem;
+
+        &.hidden {
+          visibility: hidden;
+        }
       }
 
       /* &:has(.placing)~.chart .recharts-wrapper {
@@ -28,11 +32,21 @@
       } */
 
       @media only screen and (max-width: 768px) {
-        font-size: 0.8rem;
-        width: min-content;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .title {
+          font-size: 1.2rem;
+          width: min-content;
+          line-height: 1.2;
+          height: 2.4em;
+        }
 
         .placing {
-          display: none;
+          align-self: flex-end;
+          margin-top: -1.2rem;
+          font-size: 0.9rem;
         }
       }
     }
