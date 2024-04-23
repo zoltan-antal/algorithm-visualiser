@@ -40,7 +40,7 @@ header {
       background-color: transparent;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
 
       &#high-contrast-mode-button {
@@ -136,6 +136,7 @@ header {
 
     #dark-mode-button {
       display: none;
+      margin-top: 3px;
     }
 
     @media only screen and (max-width: 768px) {
