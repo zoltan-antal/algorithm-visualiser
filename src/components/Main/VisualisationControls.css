@@ -73,7 +73,7 @@
 
       @media only screen and (max-width: 768px) {
         /* display: none; */
-        font-size: 0.85rem;
+        /* font-size: 0.85rem; */
       }
     }
   }

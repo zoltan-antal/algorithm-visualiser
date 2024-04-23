@@ -89,9 +89,29 @@ aside {
 }
 
 @media only screen and (max-width: 768px) {
+  aside {
+    >.title {
+      font-size: 1.5rem;
+    }
+  }
+
   html:has(.menuClosed) {
     aside {
       display: none;
+    }
+  }
+
+  html:has(.menuOpen) {
+    aside {
+      .section {
+        &:has(input[type='checkbox'], input[type='radio']) {
+          .items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 6px;
+          }
+        }
+      }
     }
   }
 }
