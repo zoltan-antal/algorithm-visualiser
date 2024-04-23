@@ -11,5 +11,9 @@
     justify-content: flex-end;
     align-items: center;
     gap: 5px;
+
+    .value {
+      text-wrap: nowrap;
+    }
   }
 }

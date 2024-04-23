@@ -26,6 +26,15 @@
       /* &:has(.placing)~.chart .recharts-wrapper {
         background-color: honeydew;
       } */
+
+      @media only screen and (max-width: 768px) {
+        font-size: 0.7rem;
+        width: min-content;
+
+        .placing {
+          display: none;
+        }
+      }
     }
 
     .chart {

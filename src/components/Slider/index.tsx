@@ -34,7 +34,7 @@ const Slider = ({
           onChange={(e) => handleChange(Number(e.target.value))}
           disabled={disabled}
         />
-        <p>
+        <p className="value">
           {value} {units} / {max} {units}
         </p>
       </div>

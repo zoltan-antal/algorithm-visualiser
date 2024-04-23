@@ -5,6 +5,7 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 30px;
 
   background-color: var(--dark-background);
   padding: 15px 15px;
@@ -14,6 +15,10 @@ header {
 
     a {
       color: var(--white-text);
+    }
+
+    @media only screen and (max-width: 768px) {
+      font-size: 1.8rem;
     }
   }
 
@@ -30,24 +35,31 @@ header {
       filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(102%) contrast(102%);
     }
 
-    button#high-contrast-mode-button {
+    button {
       border: none;
       background-color: transparent;
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
 
-      div {
-        color: white;
-        font-size: 1.6rem;
-        font-weight: bold;
-      }
+      &#high-contrast-mode-button {
+        div {
+          color: white;
+          font-size: 1.6rem;
+          font-weight: bold;
+          text-align: center;
+          vertical-align: middle;
+        }
 
-      &.on {
-        /* img {
+        &.on {
+          /* img {
           filter: invert(92%) sepia(67%) saturate(1502%) hue-rotate(350deg) brightness(102%) contrast(110%);
         } */
 
-        div {
-          color: yellow;
+          div {
+            color: yellow;
+          }
         }
       }
     }
@@ -120,6 +132,22 @@ header {
           transform: translateX(20px);
         }
       }
+    }
+
+    #dark-mode-button {
+      display: none;
+    }
+
+    @media only screen and (max-width: 768px) {
+      #dark-mode-switch {
+        display: none;
+      }
+
+      #dark-mode-button {
+        display: inline-block;
+      }
+
+      gap: 20px;
     }
   }
 }

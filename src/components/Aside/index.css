@@ -86,4 +86,8 @@ aside {
       }
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 }
