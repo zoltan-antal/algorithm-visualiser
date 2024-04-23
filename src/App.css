@@ -155,8 +155,17 @@ input[type='range'] {
 
   @media only screen and (max-width: 768px) {
     grid-template-columns: 1fr;
-    grid-template-areas: 'header'
-      'main'
-      'footer';
+
+    &:has(.menuClosed) {
+      grid-template-areas: 'header'
+        'main'
+        'footer';
+    }
+
+    &:has(.menuOpen) {
+      grid-template-areas: 'header'
+        'aside'
+        'footer';
+    }
   }
 }

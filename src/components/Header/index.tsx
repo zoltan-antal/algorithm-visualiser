@@ -1,4 +1,7 @@
 import './index.css';
+import { useState } from 'react';
+import menuOpenIcon from '../../assets/images/icons/menu.svg';
+import menuCloseIcon from '../../assets/images/icons/close.svg';
 import lightModeIcon from '../../assets/images/icons/sun.svg';
 import darkModeIcon from '../../assets/images/icons/moon.svg';
 // import highContrastModeOffIcon from '../../assets/images/icons/lightbulb-off.svg';
@@ -18,11 +21,13 @@ const Header = ({
   highContrastMode,
   setHighContrastMode,
 }: HeaderProps) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header
       className={`${darkMode ? 'darkTheme' : 'lightTheme'} ${
         highContrastMode ? 'highContrastTheme' : 'lowContrastTheme'
-      }`}
+      } ${menuOpen ? 'menuOpen' : 'menuClosed'}`}
     >
       <h1 className="title">
         <a href="">Algorithm Visualiser</a>
@@ -97,6 +102,15 @@ const Header = ({
         >
           {darkMode && <img src={lightModeIcon} alt="light mode" />}
           {!darkMode && <img src={darkModeIcon} alt="dark mode" />}
+        </button>
+        <button
+          id="menu-button"
+          onClick={() => {
+            setMenuOpen((val) => !val);
+          }}
+        >
+          {!menuOpen && <img src={menuOpenIcon} alt="open-menu" />}
+          {menuOpen && <img src={menuCloseIcon} alt="close-menu" />}
         </button>
       </nav>
     </header>
