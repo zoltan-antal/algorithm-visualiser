@@ -61,7 +61,7 @@
     }
 
     .slider {
-      /* align-self: stretch; */
+      width: clamp(120px, 100%, 500px);
 
       .display {
         flex-grow: 1;
