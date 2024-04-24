@@ -30,6 +30,11 @@ html {
     overflow: visible;
     font-size: 14px;
   }
+
+  /* Firefox only */
+  @media screen and (-moz-device-pixel-ratio) {
+    overflow: hidden;
+  }
 }
 
 :root:has(.lightTheme) {
