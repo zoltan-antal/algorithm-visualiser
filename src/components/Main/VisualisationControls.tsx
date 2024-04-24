@@ -175,7 +175,13 @@ const VisualisationControls = ({
           </button>
         </div>
         <Slider
-          label="Animation speed (steps/s)"
+          label={`Animation speed${
+            !/Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              navigator.userAgent
+            )
+              ? ' '
+              : '\n'
+          }(steps/s)`}
           value={speed}
           units=""
           min={ANIMATION_SPEED.min}
