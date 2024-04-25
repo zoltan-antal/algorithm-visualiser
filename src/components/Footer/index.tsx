@@ -7,7 +7,7 @@ const Footer = () => {
       <pre>Built by </pre>
       <a
         className="user"
-        href="https://github.com/zoltan-antal"
+        href="https://zoltan-antal.dev"
         target="_blank"
         rel="noopener noreferrer"
       >
