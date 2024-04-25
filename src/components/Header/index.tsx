@@ -42,9 +42,9 @@ const Header = ({
             );
           }}
         >
-          {/* <img src={highContrastModeIcon} alt="high contrast mode" /> */}
-          <div aria-label="high contrast mode" role="img">
-            A
+          {/* <img src={highContrastModeIcon} alt="high-contrast mode" /> */}
+          <div aria-label="high-contrast mode" role="img">
+            Aa
           </div>
         </button>
         {/* <div id="high-contrast-mode-switch" className="mode-switch">
