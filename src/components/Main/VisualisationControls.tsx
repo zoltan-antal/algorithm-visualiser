@@ -44,16 +44,6 @@ const VisualisationControls = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_rerender, setRerender] = useState(false);
 
-  // const removeHighlights = () => {
-  //   setAlgorithmStates((prevStates) => {
-  //     const updatedStates: AlgorithmStates = structuredClone(prevStates);
-  //     Object.keys(updatedStates).forEach(
-  //       (key) => (updatedStates[key].highlights = [])
-  //     );
-  //     return updatedStates;
-  //   });
-  // };
-
   const n = Math.max(
     ...Object.values(algorithmSteps.current).map((steps) => steps.length)
   );
