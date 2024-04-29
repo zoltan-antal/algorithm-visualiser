@@ -39,7 +39,10 @@ const VisualisationControls = ({
 }: VisualisationControlsProps) => {
   const [speed, setSpeed] = useState(ANIMATION_SPEED.default);
   const speedRef = useRef(ANIMATION_SPEED.default);
-  const [paused, setPaused] = useState<boolean>(true);
+  const paused = useRef(true);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_rerender, setRerender] = useState(false);
 
   // const removeHighlights = () => {
   //   setAlgorithmStates((prevStates) => {
@@ -77,22 +80,25 @@ const VisualisationControls = ({
 
   const handlePlay = async () => {
     calculateAlgorithms();
-    setPaused(false);
+    paused.current = false;
     setProcessing(true);
+    setButtonsDisabled(false);
     await callRunAlgorithms();
-    setPaused(true);
+    paused.current = true;
   };
 
   const handleAbort = () => {
     stopAlgorithms();
-    setPaused(true);
+    paused.current = true;
     setProcessing(false);
     callStepAlgorithms('firstStep');
   };
 
   const handlePause = () => {
     stopAlgorithms();
-    setPaused(true);
+    setTimeout(() => (paused.current = true), 100);
+    paused.current = true;
+    setRerender((prev) => !prev);
   };
 
   const handleAdvance = () => {
@@ -110,13 +116,20 @@ const VisualisationControls = ({
     calculateAlgorithms();
     setProcessing(true);
     stopAlgorithms();
-    setPaused(true);
+    paused.current = true;
     callStepAlgorithms('lastStep');
   };
 
-  const handleGoToFirstStep = () => {
-    setProcessing(false);
-    callStepAlgorithms('firstStep');
+  const handleGoToFirstStep = async () => {
+    if (paused.current) {
+      setProcessing(false);
+      callStepAlgorithms('firstStep');
+    } else {
+      setButtonsDisabled(true);
+      stopAlgorithms();
+      callStepAlgorithms('firstStep');
+      setTimeout(async () => await handlePlay(), Math.max(500, 1000 / speed));
+    }
   };
 
   return (
@@ -127,7 +140,9 @@ const VisualisationControls = ({
             id="skipBackwardButton"
             onClick={handleGoToFirstStep}
             disabled={
-              !paused || currentStep.current <= 0 || !selectedAlgorithms.size
+              currentStep.current <= 0 ||
+              !selectedAlgorithms.size ||
+              buttonsDisabled
             }
           >
             <img src={controlButtonImages.skipBackward} />
@@ -136,7 +151,10 @@ const VisualisationControls = ({
             id="stepBackwardButton"
             onClick={handleRewind}
             disabled={
-              !paused || currentStep.current <= 0 || !selectedAlgorithms.size
+              !paused.current ||
+              currentStep.current <= 0 ||
+              !selectedAlgorithms.size ||
+              buttonsDisabled
             }
           >
             <img src={controlButtonImages.stepBackward} />
@@ -146,7 +164,8 @@ const VisualisationControls = ({
             onClick={handleAbort}
             disabled={
               (!processing && currentStep.current !== n - 1) ||
-              !selectedAlgorithms.size
+              !selectedAlgorithms.size ||
+              buttonsDisabled
             }
           >
             <img src={controlButtonImages.stop} />
@@ -155,19 +174,25 @@ const VisualisationControls = ({
             id="playButton"
             onClick={handlePlay}
             disabled={
-              (processing && !paused) ||
+              (processing && !paused.current) ||
               (n > 0 && currentStep.current >= n - 1) ||
-              !selectedAlgorithms.size
+              !selectedAlgorithms.size ||
+              buttonsDisabled
             }
-            className={processing && !paused ? 'hidden' : ''}
+            className={processing && !paused.current ? 'hidden' : ''}
           >
             <img src={controlButtonImages.play} />
           </button>
           <button
             id="pauseButton"
             onClick={handlePause}
-            disabled={!processing || paused || !selectedAlgorithms.size}
-            className={!processing || paused ? 'hidden' : ''}
+            disabled={
+              !processing ||
+              paused.current ||
+              !selectedAlgorithms.size ||
+              buttonsDisabled
+            }
+            className={!processing || paused.current ? 'hidden' : ''}
           >
             <img src={controlButtonImages.pause} />
           </button>
@@ -175,9 +200,10 @@ const VisualisationControls = ({
             id="stepForwardButton"
             onClick={handleAdvance}
             disabled={
-              !paused ||
+              !paused.current ||
               (n > 0 && currentStep.current >= n - 1) ||
-              !selectedAlgorithms.size
+              !selectedAlgorithms.size ||
+              buttonsDisabled
             }
           >
             <img src={controlButtonImages.stepForward} />
@@ -187,7 +213,8 @@ const VisualisationControls = ({
             onClick={handleGoToLastStep}
             disabled={
               (n > 0 && currentStep.current >= n - 1) ||
-              !selectedAlgorithms.size
+              !selectedAlgorithms.size ||
+              buttonsDisabled
             }
           >
             <img src={controlButtonImages.skipForward} />
