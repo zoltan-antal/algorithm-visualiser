@@ -41,15 +41,15 @@ const VisualisationControls = ({
   const speedRef = useRef(ANIMATION_SPEED.default);
   const [paused, setPaused] = useState<boolean>(true);
 
-  const removeHighlights = () => {
-    setAlgorithmStates((prevStates) => {
-      const updatedStates: AlgorithmStates = structuredClone(prevStates);
-      Object.keys(updatedStates).forEach(
-        (key) => (updatedStates[key].highlights = [])
-      );
-      return updatedStates;
-    });
-  };
+  // const removeHighlights = () => {
+  //   setAlgorithmStates((prevStates) => {
+  //     const updatedStates: AlgorithmStates = structuredClone(prevStates);
+  //     Object.keys(updatedStates).forEach(
+  //       (key) => (updatedStates[key].highlights = [])
+  //     );
+  //     return updatedStates;
+  //   });
+  // };
 
   const n = Math.max(
     ...Object.values(algorithmSteps.current).map((steps) => steps.length)
@@ -87,9 +87,7 @@ const VisualisationControls = ({
     stopAlgorithms();
     setPaused(true);
     setProcessing(false);
-    removeHighlights();
-    currentStep.current = 0;
-    algorithmSteps.current = {};
+    callStepAlgorithms('firstStep');
   };
 
   const handlePause = () => {
