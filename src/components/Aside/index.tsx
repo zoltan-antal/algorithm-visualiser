@@ -44,6 +44,8 @@ const Aside = ({
   setSelectedArrayOrder,
   generateArrays,
 }: AsideProps) => {
+  const disabledTooltip = 'Visualisation in progress';
+
   return (
     <aside>
       <h2 className="title">Settings</h2>
@@ -53,13 +55,18 @@ const Aside = ({
           <button
             onClick={() => setSelectedAlgorithms(new Set(algorithmNames))}
             disabled={processing}
+            data-tooltip={processing ? disabledTooltip : ''}
           >
             Select all
           </button>
         </div>
         <div className="items">
           {algorithmNames.map((algorithmName) => (
-            <label key={algorithmName} className="item">
+            <label
+              key={algorithmName}
+              className="item"
+              data-tooltip={processing ? disabledTooltip : ''}
+            >
               <input
                 type="checkbox"
                 checked={Array.from(selectedAlgorithms).includes(algorithmName)}
@@ -100,13 +107,20 @@ const Aside = ({
       <div className="section" id="input-ordering">
         <div className="header">
           <h3 className="title">Input ordering</h3>
-          <button onClick={generateArrays} disabled={processing}>
+          <button
+            onClick={generateArrays}
+            disabled={processing}
+            data-tooltip={processing ? disabledTooltip : ''}
+          >
             Regenerate data
           </button>
         </div>
         <div className="items">
           {ARRAY_ORDER_OPTIONS.map((arrayOrderOption) => (
-            <label key={arrayOrderOption.name}>
+            <label
+              key={arrayOrderOption.name}
+              data-tooltip={processing ? disabledTooltip : ''}
+            >
               <input
                 type="radio"
                 onChange={() => setSelectedArrayOrder(arrayOrderOption.name)}
@@ -127,6 +141,7 @@ const Aside = ({
               setMaxValue(VALUE_RANGE.default);
             }}
             disabled={processing}
+            data-tooltip={processing ? disabledTooltip : ''}
           >
             Reset defaults
           </button>
@@ -147,6 +162,7 @@ const Aside = ({
             step={ARRAY_SIZE.step}
             handleChange={setArraySize}
             disabled={processing}
+            tooltip={processing ? disabledTooltip : ''}
           ></Slider>
           <Slider
             label="Value range"
@@ -157,6 +173,7 @@ const Aside = ({
             step={VALUE_RANGE.step}
             handleChange={setMaxValue}
             disabled={processing}
+            tooltip={processing ? disabledTooltip : ''}
           ></Slider>
         </div>
       </div>

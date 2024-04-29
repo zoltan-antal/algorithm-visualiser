@@ -9,6 +9,7 @@ interface SliderProps {
   step: number;
   handleChange: (value: number) => void;
   disabled: boolean;
+  tooltip?: string;
 }
 
 const Slider = ({
@@ -20,6 +21,7 @@ const Slider = ({
   step,
   handleChange,
   disabled,
+  tooltip,
 }: SliderProps) => {
   return (
     <label className="slider">
@@ -33,6 +35,7 @@ const Slider = ({
           value={value}
           onChange={(e) => handleChange(Number(e.target.value))}
           disabled={disabled}
+          data-tooltip={tooltip ? tooltip : ''}
         />
         <p className="value">
           {value} {units} / {max} {units}

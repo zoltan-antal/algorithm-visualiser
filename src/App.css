@@ -111,8 +111,7 @@ input[type='range'] {
   accent-color: var(--input-accent-color);
 }
 
-[data-tooltip] {
-  cursor: pointer;
+[data-tooltip]:not([data-tooltip=""]) {
   position: relative;
 
   &::after {
@@ -133,6 +132,7 @@ input[type='range'] {
     transform-origin: top;
     transition: 0.14s;
     box-shadow: 0 4px 14px 0 rgba(0, 0, 0, .2), 0 0 0 1px rgba(0, 0, 0, .05);
+    z-index: 9999;
   }
 
   &:hover::after {
