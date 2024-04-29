@@ -109,6 +109,8 @@ const VisualisationControls = ({
   const handleGoToLastStep = () => {
     calculateAlgorithms();
     setProcessing(true);
+    stopAlgorithms();
+    setPaused(true);
     callStepAlgorithms('lastStep');
   };
 
@@ -184,7 +186,6 @@ const VisualisationControls = ({
             id="skipForwardButton"
             onClick={handleGoToLastStep}
             disabled={
-              !paused ||
               (n > 0 && currentStep.current >= n - 1) ||
               !selectedAlgorithms.size
             }
