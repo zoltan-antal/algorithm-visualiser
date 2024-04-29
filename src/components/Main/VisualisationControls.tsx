@@ -19,18 +19,20 @@ import {
 import Slider from '../Slider';
 
 interface VisualisationControlsProps {
-  processing: boolean;
   currentStep: React.MutableRefObject<number>;
   algorithmSteps: React.MutableRefObject<AlgorithmSteps>;
+  selectedAlgorithms: Set<string>;
+  processing: boolean;
   setProcessing: React.Dispatch<React.SetStateAction<boolean>>;
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>;
   calculateAlgorithms: () => void;
 }
 
 const VisualisationControls = ({
-  processing,
   currentStep,
   algorithmSteps,
+  selectedAlgorithms,
+  processing,
   setProcessing,
   setAlgorithmStates,
   calculateAlgorithms,
@@ -124,21 +126,28 @@ const VisualisationControls = ({
           <button
             id="skipBackwardButton"
             onClick={handleGoToFirstStep}
-            disabled={!paused || currentStep.current <= 0}
+            disabled={
+              !paused || currentStep.current <= 0 || !selectedAlgorithms.size
+            }
           >
             <img src={controlButtonImages.skipBackward} />
           </button>
           <button
             id="stepBackwardButton"
             onClick={handleRewind}
-            disabled={!paused || currentStep.current <= 0}
+            disabled={
+              !paused || currentStep.current <= 0 || !selectedAlgorithms.size
+            }
           >
             <img src={controlButtonImages.stepBackward} />
           </button>
           <button
             id="stopButton"
             onClick={handleAbort}
-            disabled={!processing && currentStep.current !== n - 1}
+            disabled={
+              (!processing && currentStep.current !== n - 1) ||
+              !selectedAlgorithms.size
+            }
           >
             <img src={controlButtonImages.stop} />
           </button>
@@ -146,7 +155,9 @@ const VisualisationControls = ({
             id="playButton"
             onClick={handlePlay}
             disabled={
-              (processing && !paused) || (n > 0 && currentStep.current >= n - 1)
+              (processing && !paused) ||
+              (n > 0 && currentStep.current >= n - 1) ||
+              !selectedAlgorithms.size
             }
             className={processing && !paused ? 'hidden' : ''}
           >
@@ -155,7 +166,7 @@ const VisualisationControls = ({
           <button
             id="pauseButton"
             onClick={handlePause}
-            disabled={!processing || paused}
+            disabled={!processing || paused || !selectedAlgorithms.size}
             className={!processing || paused ? 'hidden' : ''}
           >
             <img src={controlButtonImages.pause} />
@@ -163,14 +174,22 @@ const VisualisationControls = ({
           <button
             id="stepForwardButton"
             onClick={handleAdvance}
-            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+            disabled={
+              !paused ||
+              (n > 0 && currentStep.current >= n - 1) ||
+              !selectedAlgorithms.size
+            }
           >
             <img src={controlButtonImages.stepForward} />
           </button>
           <button
             id="skipForwardButton"
             onClick={handleGoToLastStep}
-            disabled={!paused || (n > 0 && currentStep.current >= n - 1)}
+            disabled={
+              !paused ||
+              (n > 0 && currentStep.current >= n - 1) ||
+              !selectedAlgorithms.size
+            }
           >
             <img src={controlButtonImages.skipForward} />
           </button>

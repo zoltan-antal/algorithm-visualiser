@@ -76,6 +76,7 @@ const Main = ({
       <VisualisationControls
         currentStep={currentStep}
         algorithmSteps={algorithmSteps}
+        selectedAlgorithms={selectedAlgorithms}
         processing={processing}
         setProcessing={setProcessing}
         setAlgorithmStates={setAlgorithmStates}
