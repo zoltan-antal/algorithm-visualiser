@@ -8,7 +8,7 @@ const runAlgorithms = async (
   algorithmSteps: AlgorithmSteps,
   currentStep: React.MutableRefObject<number>,
   setAlgorithmStates: React.Dispatch<React.SetStateAction<AlgorithmStates>>,
-  timeout: number,
+  speedRef: React.MutableRefObject<number>,
   setProcessing: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   stopped = false;
@@ -33,7 +33,9 @@ const runAlgorithms = async (
       });
       return updatedStates;
     });
-    await new Promise((resolve) => setTimeout(resolve, timeout));
+    await new Promise((resolve) =>
+      setTimeout(resolve, 1000 / speedRef.current)
+    );
   }
 
   setProcessing(false);

@@ -7,7 +7,7 @@ interface SliderProps {
   min: number;
   max: number;
   step: number;
-  handleChange: (value: React.SetStateAction<number>) => void;
+  handleChange: (value: number) => void;
   disabled: boolean;
 }
 

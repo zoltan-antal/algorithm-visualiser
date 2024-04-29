@@ -1,6 +1,6 @@
 import './VisualisationControls.css';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import StepAlgorithmsMode from '../../types/StepAlgorithmsMode.ts';
 import AlgorithmStates from '../../types/AlgorithmStates.ts';
@@ -36,6 +36,7 @@ const VisualisationControls = ({
   calculateAlgorithms,
 }: VisualisationControlsProps) => {
   const [speed, setSpeed] = useState(ANIMATION_SPEED.default);
+  const speedRef = useRef(ANIMATION_SPEED.default);
   const [paused, setPaused] = useState<boolean>(true);
 
   const removeHighlights = () => {
@@ -57,7 +58,7 @@ const VisualisationControls = ({
       algorithmSteps.current,
       currentStep,
       setAlgorithmStates,
-      Math.round(1000 / speed),
+      speedRef,
       setProcessing
     );
   };
@@ -193,8 +194,11 @@ const VisualisationControls = ({
               : Math.min(40, ANIMATION_SPEED.max)
           }
           step={ANIMATION_SPEED.step}
-          handleChange={setSpeed}
-          disabled={!paused}
+          handleChange={(value: number) => {
+            setSpeed(value);
+            speedRef.current = value;
+          }}
+          disabled={false}
         ></Slider>
       </div>
       <div className="info">
