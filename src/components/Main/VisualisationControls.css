@@ -28,7 +28,9 @@
         background-color: var(--control-button-background);
 
         &:hover {
-          background-color: var(--control-button-hover);
+          @media only screen and not (max-width: 768px) {
+            background-color: var(--control-button-hover);
+          }
         }
 
         &:disabled {

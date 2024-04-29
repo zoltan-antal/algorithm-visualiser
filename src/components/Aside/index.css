@@ -45,7 +45,9 @@ aside {
         color: var(--button-text);
 
         &:hover {
-          background-color: var(--button-hover);
+          @media only screen and not (max-width: 768px) {
+            background-color: var(--button-hover);
+          }
         }
 
         &:disabled {
