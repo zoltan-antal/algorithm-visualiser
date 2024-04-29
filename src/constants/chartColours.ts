@@ -8,7 +8,7 @@ const CHART_COLOURS = {
     highContrast: {
       default: '#082f49',
       highlight: '#f97316',
-      finished: '#16a34a',
+      finished: '#22c55e',
     },
   },
   dark: {
