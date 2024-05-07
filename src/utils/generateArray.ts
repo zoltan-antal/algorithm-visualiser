@@ -25,8 +25,9 @@ const generateArray = (
       break;
 
     case 'equal':
+      min = Math.floor(max * 0.75);
       array = new Array(size).fill(
-        Math.floor(Math.random() * (max - min + 1)) + 1
+        Math.floor(Math.random() * (max - min + 1)) + min
       );
       break;
 
