@@ -96,13 +96,13 @@ aside {
     }
   }
 
-  html:has(.menuClosed) {
+  html:has(.menu-closed) {
     aside {
       display: none;
     }
   }
 
-  html:has(.menuOpen) {
+  html:has(.menu-open) {
     aside {
       .section {
         &:has(input[type='checkbox'], input[type='radio']) {

@@ -22,9 +22,9 @@ const Header = ({
 
   return (
     <header
-      className={`${darkMode ? 'darkTheme' : 'lightTheme'} ${
-        highContrastMode ? 'highContrastTheme' : 'lowContrastTheme'
-      } ${menuOpen ? 'menuOpen' : 'menuClosed'}`}
+      className={`${darkMode ? 'dark-theme' : 'light-theme'} ${
+        highContrastMode ? 'highcontrast-theme' : 'lowcontrast-theme'
+      } ${menuOpen ? 'menu-open' : 'menu-closed'}`}
     >
       <h1 className="title">
         <a href="">Algorithm Visualiser</a>

@@ -37,7 +37,7 @@ html {
   }
 }
 
-:root:has(.lightTheme) {
+:root:has(.light-theme) {
   --dark-background: #075985;
   --medium-background: #e0f2fe;
   --light-background: white;
@@ -56,7 +56,7 @@ html {
   --slider-background: #94a3b8;
 }
 
-:root:has(.darkTheme) {
+:root:has(.dark-theme) {
   --dark-background: #075985;
   --medium-background: #353535;
   --light-background: #262626;
@@ -74,7 +74,7 @@ html {
   --control-button-hover: #0c4a6e;
   --slider-background: #94a3b8;
 
-  &:has(.highContrastTheme) {
+  &:has(.highcontrast-theme) {
     --medium-background: #262626;
     --light-background: black;
     --input-accent-color: #38bdf8;
@@ -161,13 +161,13 @@ input[type='range'] {
   @media only screen and (max-width: 768px) {
     grid-template-columns: 1fr;
 
-    &:has(.menuClosed) {
+    &:has(.menu-closed) {
       grid-template-areas: 'header'
         'main'
         'footer';
     }
 
-    &:has(.menuOpen) {
+    &:has(.menu-open) {
       grid-template-areas: 'header'
         'aside'
         'footer';
